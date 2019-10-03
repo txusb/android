@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFE8E1"
+    tools:context=".mainActivity.HomeFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="342.33dp"
+            android:layout_height="271.67dp"
+            android:background="@mipmap/universal_sensor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="73dp"
+            android:layout_marginEnd="40dp"
+            android:text="Orange TPMS Sensor Application"
+            android:textColor="#32414E"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/program_sensor_btn"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/program_sensor_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROGRAM SENSOR"
+            android:textColor="#32414E"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/program_sensor_btn"
+            app:layout_constraintStart_toStartOf="@+id/program_sensor_btn"
+            app:layout_constraintTop_toBottomOf="@+id/program_sensor_btn" />
+
+        <Button
+            android:id="@+id/program_pad_btn"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="57dp"
+            android:alpha="0.6"
+            android:background="@drawable/program_pad_btn"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="PROGRAM SENSOR\n(Multiple)"
+            android:textColor="#32414E"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/program_pad_btn"
+            app:layout_constraintStart_toStartOf="@+id/program_pad_btn"
+            app:layout_constraintTop_toBottomOf="@+id/program_pad_btn" />
+
+        <Button
+            android:id="@+id/information_btn"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_marginStart="57dp"
+            android:layout_marginTop="23dp"
+            android:alpha="0.6"
+            android:background="@drawable/information_btn"
+            android:enabled="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/program_sensor_btn" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INFORMATION"
+            android:textColor="#32414E"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/information_btn"
+            app:layout_constraintStart_toStartOf="@+id/information_btn"
+            app:layout_constraintTop_toBottomOf="@+id/information_btn" />
+
+        <Button
+            android:id="@+id/online_shopping_btn"
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="57dp"
+            android:alpha="0.6"
+            android:background="@drawable/online_shopping_btn"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/program_pad_btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ONLINE SHOPPING"
+            android:textColor="#32414E"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/online_shopping_btn"
+            app:layout_constraintStart_toStartOf="@+id/online_shopping_btn"
+            app:layout_constraintTop_toBottomOf="@+id/online_shopping_btn" />
+
+        <Button
+            android:id="@+id/user_manual_btn"
+            android:layout_width="81.33dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="34dp"
+            android:alpha="0.6"
+            android:background="@drawable/users_manual_btn"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User's manual"
+            android:textColor="#32414E"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/user_manual_btn"
+            app:layout_constraintStart_toStartOf="@+id/user_manual_btn"
+            app:layout_constraintTop_toBottomOf="@+id/user_manual_btn" />
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

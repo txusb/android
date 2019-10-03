@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ManualActivity.Idcopy_USB.UID1" android:background="#FFF5ED">
+    <ImageView
+            android:src="@mipmap/img_step1_program"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/imageView31" android:layout_below="@id/textView39"/>
+    <TextView
+            android:text="@string/step2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp" android:id="@+id/textView39" android:layout_centerHorizontal="true"
+            android:gravity="left|center_vertical" android:lineSpacingMultiplier="1.5" android:layout_marginTop="22dp"
+            android:textColor="@android:color/black" android:layout_marginBottom="14dp"
+            android:layout_marginLeft="50dp"/>
+</RelativeLayout>

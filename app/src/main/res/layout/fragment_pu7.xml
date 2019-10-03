@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ManualActivity.Program_USB.PU7" android:background="#FFF5ED">
+    <TextView
+            android:text="@string/step1_8"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" android:id="@+id/textView36" android:layout_centerHorizontal="true"
+            android:gravity="left|center_vertical" android:lineSpacingMultiplier="1.5"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="80dp" android:layout_marginTop="22dp" android:layout_marginBottom="19dp"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@id/textView36">
+
+        <ImageView
+                android:src="@mipmap/img_step6_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/imageView29"
+                android:layout_centerInParent="true" android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                android:background="@drawable/strokeb" android:padding="1dp"/>
+    </RelativeLayout>
+</RelativeLayout>

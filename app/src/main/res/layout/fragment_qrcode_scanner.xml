@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".mainActivity.QrcodeScanner" android:background="@color/buttoncolor">
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp" android:layout_centerInParent="true"
+            android:id="@+id/frame">
+
+    </FrameLayout>
+    <TextView
+            android:text="@string/Please_scan_the_QR_Code_on_the_catalog_or_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView12" android:layout_below="@id/frame"
+            android:layout_centerHorizontal="true" android:textColor="@color/white" android:layout_marginTop="10dp"/>
+</RelativeLayout>

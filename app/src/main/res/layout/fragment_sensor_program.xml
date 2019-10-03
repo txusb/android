@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".mainActivity.SensorProgramFragment"
+    android:background="#EFE8E1">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/make_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/mmy_text"
+            app:layout_constraintEnd_toStartOf="@+id/mmy_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mmy_text" />
+
+        <TextView
+
+            android:id="@+id/mmy_text"
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="Make/Model\nYear"
+            android:textColor="#32414E"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/start_btn"
+            style="@style/select_button_style"
+            android:layout_marginTop="180dp"
+            android:background="@drawable/select_button"
+            android:text="START"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            style="@style/select_button_style"
+            android:id="@+id/menu_btn"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/select_button"
+            android:text="MENU"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_btn" />
+
+        <ImageView
+            android:layout_width="342.33dp"
+            android:layout_height="271.67dp"
+            android:background="@mipmap/universal_sensor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ManualActivity.Users_Manual" android:background="#EFE8E1">
+    <TextView
+            android:text="@string/ProvideUsbTpmsApp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/textView25" android:textSize="18sp"
+            android:gravity="center" android:layout_above="@id/li"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_centerVertical="true" android:id="@+id/li">
+        <TextView
+                android:text="Program (USB TPMS)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView28" android:gravity="center"
+                android:textSize="20sp" android:textColor="@color/colorPrimaryDark"/>
+        <Button
+                android:layout_width="236dp"
+                android:layout_height="58dp" android:id="@+id/button7" android:background="@mipmap/button"
+                android:layout_gravity="center_horizontal" android:textColor="@color/white"
+                android:text="@string/Program" android:layout_marginTop="15dp"/>
+        <Button
+                android:layout_width="236dp"
+                android:layout_height="58dp" android:id="@+id/button8" android:background="@mipmap/button"
+                android:layout_gravity="center_horizontal" android:textColor="@color/white"
+                android:text="@string/ID_COPY" android:layout_marginTop="14dp"/>
+        <TextView
+                android:text="Program (USB PAD)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView29" android:gravity="center"
+                android:textSize="20sp" android:layout_marginTop="20dp" android:textColor="@color/colorPrimaryDark"/>
+        <Button
+                android:layout_width="236dp"
+                android:layout_height="58dp" android:id="@+id/button9" android:background="@mipmap/button"
+                android:layout_gravity="center_horizontal" android:textColor="@color/white"
+                android:text="@string/Program" android:layout_marginTop="15dp"/>
+        <Button
+                android:layout_width="236dp"
+                android:layout_height="58dp" android:id="@+id/button10" android:background="@mipmap/button"
+                android:layout_gravity="center_horizontal" android:textColor="@color/white"
+                android:text="@string/ID_COPY" android:layout_marginTop="14dp"/>
+    </LinearLayout>
+</RelativeLayout>

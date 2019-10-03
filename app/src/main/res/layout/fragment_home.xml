@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#EFE8E1"
+                tools:context=".mainActivity.HomeFragment">
+
+    <TextView
+            android:text="@string/Setting"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content" android:id="@+id/textView68"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="0dp" android:layout_centerVertical="false"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="14dp"/>
+    <Button
+            android:layout_width="64dp"
+            android:layout_height="64dp" android:id="@+id/Setim" android:background="@mipmap/setting"
+            android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp" android:layout_marginEnd="10dp" android:enabled="false"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:orientation="vertical" android:layout_marginBottom="50dp">
+
+        <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Orange_USB_TPMS_Application"
+                android:textColor="#32414E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center" android:layout_marginTop="15dp"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1">
+
+                <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ProgramUSB_TPMS"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:layout_below="@id/program_sensor_btn" android:layout_centerHorizontal="true"
+                        android:translationX="10dp"/>
+                <Button
+                        android:id="@+id/program_sensor_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/program_sensor_btn"
+                        android:enabled="false" android:layout_centerInParent="true" android:translationX="10dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1">
+
+                <Button
+                        android:id="@+id/program_pad_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:alpha="1.0"
+                        android:background="@mipmap/btn_pad"
+                        android:enabled="false"
+                        android:layout_centerInParent="true" android:translationX="-10dp"/>
+                <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/Program_USB_PAD"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:layout_centerHorizontal="true" android:layout_below="@id/program_pad_btn"
+                        android:translationX="-10dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1">
+
+                <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Cloud_information"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:gravity="center_horizontal" android:layout_below="@id/information_btn"
+                        android:layout_centerHorizontal="true"
+                        android:translationX="10dp"/>
+                <Button
+                        android:id="@+id/information_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:alpha="0.6"
+                        android:background="@drawable/information_btn"
+                        android:layout_centerInParent="true"
+                        android:translationX="10dp" android:enabled="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1">
+
+                <Button
+                        android:id="@+id/online_shopping_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:alpha="1"
+                        android:background="@drawable/online_shopping_btn"
+                        android:enabled="true"
+                        android:layout_centerInParent="true" android:translationX="-10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Online_shopping"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:layout_centerHorizontal="true" android:layout_below="@id/online_shopping_btn"
+                        android:translationX="-10dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1">
+
+                <Button
+                        android:id="@+id/user_manual_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:alpha="1.0"
+                        android:background="@drawable/users_manual_btn"
+                        android:enabled="false"
+                        android:layout_centerInParent="true" android:translationX="10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Users_manual"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:layout_below="@id/user_manual_btn" android:layout_centerHorizontal="true"
+                        android:translationX="10dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1">
+
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="167dp"
+                        android:background="@mipmap/universal_sensor"
+                        android:layout_centerVertical="true" android:id="@+id/setting"
+                        android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

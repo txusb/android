@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ManualActivity.PadCopy.PC10" android:background="#FFF5ED">
+    <TextView
+            android:text="@string/step4_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView57" android:lineSpacingMultiplier="1.2"
+            android:layout_marginTop="22dp" android:layout_marginBottom="14dp" android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp" android:textColor="@android:color/black"
+    />
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@id/textView57">
+
+        <ImageView
+                android:src="@mipmap/pc10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/imageView57"
+                android:layout_centerInParent="true" android:background="@drawable/strokeb" android:padding="1dp"/>
+    </RelativeLayout>
+</RelativeLayout>

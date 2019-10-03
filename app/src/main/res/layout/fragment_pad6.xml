@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ManualActivity.PAD_PROGRAM.Pad6" android:background="#FFF5ED">
+    <TextView
+            android:text="@string/step3_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView51" android:lineSpacingMultiplier="1.2"
+            android:layout_marginTop="22dp" android:layout_marginBottom="14dp" android:layout_marginLeft="38dp"
+            android:layout_marginRight="38dp" android:textColor="@android:color/black"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@id/textView51">
+
+        <ImageView
+                android:src="@mipmap/pad6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/imageView44"
+                android:layout_centerInParent="true" android:padding="1dp" android:background="@drawable/strokeb"/>
+    </RelativeLayout>
+</RelativeLayout>

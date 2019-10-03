@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".mainActivity.ProgrammingFragment"
+    android:background="#EFE8E1">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/make_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/mmy_text"
+            app:layout_constraintEnd_toStartOf="@+id/mmy_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mmy_text" />
+
+        <TextView
+            android:id="@+id/mmy_text"
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="Make/Model\nYear"
+            android:textColor="#32414E"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/program_img"
+            android:layout_width="213.33dp"
+            android:layout_height="320dp"
+            android:layout_marginTop="8dp"
+            android:background="@mipmap/program"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mmy_text" />
+
+        <ImageView
+            android:id="@+id/program_img_status"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="49dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/program_img"
+            app:layout_constraintEnd_toEndOf="@+id/program_img" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="simple-loader.json"
+            app:lottie_loop="true" />
+
+        <Button
+            style="@style/select_button_style"
+            android:id="@+id/program_btn"
+            android:layout_marginTop="21dp"
+            android:background="@drawable/select_button"
+            android:text="PROGRAM AGAIN"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/program_img" />
+
+        <TextView
+            android:id="@+id/program_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:textColor="#32414E"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/menu_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            style="@style/select_button_style"
+            android:id="@+id/menu_btn"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/select_button"
+            android:text="MENU"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/program_btn" />
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

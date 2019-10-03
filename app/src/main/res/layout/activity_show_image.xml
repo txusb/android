@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+                xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            fresco:viewAspectRatio="1"
+            android:layout_weight="1"
+            android:visibility="visible" android:scaleType="fitCenter" app:placeholderImage="@drawable/field"
+            android:background="#EFE8E1" app:actualImageScaleType="fitCenter" android:layout_below="@id/top"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp" android:background="@color/colorPrimary" android:id="@+id/top"
+            android:elevation="5dp">
+
+        <TextView
+                android:text="https://www.youtube.com/"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/title" android:gravity="center"
+                android:textSize="17sp" android:textColor="@color/white" android:paddingLeft="50dp"
+                android:singleLine="true"/>
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content" app:srcCompat="@mipmap/btn_back_normal"
+                android:id="@+id/back" android:padding="5dp" android:onClick="onclick"/>
+    </RelativeLayout>
+</RelativeLayout>

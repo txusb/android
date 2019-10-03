@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_areaFragment"
+            app:destination="@id/areaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/areaFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.AreaFragment"
+        android:label="fragment_area"
+        tools:layout="@layout/fragment_area" >
+        <action
+            android:id="@+id/action_areaFragment_to_makeFragment"
+            app:destination="@id/makeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.MakeFragment"
+        android:label="fragment_make"
+        tools:layout="@layout/fragment_make" >
+        <action
+            android:id="@+id/action_makeFragment_to_modelFragment"
+            app:destination="@id/modelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.ModelFragment"
+        android:label="fragment_model"
+        tools:layout="@layout/fragment_model" >
+        <action
+            android:id="@+id/action_modelFragment_to_yearFragment"
+            app:destination="@id/yearFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/yearFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.YearFragment"
+        android:label="fragment_year"
+        tools:layout="@layout/fragment_year" >
+        <action
+            android:id="@+id/action_yearFragment_to_mmyFragment"
+            app:destination="@id/mmyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mmyFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.mmyFragment"
+        android:label="fragment_mmy"
+        tools:layout="@layout/fragment_mmy" >
+        <action
+            android:id="@+id/action_mmyFragment_to_sensorProgramFragment"
+            app:destination="@id/sensorProgramFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sensorProgramFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.SensorProgramFragment"
+        android:label="fragment_sensor_program"
+        tools:layout="@layout/fragment_sensor_program" >
+        <action
+            android:id="@+id/action_sensorProgramFragment_to_programmingFragment"
+            app:destination="@id/programmingFragment" />
+        <action
+            android:id="@+id/action_sensorProgramFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/programmingFragment"
+        android:name="com.orango.electronic.orangetxusb.mainActivity.ProgrammingFragment"
+        android:label="fragment_programming"
+        tools:layout="@layout/fragment_programming" >
+        <action
+            android:id="@+id/action_programmingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+</navigation>

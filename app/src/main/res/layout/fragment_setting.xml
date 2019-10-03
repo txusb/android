@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".SettingPagr.Setting" android:background="#EFE8E1">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+                android:src="@color/buttoncolor"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:id="@+id/imageView59" android:layout_margin="5dp"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp" android:id="@+id/area">
+
+            <ImageView
+                    android:src="@mipmap/language"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp" android:id="@+id/imageView63"
+                    android:layout_marginLeft="10dp" android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"/>
+            <TextView
+                    android:text="@string/AreaLanguage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView67"
+                    android:layout_centerVertical="true" android:layout_marginLeft="78dp" android:textSize="18sp"/>
+        </RelativeLayout>
+        <ImageView
+                android:src="@color/buttoncolor"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:id="@+id/imageView61" android:layout_margin="5dp"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp" android:id="@+id/version">
+
+            <TextView
+                    android:text="@string/Version_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView69"
+                    android:layout_centerVertical="true" android:layout_marginLeft="78dp" android:textSize="18sp"/>
+            <ImageView
+                    android:src="@mipmap/version"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp" android:id="@+id/imageView66" android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"/>
+        </RelativeLayout>
+        <ImageView
+                android:src="@color/buttoncolor"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:id="@+id/imageView62" android:layout_margin="5dp"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp" android:id="@+id/policy">
+
+            <TextView
+                    android:text="@string/Privacy_Policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView70"
+                    android:layout_centerVertical="true" android:layout_marginLeft="78dp" android:textSize="18sp"/>
+            <ImageView
+                    android:src="@mipmap/privarypolicer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/imageView67"
+                    android:layout_centerVertical="true" android:layout_marginLeft="10dp"/>
+        </RelativeLayout>
+        <ImageView
+                android:src="@color/buttoncolor"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" android:id="@+id/imageView68" android:layout_margin="5dp"/>
+    </LinearLayout>
+</RelativeLayout>
