@@ -67,7 +67,7 @@ class TalkingActivity : AppCompatActivity() {
         })
         logdata("0")
         timer=Timer()
-        timer.schedule(0,5000){
+        timer.schedule(0,1000){
             newMail()
         }
     }
