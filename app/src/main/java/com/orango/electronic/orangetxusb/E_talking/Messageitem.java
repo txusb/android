@@ -13,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.orango.electronic.orangetxusb.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,7 +58,7 @@ public class Messageitem {
         this.pick.add(0,pick);
         this.file.add(0,file);
     }
-    public static String CalculateTime(String time) {
+    public static String CalculateTime(String time,Context context) {
         long nowTime = System.currentTimeMillis(); // 获取当前时间的毫秒数
         String msg = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 指定时间格式
@@ -71,7 +72,7 @@ public class Messageitem {
         long reset = setTime.getTime(); // 获取指定时间的毫秒数
         long dateDiff = nowTime - reset;
         if (dateDiff < 0) {
-            msg = "剛剛";
+            msg = context.getResources().getString(R.string.secago);
         } else {
             long dateTemp1 = dateDiff / 1000; // 秒
             long dateTemp2 = dateTemp1 / 60; // 分钟
@@ -80,17 +81,17 @@ public class Messageitem {
             long dateTemp5 = dateTemp4 / 30; // 月数
             long dateTemp6 = dateTemp5 / 12; // 年数
             if (dateTemp6 > 0) {
-                msg = dateTemp6 + "年前";
+                msg = context.getResources().getString(R.string.yeargo).replace("1", ""+dateTemp6);
             } else if (dateTemp5 > 0) {
-                msg = dateTemp5 + "個月前";
+                msg = context.getResources().getString(R.string.monthago).replace("1", ""+dateTemp5);
             } else if (dateTemp4 > 0) {
-                msg = dateTemp4 + "天前";
+                msg = context.getResources().getString(R.string.dayago).replace("1", ""+dateTemp4);
             } else if (dateTemp3 > 0) {
-                msg = dateTemp3 + "小时前";
+                msg = context.getResources().getString(R.string.hourago).replace("1", ""+dateTemp3);;
             } else if (dateTemp2 > 0) {
-                msg = dateTemp2 + "分鐘前";
+                msg = context.getResources().getString(R.string.minuteago).replace("1", ""+dateTemp2);
             } else if (dateTemp1 > 0) {
-                msg = "剛剛";
+                msg = context.getResources().getString(R.string.secago);
             }
         }
         return msg;

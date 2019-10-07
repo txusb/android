@@ -226,4 +226,17 @@
     <string name="update_success">Erfolgreich aktualisiert</string>
     <string name="need_upadte">Bitte aktualisieren Sie auf die neueste Version</string>
     <string name="is_latest">Um auf die neueste Version zu aktualisieren</string>
+    <string name="SayQusition">Hallo, bitte erläutern Sie das Produktproblem</string>
+    <string name="PleaseMessage">Bitte geben Sie den Inhalt des Briefes ein</string>
+    <string name="notempty">Die Nachricht darf nicht leer sein</string>
+    <string name="sendsuccess">Erfolgreicher Transfer</string>
+    <string name="sendfalse">Übertragung fehlgeschlagen</string>
+    <string name="minuteago">Vor 1 Minute</string>
+    <string name="dayago">Vor 1 Tag</string>
+    <string name="secago">Kundendienstspezialist</string>
+    <string name="Online_customer_service">Online-Kundendienst</string>
+    <string name="Customer_service_specialist">Kundendienstspezialist</string>
+    <string name="hourago">Vor einer Stunde</string>
+    <string name="monthago">Vor 1 Monat</string>
+    <string name="yeargo">Vor 1 Jahr</string>
 </resources>

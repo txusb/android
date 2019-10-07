@@ -348,4 +348,17 @@
     <string name="update_success">update completed</string>
     <string name="need_upadte">Please update to the latest version</string>
     <string name="is_latest">To update to the latest version</string>
+    <string name="SayQusition">Hello, please elaborate on the product issue</string>
+    <string name="PleaseMessage">Please enter the content of the letter</string>
+    <string name="notempty">Message cannot be empty</string>
+    <string name="sendsuccess">Successful transfer</string>
+    <string name="sendfalse">Transfer failed</string>
+    <string name="minuteago">1 minute ago</string>
+    <string name="dayago">1 day ago</string>
+    <string name="secago">just</string>
+    <string name="Online_customer_service">Online customer service</string>
+    <string name="Customer_service_specialist">Customer service specialist</string>
+    <string name="hourago">1 hour ago</string>
+    <string name="monthago">1 month ago</string>
+    <string name="yeargo">1 year ago</string>
 </resources>

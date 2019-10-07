@@ -279,4 +279,17 @@
     <string name="update_success">更新成功</string>
     <string name="need_upadte">请更新至最新版本</string>
     <string name="is_latest">以更新至最新版本</string>
+    <string name="SayQusition">您好，请详细说明产品问题</string>
+    <string name="PleaseMessage">请输入信件内容</string>
+    <string name="notempty">讯息不得为空</string>
+    <string name="sendsuccess">传送成功</string>
+    <string name="sendfalse">传送失败</string>
+    <string name="minuteago">1分钟前</string>
+    <string name="dayago">1天前</string>
+    <string name="secago">刚刚</string>
+    <string name="Online_customer_service">线上客服</string>
+    <string name="Customer_service_specialist">客服专员</string>
+    <string name="hourago">1小时前</string>
+    <string name="monthago">1个月前</string>
+    <string name="yeargo">1年前</string>
 </resources>

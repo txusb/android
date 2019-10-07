@@ -221,4 +221,17 @@
     <string name="update_success">更新成功</string>
     <string name="need_upadte">請更新至最新版本</string>
     <string name="is_latest">以更新至最新版本</string>
+    <string name="SayQusition">您好，請詳細說明產品問題</string>
+    <string name="PleaseMessage">請輸入信件內容</string>
+    <string name="notempty">訊息不得為空</string>
+    <string name="sendsuccess">傳送成功</string>
+    <string name="sendfalse">傳送失敗</string>
+    <string name="minuteago">1分鐘前</string>
+    <string name="dayago">1天前</string>
+    <string name="secago">剛剛</string>
+    <string name="Online_customer_service">線上客服</string>
+    <string name="Customer_service_specialist">客服專員</string>
+    <string name="hourago">1小時前</string>
+    <string name="monthago">1個月前</string>
+    <string name="yeargo">1年前</string>
 </resources>

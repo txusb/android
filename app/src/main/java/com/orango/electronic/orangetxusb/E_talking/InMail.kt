@@ -37,9 +37,9 @@ class InMail(private val a: Messageitem)
         if(position==a.admin.size){
             holder.you.visibility=View.VISIBLE
             holder.image.visibility=View.GONE
-            holder.po.text="您好，請詳細說明產品問題"
+            holder.po.text= holder.mView.context.resources.getString(R.string.SayQusition)
             loadResPic(holder.mView.context,holder.head,R.mipmap.mastericon)
-            holder.name.text="客服專員"
+            holder.name.text=holder.mView.context.resources.getString(R.string.Customer_service_specialist)
         }else{
             if(a.admin[position].equals(E_Command.admin)){
                 holder.me.visibility=View.VISIBLE
@@ -50,7 +50,7 @@ class InMail(private val a: Messageitem)
                         holder.mView.context.startActivity(intent)}
                 }
                 holder.pome.setText(a.message[position])
-                holder.timeme.text=CalculateTime(a.time[position])
+                holder.timeme.text=CalculateTime(a.time[position],holder.mView.context)
             }else{
                 holder.you.visibility=View.VISIBLE
                 if(a.file[position].equals("nodata")){holder.image.visibility=View.GONE}else{
@@ -62,8 +62,8 @@ class InMail(private val a: Messageitem)
                     holder.image.setImageURI(a.file[position])}
                 holder.po.text=a.message[position]
                 loadResPic(holder.mView.context,holder.head,R.mipmap.mastericon)
-                holder.name.text="客服專員"
-                holder.time.text=CalculateTime(a.time[position])
+                holder.name.text=holder.mView.context.resources.getString(R.string.Customer_service_specialist)
+                holder.time.text=CalculateTime(a.time[position],holder.mView.context)
             }
         }
     }

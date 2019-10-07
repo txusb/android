@@ -298,4 +298,17 @@
     <string name="update_success">Aggiornato con successo</string>
     <string name="need_upadte">Si prega di aggiornare all\'ultima versione</string>
     <string name="is_latest">Per aggiornare all\'ultima versione</string>
+    <string name="SayQusition">Ciao, ti preghiamo di approfondire il problema del prodotto</string>
+    <string name="PleaseMessage">Si prega di inserire il contenuto della lettera</string>
+    <string name="notempty">Il messaggio non può essere vuoto</string>
+    <string name="sendsuccess">Trasferimento riuscito</string>
+    <string name="sendfalse">Trasferimento fallito</string>
+    <string name="minuteago">1 minuto fa</string>
+    <string name="dayago">1 giorno fa</string>
+    <string name="secago">solo</string>
+    <string name="Online_customer_service">Servizio clienti online</string>
+    <string name="Customer_service_specialist">Specialista del servizio clienti</string>
+    <string name="hourago">1 ora fa</string>
+    <string name="monthago">1 mese fa</string>
+    <string name="yeargo">1 anno fa</string>
 </resources>

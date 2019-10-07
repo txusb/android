@@ -15,10 +15,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import com.orango.electronic.orangetxusb.E_talking.E_Command.*
 import com.orango.electronic.orangetxusb.R
 import com.zhihu.matisse.Matisse
@@ -40,6 +37,7 @@ class TalkingActivity : AppCompatActivity() {
     var refresh=true
     var image="nodata"
     var talkingwho="admin"
+    lateinit var tit:TextView
     lateinit var sender: EditText
     lateinit var InternalError:RelativeLayout
 
@@ -49,11 +47,13 @@ class TalkingActivity : AppCompatActivity() {
         val profilePreferences = getSharedPreferences("Setting", Context.MODE_PRIVATE)
         E_Command.admin=profilePreferences.getString("admin","nodata")
         re=findViewById(R.id.re)
+        tit=findViewById(R.id.title)
         sender=findViewById(R.id.sender)
         InternalError=findViewById(R.id.InternetError)
         im=findViewById(R.id.im)
         showimage=findViewById(R.id.showimage)
         re.layoutManager=LinearLayoutManager(this,RecyclerView.VERTICAL,true)
+        tit.text=resources.getString(R.string.Online_customer_service)
         re.adapter=cell
         re.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -90,7 +90,7 @@ class TalkingActivity : AppCompatActivity() {
             }
             R.id.send->{
                 if(sender.text.isEmpty()){
-                    Toast.makeText(this,"訊息不得為空", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,R.string.notempty, Toast.LENGTH_SHORT).show()
                     return
                 }
                 if(image.equals("nodata")){
@@ -116,6 +116,7 @@ class TalkingActivity : AppCompatActivity() {
                 handler.post {
                     refresh=true
                     if(it.success){
+                        InternalError.visibility=View.GONE
                         cell.notifyDataSetChanged()
                     }
                 }
@@ -176,11 +177,11 @@ class TalkingActivity : AppCompatActivity() {
                 image="nodata"
                 E_Command.dismiss()
                 if(response){
-                    Toast.makeText(this,"傳送成功", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,R.string.sendsuccess, Toast.LENGTH_SHORT).show()
                     sender.setText("")
                     showimage.visibility=View.GONE
                 }else{
-                    Toast.makeText(this,"傳送失敗", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,R.string.sendfalse, Toast.LENGTH_SHORT).show()
                 }
             }
         }.start()
