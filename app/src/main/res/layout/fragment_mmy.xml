@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".mainActivity.mmyFragment"
+    tools:context=".UsbCable.Cable_Program"
     android:background="#EFE8E1">
 
     <android.support.constraint.ConstraintLayout

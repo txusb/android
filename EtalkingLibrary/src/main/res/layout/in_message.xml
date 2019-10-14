@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:fresco="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/me" android:visibility="gone">
+        <LinearLayout
+                android:id="@+id/oiu2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sa2"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/imageme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    fresco:viewAspectRatio="1"
+                    android:layout_weight="1"
+                    android:visibility="gone" android:scaleType="fitCenter" app:placeholderImage="@drawable/field"
+                    android:background="#EFE8E1" app:actualImageScaleType="fitEnd"/>
+        </LinearLayout>
+        <RelativeLayout
+                android:id="@+id/sa2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp" android:background="@drawable/cornergray" android:layout_alignParentEnd="true"
+                android:layout_marginLeft="50dp">
+
+            <TextView
+                    android:id="@+id/pome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:lineSpacingExtra="0sp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="sasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasa"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="14sp"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@id/oiu2">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:gravity="left|center"
+                    android:text="剛剛"
+                    android:textSize="12sp" android:id="@+id/timeme" android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/you" android:visibility="visible">
+
+        <LinearLayout
+                android:id="@+id/oiu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sa"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    fresco:viewAspectRatio="1"
+                    android:layout_weight="1"
+                    android:visibility="gone" android:scaleType="fitCenter" app:placeholderImage="@drawable/field"
+                    android:background="#EFE8E1" app:actualImageScaleType="fitStart"/>
+        </LinearLayout>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/head"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                fresco:roundAsCircle="true"
+                fresco:placeholderImage="@drawable/admin2"
+                fresco:failureImage="@drawable/admin2"
+                fresco:roundedCornerRadius="20dp" android:layout_marginTop="5dp"/>
+
+        <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人名"
+                android:textColor="@android:color/background_dark"
+                android:textSize="14sp"
+                android:textStyle="bold" android:layout_toEndOf="@id/head" android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"/>
+        <RelativeLayout
+                android:id="@+id/sa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:padding="5dp" android:background="@drawable/cornergray">
+
+            <TextView
+                    android:id="@+id/po"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:lineSpacingExtra="0sp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="14sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@+id/oiu">
+
+            <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="60dp"
+                    android:gravity="left|center"
+                    android:text="剛剛"
+                    android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

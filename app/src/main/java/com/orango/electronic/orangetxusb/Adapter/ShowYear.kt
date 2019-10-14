@@ -1,7 +1,6 @@
 package com.orango.electronic.orangetxusb.Adapter
 
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 
@@ -14,11 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.orango.electronic.orangetxusb.LotActivity.Pad_Idcopy
-import com.orango.electronic.orangetxusb.LotActivity.StartProgram
+import com.orango.electronic.orangetxusb.UsbPad.Pad_Idcopy
+import com.orango.electronic.orangetxusb.UsbPad.StartProgram
 import com.orango.electronic.orangetxusb.R
+import com.orango.electronic.orangetxusb.UsbCable.Id_copy
+import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
 import com.orango.electronic.orangetxusb.mainActivity.*
-import com.orango.electronic.orangetxusb.tool.FileDowload.DownS19
 import java.util.ArrayList
 
 
@@ -37,11 +37,11 @@ class ShowYear(private val years: ArrayList<String>, private val make: String, p
             "PROGRAM"->{
                 if(NavigationActivity.PAD_OR_USB.equals("USB")){
                     val args = Bundle()
-                    args.putString(mmyFragment.stringMake, make)
-                    args.putString(mmyFragment.stringMakeImg, makeImg)
-                    args.putString(mmyFragment.stringModel, model)
-                    args.putString(mmyFragment.stringYear, years[position])
-                    val fragment = mmyFragment()
+                    args.putString(Cable_Program.stringMake, make)
+                    args.putString(Cable_Program.stringMakeImg, makeImg)
+                    args.putString(Cable_Program.stringModel, model)
+                    args.putString(Cable_Program.stringYear, years[position])
+                    val fragment = Cable_Program()
                     fragment.arguments = args
                     val transaction = fragmentManager.beginTransaction()
                     transaction.replace(R.id.nav_host_fragment, fragment, "Program")
@@ -51,14 +51,14 @@ class ShowYear(private val years: ArrayList<String>, private val make: String, p
                         .commit()
                 }else{
                     val args = Bundle()
-                    args.putString(mmyFragment.stringMake, make)
-                    args.putString(mmyFragment.stringMakeImg, makeImg)
-                    args.putString(mmyFragment.stringModel, model)
-                    args.putString(mmyFragment.stringYear, years[position])
-                    args.putString(mmyFragment.LFID, "")
-                    args.putString(mmyFragment.LRID, "")
-                    args.putString(mmyFragment.RRID, "")
-                    args.putString(mmyFragment.RFID, "")
+                    args.putString(Cable_Program.stringMake, make)
+                    args.putString(Cable_Program.stringMakeImg, makeImg)
+                    args.putString(Cable_Program.stringModel, model)
+                    args.putString(Cable_Program.stringYear, years[position])
+                    args.putString(Cable_Program.LFID, "")
+                    args.putString(Cable_Program.LRID, "")
+                    args.putString(Cable_Program.RRID, "")
+                    args.putString(Cable_Program.RFID, "")
                     val fragment = StartProgram()
                     fragment.arguments = args
                     val transaction = fragmentManager.beginTransaction()
@@ -72,10 +72,10 @@ class ShowYear(private val years: ArrayList<String>, private val make: String, p
             "IDCOPY"->{
                 if(NavigationActivity.PAD_OR_USB.equals("USB")){
                     val args = Bundle()
-                    args.putString(mmyFragment.stringMake, make)
-                    args.putString(mmyFragment.stringMakeImg, makeImg)
-                    args.putString(mmyFragment.stringModel, model)
-                    args.putString(mmyFragment.stringYear, years[position])
+                    args.putString(Cable_Program.stringMake, make)
+                    args.putString(Cable_Program.stringMakeImg, makeImg)
+                    args.putString(Cable_Program.stringModel, model)
+                    args.putString(Cable_Program.stringYear, years[position])
                     val fragment = Id_copy()
                     fragment.arguments = args
                     val transaction = fragmentManager.beginTransaction()
@@ -86,10 +86,10 @@ class ShowYear(private val years: ArrayList<String>, private val make: String, p
                         .commit()
                 }else{
                     val args = Bundle()
-                    args.putString(mmyFragment.stringMake, make)
-                    args.putString(mmyFragment.stringMakeImg, makeImg)
-                    args.putString(mmyFragment.stringModel, model)
-                    args.putString(mmyFragment.stringYear, years[position])
+                    args.putString(Cable_Program.stringMake, make)
+                    args.putString(Cable_Program.stringMakeImg, makeImg)
+                    args.putString(Cable_Program.stringModel, model)
+                    args.putString(Cable_Program.stringYear, years[position])
                     val fragment = Pad_Idcopy()
                     fragment.arguments = args
                     val transaction = fragmentManager.beginTransaction()

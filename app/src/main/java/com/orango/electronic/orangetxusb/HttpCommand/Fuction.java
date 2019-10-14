@@ -10,11 +10,54 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class Fuction {
+    public static final int timeout=1000;
+    public static final String wsdl = "http://35.240.51.141/App_Asmx/ToolApp.asmx";
+    private static RetNode _req(String url_String, String data, int timeout) {
+        try{  Log.d(TAG + "_post", "url: " + url_String);
+            URL url = new URL(url_String);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
+            conn.setRequestMethod("POST");
+            conn.setUseCaches(false);
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(timeout);
+            conn.setReadTimeout(timeout);
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+            dos.write(data.getBytes(StandardCharsets.UTF_8));
+            dos.flush();
+            RetNode retNode = new RetNode();
+            retNode.status=conn.getResponseCode();
+            retNode.data = "";
+            if(retNode.status==200){
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                String line = null;
+                StringBuffer strBuf = new StringBuffer();
+                while ((line = reader.readLine()) != null) {
+                    strBuf.append(line);
+                }
+                retNode.data=strBuf.toString();
+                reader.close();
+            }
+            dos.close();
+            Log.d(TAG+"_post", "-------------respond data--------------");
+            Log.d(TAG+"_post", retNode.data);
+            Log.d(TAG+"_post", "---------------------------------------");
+            Log.d(TAG+"_post", "status: "+retNode.status);
+            Log.d(TAG+"_post", "-------------data end--------------");
+            return  retNode;
+        }catch (Exception e){
+            RetNode retNode = new RetNode();
+            retNode.status = -1;
+            retNode.data = "";
+            return  retNode;
+        }
+    }
     public static boolean ResetPassword(String admin){
         try{
-            String wsdl = "http://35.240.51.141/App_Asmx/ToolApp.asmx";
-            int timeout = 10000;
             StringBuffer sb = new StringBuffer();
             sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                     "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
@@ -24,40 +67,12 @@ public class Fuction {
                     "    </SysResetPwd>\n" +
                     "  </soap12:Body>\n" +
                     "</soap12:Envelope>");
-            // HttpURLConnection 發送SOAP請求
-            System.out.println("HttpURLConnection 發送SOAP請求");
-            URL url = new URL(wsdl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
-            conn.setRequestMethod("POST");
-            conn.setUseCaches(false);
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setConnectTimeout(timeout);
-            conn.setReadTimeout(timeout);
-
-            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(sb.toString().getBytes(StandardCharsets.UTF_8));
-            dos.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-            String line = null;
-            StringBuffer strBuf = new StringBuffer();
-            while ((line = reader.readLine()) != null) {
-                strBuf.append(line);
-            }
-            dos.close();
-            reader.close();
-
-            System.out.println(strBuf.toString());
-            return true;
+            return _req(wsdl,sb.toString(),timeout).status==200;
         }catch(Exception e){e.printStackTrace();return false;}
     }
     public static boolean ValidateUser(String admin,String password){
         try{
-            String wsdl = "http://35.240.51.141/App_Asmx/ToolApp.asmx";
-            int timeout = 10000;
             StringBuffer sb = new StringBuffer();
             sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                     "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
@@ -68,39 +83,12 @@ public class Fuction {
                     "    </ValidateUser>\n" +
                     "  </soap12:Body>\n" +
                     "</soap12:Envelope>");
-            // HttpURLConnection 發送SOAP請求
-            System.out.println("HttpURLConnection 發送SOAP請求");
-            URL url = new URL(wsdl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
-            conn.setRequestMethod("POST");
-            conn.setUseCaches(false);
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setConnectTimeout(timeout);
-            conn.setReadTimeout(timeout);
-
-            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(sb.toString().getBytes(StandardCharsets.UTF_8));
-            dos.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-            String line = null;
-            StringBuffer strBuf = new StringBuffer();
-            while ((line = reader.readLine()) != null) {
-                strBuf.append(line);
-            }
-            dos.close();
-            reader.close();
-            System.out.println(strBuf.toString());
-            return strBuf.toString().substring(strBuf.toString().indexOf("<ValidateUserResult>") + 20, strBuf.toString().indexOf("</ValidateUserResult>")).equals("true");
+           RetNode respnse=_req(wsdl,sb.toString(),timeout);
+            return respnse.data.substring(respnse.data.indexOf("<ValidateUserResult>") + 20, respnse.data.indexOf("</ValidateUserResult>")).equals("true");
         }catch(Exception e){e.printStackTrace();return false;}
     }
     public static int Register(String admin,String password,String SerialNum,String storetype,String companyname,String firstname,String lastname,String phone,String State,String city,String streat,String zp){
         try{
-            String wsdl = "http://35.240.51.141/App_Asmx/ToolApp.asmx";
-            int timeout = 10000;
             StringBuffer sb = new StringBuffer();
             sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                     "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
@@ -138,35 +126,9 @@ public class Fuction {
                     "    </Register>\n" +
                     "  </soap12:Body>\n" +
                     "</soap12:Envelope>");
-
-            // HttpURLConnection 發送SOAP請求
-            System.out.println("HttpURLConnection 發送SOAP請求");
-            URL url = new URL(wsdl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
-            conn.setRequestMethod("POST");
-            conn.setUseCaches(false);
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setConnectTimeout(timeout);
-            conn.setReadTimeout(timeout);
-
-            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-            dos.write(sb.toString().getBytes(StandardCharsets.UTF_8));
-            dos.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-            String line = null;
-            StringBuffer strBuf = new StringBuffer();
-            while ((line = reader.readLine()) != null) {
-                strBuf.append(line);
-            }
-            dos.close();
-            reader.close();
-
-            System.out.println(strBuf.toString());
-            if(strBuf.toString().substring(strBuf.toString().indexOf("<RegisterResult>")+16,strBuf.toString().indexOf("</RegisterResult>")).equals("true")){
+            RetNode respnse=_req(wsdl,sb.toString(),timeout);
+            if(respnse.status!=200){return -1;}
+            if(respnse.data.substring(respnse.data.indexOf("<RegisterResult>")+16,respnse.data.indexOf("</RegisterResult>")).equals("true")){
                 return 0;
             }else{
                 return 1;
@@ -176,8 +138,6 @@ public class Fuction {
     }
     public static void Upload_ProgramRecord(String make, String model, String year, String startime, String Endtime, String SreialNum, String Devicetype, String Mode, int SensorCount, String position
             , ArrayList<SensorRecord> idrecord){try{
-        String wsdl = "http://35.240.51.141/App_Asmx/ToolApp.asmx";
-        int timeout = 10000;
         StringBuffer sb = new StringBuffer();
         sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
@@ -236,34 +196,10 @@ public class Fuction {
                         "    </Upload_VersionUpdateRecord>\n" +
                         "  </soap12:Body>\n" +
                         "</soap12:Envelope>");
-        // HttpURLConnection 發送SOAP請求
-        System.out.println(sb);
-        URL url = new URL(wsdl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.setConnectTimeout(timeout);
-        conn.setReadTimeout(timeout);
-        DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-        dos.write(sb.toString().getBytes(StandardCharsets.UTF_8));
-        dos.flush();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-        String line = null;
-        StringBuffer strBuf = new StringBuffer();
-        while ((line = reader.readLine()) != null) {
-            strBuf.append(line);
-        }
-        dos.close();
-        reader.close();
-        Log.d("upload",strBuf.toString());
+        RetNode respnse=_req(wsdl,sb.toString(),timeout);
     }catch(Exception e){  Log.d("upload",e.getMessage());}}
     public static void Upload_IDCopyRecord(String make,String model,String year,String startime,String Endtime,String SreialNum,String Devicetype,String Mode,int SensorCount,String position
             ,ArrayList<SensorRecord> idrecord){try{
-        String wsdl = "http://35.240.51.141/App_Asmx/ToolApp.asmx";
-        int timeout = 10000;
         StringBuffer sb = new StringBuffer();
         sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
@@ -321,28 +257,7 @@ public class Fuction {
                         "    </Upload_IDCopyRecord>\n" +
                         "  </soap12:Body>\n" +
                         "</soap12:Envelope>");
-        // HttpURLConnection 發送SOAP請求
-        System.out.println(sb);
-        URL url = new URL(wsdl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
-        conn.setRequestMethod("POST");
-        conn.setUseCaches(false);
-        conn.setDoInput(true);
-        conn.setDoOutput(true);
-        conn.setConnectTimeout(timeout);
-        conn.setReadTimeout(timeout);
-        DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-        dos.write(sb.toString().getBytes(StandardCharsets.UTF_8));
-        dos.flush();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-        String line = null;
-        StringBuffer strBuf = new StringBuffer();
-        while ((line = reader.readLine()) != null) {
-            strBuf.append(line);
-        }
-        dos.close();
-        reader.close();
-        Log.d("upload",strBuf.toString());
+        RetNode respnse=_req(wsdl,sb.toString(),timeout);
+        Log.d("upload",respnse.data.toString());
     }catch(Exception e){  Log.d("upload",e.getMessage());}}
 }

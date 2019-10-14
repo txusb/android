@@ -22,16 +22,15 @@ import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
 import com.hoho.android.usbserial.driver.UsbSerialDriver
 import com.hoho.android.usbserial.driver.UsbSerialProber
+import com.orange.etalkinglibrary.E_talking.E_Command
+import com.orange.etalkinglibrary.E_talking.TalkingActivity
 import com.orango.electronic.orangetxusb.*
-import com.orango.electronic.orangetxusb.E_talking.E_Command
-import com.orango.electronic.orangetxusb.E_talking.TalkingActivity
 import com.orango.electronic.orangetxusb.EventBus.ConnectBle
-import com.orango.electronic.orangetxusb.LotActivity.PadSelect
 import com.orango.electronic.orangetxusb.OrangeUsbProber.Companion.getCustomProber
 import com.orango.electronic.orangetxusb.SettingPagr.Update
-import com.orango.electronic.orangetxusb.TestPackage.Command
-import com.orango.electronic.orangetxusb.TestPackage.FormatConvert
-import com.orango.electronic.orangetxusb.TestPackage.RxCommand
+import com.orango.electronic.orangetxusb.TxCommand.Command
+import com.orango.electronic.orangetxusb.TxCommand.FormatConvert
+import com.orango.electronic.orangetxusb.TxCommand.RxCommand
 import com.orango.electronic.orangetxusb.blelibrary.EventBus.*
 import com.orango.electronic.orangetxusb.blelibrary.Server.BleServiceControl
 import com.orango.electronic.orangetxusb.mmySql.ItemDAO
@@ -146,7 +145,7 @@ class NavigationActivity : AppCompatActivity(), FragmentManager.OnBackStackChang
 fun onclick(view: View){
     when(view.id){
         R.id.imageView71->{
-            startActivity(Intent(this,TalkingActivity::class.java))
+            startActivity(Intent(this, TalkingActivity::class.java))
         }
         R.id.imageView3->{
             Thread {

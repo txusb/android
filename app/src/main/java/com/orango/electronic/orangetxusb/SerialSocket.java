@@ -12,8 +12,8 @@ import com.hoho.android.usbserial.util.SerialInputOutputManager;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 
-import static com.orango.electronic.orangetxusb.TestPackage.FormatConvert.StringHexToByte;
-import static com.orango.electronic.orangetxusb.TestPackage.FormatConvert.bytesToHex;
+import static com.orango.electronic.orangetxusb.TxCommand.FormatConvert.StringHexToByte;
+import static com.orango.electronic.orangetxusb.TxCommand.FormatConvert.bytesToHex;
 
 
 public class SerialSocket implements SerialInputOutputManager.Listener {

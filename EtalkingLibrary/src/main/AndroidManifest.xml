@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.orange.etalkinglibrary">
+    <application>
+    <activity android:name="com.orange.etalkinglibrary.E_talking.TalkingActivity"
+              android:theme="@style/SwipTheme">
+    </activity>
+    <activity android:name="com.orange.etalkinglibrary.E_talking.ShowImage"
+              android:theme="@style/SwipTheme">
+    </activity>
+</application>
+</manifest>

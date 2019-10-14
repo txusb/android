@@ -3,7 +3,6 @@ package com.orango.electronic.orangetxusb.mainActivity
 
 import android.Manifest
 import android.app.Instrumentation
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
@@ -19,16 +18,9 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.Result
-import com.orango.electronic.orangetxusb.LotActivity.Pad_Idcopy
+import com.orango.electronic.orangetxusb.UsbPad.Pad_Idcopy
 
 import com.orango.electronic.orangetxusb.R
-import com.orango.electronic.orangetxusb.tool.Format
-import kotlinx.android.synthetic.main.fragment_pad__idcopy.*
-import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.*
-import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.Lf
-import kotlinx.android.synthetic.main.fragment_qrcode_scanner.*
-import kotlinx.android.synthetic.main.fragment_qrcode_scanner.view.*
-import kotlinx.android.synthetic.main.selectble.view.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 

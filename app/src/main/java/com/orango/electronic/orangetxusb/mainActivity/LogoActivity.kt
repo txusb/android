@@ -11,9 +11,8 @@ import android.os.Handler
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.View
+import com.orango.electronic.orangetxusb.AdminActivity.Enroll
 import com.orango.electronic.orangetxusb.AdminActivity.SetArea
-import com.orango.electronic.orangetxusb.E_talking.E_Command
-import com.orango.electronic.orangetxusb.E_talking.TalkingActivity
 import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.tool.LanguageUtil
 import java.util.ArrayList

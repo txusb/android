@@ -10,13 +10,12 @@ import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.orango.electronic.orangetxusb.LotActivity.PadSelect
+import com.orango.electronic.orangetxusb.UsbPad.PadSelect
 import com.orango.electronic.orangetxusb.ManualActivity.Users_Manual
 import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.SettingPagr.Setting
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import android.net.Uri
-import com.orango.electronic.orangetxusb.E_talking.TalkingActivity
 import java.lang.Exception
 
 

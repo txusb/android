@@ -10,8 +10,8 @@ android {
         applicationId "com.orango.electronic.orangetxusb"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 8
-        versionName "1.6"
+        versionCode 9
+        versionName "1.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -39,6 +39,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':usbSerialForAndroid')
+    implementation project(':EtalkingLibrary')
     def nav_version = "1.0.0-alpha09"
     implementation "android.arch.navigation:navigation-fragment:$nav_version"
     // use -ktx for Kotlin

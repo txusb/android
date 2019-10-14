@@ -1,7 +1,6 @@
 package com.orango.electronic.orangetxusb.mmySql
 
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -9,15 +8,13 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.util.Log
-import com.airbnb.lottie.parser.IntegerParser
-import com.orango.electronic.orangetxusb.LotActivity.Pad_Idcopy
-import com.orango.electronic.orangetxusb.LotActivity.StartProgram
+import com.orango.electronic.orangetxusb.UsbPad.Pad_Idcopy
+import com.orango.electronic.orangetxusb.UsbPad.StartProgram
 import com.orango.electronic.orangetxusb.R
-import com.orango.electronic.orangetxusb.mainActivity.Id_copy
+import com.orango.electronic.orangetxusb.UsbCable.Id_copy
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
-import com.orango.electronic.orangetxusb.mainActivity.mmyFragment
+import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
 import com.orango.electronic.orangetxusb.tool.FileDowload
-import com.orango.electronic.orangetxusb.tool.LanguageUtil
 import java.lang.Exception
 import java.util.ArrayList
 
@@ -89,11 +86,11 @@ fun GoOk(code:String,fragmentManager: FragmentManager){
                 "PROGRAM"->{
                     if(NavigationActivity.PAD_OR_USB.equals("USB")){
                         val args = Bundle()
-                        args.putString(mmyFragment.stringMake, make)
-                        args.putString(mmyFragment.stringMakeImg, makeImg)
-                        args.putString(mmyFragment.stringModel, model)
-                        args.putString(mmyFragment.stringYear, years)
-                        val fragment = mmyFragment()
+                        args.putString(Cable_Program.stringMake, make)
+                        args.putString(Cable_Program.stringMakeImg, makeImg)
+                        args.putString(Cable_Program.stringModel, model)
+                        args.putString(Cable_Program.stringYear, years)
+                        val fragment = Cable_Program()
                         fragment.arguments = args
                         val transaction = fragmentManager.beginTransaction()
                         transaction.replace(R.id.nav_host_fragment, fragment, "Program")
@@ -103,14 +100,14 @@ fun GoOk(code:String,fragmentManager: FragmentManager){
                             .commit()
                     }else{
                         val args = Bundle()
-                        args.putString(mmyFragment.stringMake, make)
-                        args.putString(mmyFragment.stringMakeImg, makeImg)
-                        args.putString(mmyFragment.stringModel, model)
-                        args.putString(mmyFragment.stringYear, years)
-                        args.putString(mmyFragment.LFID, "")
-                        args.putString(mmyFragment.LRID, "")
-                        args.putString(mmyFragment.RRID, "")
-                        args.putString(mmyFragment.RFID, "")
+                        args.putString(Cable_Program.stringMake, make)
+                        args.putString(Cable_Program.stringMakeImg, makeImg)
+                        args.putString(Cable_Program.stringModel, model)
+                        args.putString(Cable_Program.stringYear, years)
+                        args.putString(Cable_Program.LFID, "")
+                        args.putString(Cable_Program.LRID, "")
+                        args.putString(Cable_Program.RRID, "")
+                        args.putString(Cable_Program.RFID, "")
                         val fragment = StartProgram()
                         fragment.arguments = args
                         val transaction = fragmentManager.beginTransaction()
@@ -124,10 +121,10 @@ fun GoOk(code:String,fragmentManager: FragmentManager){
                 "IDCOPY"->{
                     if(NavigationActivity.PAD_OR_USB.equals("USB")){
                         val args = Bundle()
-                        args.putString(mmyFragment.stringMake, make)
-                        args.putString(mmyFragment.stringMakeImg, makeImg)
-                        args.putString(mmyFragment.stringModel, model)
-                        args.putString(mmyFragment.stringYear, years)
+                        args.putString(Cable_Program.stringMake, make)
+                        args.putString(Cable_Program.stringMakeImg, makeImg)
+                        args.putString(Cable_Program.stringModel, model)
+                        args.putString(Cable_Program.stringYear, years)
                         val fragment = Id_copy()
                         fragment.arguments = args
                         val transaction = fragmentManager.beginTransaction()
@@ -138,10 +135,10 @@ fun GoOk(code:String,fragmentManager: FragmentManager){
                             .commit()
                     }else{
                         val args = Bundle()
-                        args.putString(mmyFragment.stringMake, make)
-                        args.putString(mmyFragment.stringMakeImg, makeImg)
-                        args.putString(mmyFragment.stringModel, model)
-                        args.putString(mmyFragment.stringYear, years)
+                        args.putString(Cable_Program.stringMake, make)
+                        args.putString(Cable_Program.stringMakeImg, makeImg)
+                        args.putString(Cable_Program.stringModel, model)
+                        args.putString(Cable_Program.stringYear, years)
                         val fragment = Pad_Idcopy()
                         fragment.arguments = args
                         val transaction = fragmentManager.beginTransaction()

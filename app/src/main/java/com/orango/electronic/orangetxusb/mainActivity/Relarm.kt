@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.orango.electronic.orangetxusb.R
-import kotlinx.android.synthetic.main.fragment_mmy.view.*
+import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
 import kotlinx.android.synthetic.main.fragment_relarm.view.*
 import kotlinx.android.synthetic.main.fragment_mmy.view.mmy_text as mmy_text1
 
@@ -56,10 +56,10 @@ class Relarm : Fragment() {
         super.onCreate(savedInstanceState)
         retainInstance = true
         navActivity = activity as NavigationActivity
-        make = arguments!!.getString(mmyFragment.stringMake)!!
-        makeImg = arguments!!.getString(mmyFragment.stringMakeImg)!!
-        model = arguments!!.getString(mmyFragment.stringModel)!!
-        year = arguments!!.getString(mmyFragment.stringYear)!!
+        make = arguments!!.getString(Cable_Program.stringMake)!!
+        makeImg = arguments!!.getString(Cable_Program.stringMakeImg)!!
+        model = arguments!!.getString(Cable_Program.stringModel)!!
+        year = arguments!!.getString(Cable_Program.stringYear)!!
 
     }
     override fun onResume() {

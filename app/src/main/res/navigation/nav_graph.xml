@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/mmyFragment"
-        android:name="com.orango.electronic.orangetxusb.mainActivity.mmyFragment"
+        android:name="com.orango.electronic.orangetxusb.UsbCable.Cable_Program"
         android:label="fragment_mmy"
         tools:layout="@layout/fragment_mmy" >
         <action

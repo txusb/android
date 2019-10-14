@@ -32,8 +32,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 import java.util.UUID;
 
-import static com.orango.electronic.orangetxusb.TestPackage.FormatConvert.StringHexToByte;
-import static com.orango.electronic.orangetxusb.TestPackage.FormatConvert.bytesToHex;
+import static com.orango.electronic.orangetxusb.TxCommand.FormatConvert.StringHexToByte;
+import static com.orango.electronic.orangetxusb.TxCommand.FormatConvert.bytesToHex;
 
 /**
  * Service for managing connection and data communication with a GATT server hosted on a
