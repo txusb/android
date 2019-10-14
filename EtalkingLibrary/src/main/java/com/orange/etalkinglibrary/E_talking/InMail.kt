@@ -15,6 +15,7 @@ import com.orange.etalkinglibrary.E_talking.E_Command
 import com.orange.etalkinglibrary.E_talking.Messageitem
 import com.orange.etalkinglibrary.E_talking.Messageitem.CalculateTime
 import com.orange.etalkinglibrary.E_talking.Messageitem.loadResPic
+import com.orange.etalkinglibrary.E_talking.UnicodeUtil.unicodeToString
 import com.orange.etalkinglibrary.R
 
 
@@ -45,7 +46,7 @@ class InMail(private val a: Messageitem)
                         intent.putExtra("url",a.file[position])
                         holder.mView.context.startActivity(intent)}
                 }
-                holder.pome.setText(a.message[position])
+                holder.pome.setText(unicodeToString(a.message[position]))
                 holder.timeme.text=CalculateTime(a.time[position],holder.mView.context)
             }else{
                 holder.you.visibility=View.VISIBLE
@@ -56,7 +57,7 @@ class InMail(private val a: Messageitem)
 
                     holder.image.visibility=View.VISIBLE
                     holder.image.setImageURI(a.file[position])}
-                holder.po.text=a.message[position]
+                holder.po.text=unicodeToString(a.message[position])
                 loadResPic(holder.mView.context,holder.head,R.mipmap.mastericon)
                 holder.name.text=holder.mView.context.resources.getString(R.string.Customer_service_specialist)
                 holder.time.text=CalculateTime(a.time[position],holder.mView.context)

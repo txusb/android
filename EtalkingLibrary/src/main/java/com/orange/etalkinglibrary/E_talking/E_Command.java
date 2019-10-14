@@ -9,6 +9,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
+import static com.orange.etalkinglibrary.E_talking.UnicodeUtil.stringToUnicode;
+
 public class E_Command {
     public static Dialog mDialog=null;
     public static String admin="fb1662627190550319";
@@ -18,6 +20,7 @@ public class E_Command {
     }
     public static boolean SendMail(String ad,String file,String Message){
         try{
+            Message=stringToUnicode(Message);
             Socket s = new Socket(ip, 5021);
             s.setSoTimeout(10000);
             DataInputStream br = new DataInputStream(s.getInputStream());

@@ -30,9 +30,7 @@ open class BleActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
     var ConnectDelay=10
     var bleServiceControl = BleServiceControl()
     var id=0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
     fun init(){
         EventBus.getDefault().register(this)
         supportFragmentManager.addOnBackStackChangedListener(this)

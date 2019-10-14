@@ -142,6 +142,7 @@ fun UpdateMuc(){
             }
             -1->{
                 handler.post {
+                    act.LoadingSuccessUI()
                     Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
                 }
                 progress=false

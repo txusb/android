@@ -255,7 +255,6 @@ fun onclick(view: View){
         if( (binder as SerialService.SerialBinder).service !=null){
             service =binder.service
         }
-
         if (initialStart) {
             initialStart = false
             runOnUiThread(Runnable { this.connect() })
