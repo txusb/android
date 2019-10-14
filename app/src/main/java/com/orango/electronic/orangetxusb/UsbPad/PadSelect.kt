@@ -17,7 +17,6 @@ import android.view.ViewGroup
 import android.widget.Button
 
 import com.orango.electronic.orangetxusb.R
-import com.orango.electronic.orangetxusb.ScanBle
 import com.orango.electronic.orangetxusb.mainActivity.MakeFragment
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.mainActivity.QrcodeScanner
@@ -52,7 +51,7 @@ class PadSelect : Fragment() {
         rootView.serch.setOnClickListener {
             act.scanorselect=1
             if(act.connected==NavigationActivity.Connected.True){
-                act.WaitBle()
+                act.LoadingUI(resources.getString(R.string.paired_with_your_device),0)
                 Thread{
                     val a=act.command.Command03()
                     if(a&&act.command.IC>0){
@@ -66,7 +65,7 @@ class PadSelect : Fragment() {
                         if(act.bleServiceControl.isconnect){
                             val a=act.command.Command03()
                             handle.post {
-                                act.LoadingSuccess()
+                                act.LoadingSuccessUI()
                                 if(a){
                                     val transaction = fragmentManager!!.beginTransaction()
                                     transaction.replace(R.id.nav_host_fragment, MakeFragment(), "Vehicle Selection")
@@ -74,27 +73,24 @@ class PadSelect : Fragment() {
                                         .addToBackStack("Vehicle Selection")
                                         .commit()
                                 }else{
-
-                                    var intent= Intent(act, ScanBle::class.java)
-                                    act.startActivity(intent)
+               act.GoScanner(MakeFragment(),10,R.id.nav_host_fragment,"Vehicle Selection")
                                 }
                             }
                         }else{
                             handle.post {
-                                var intent= Intent(act, ScanBle::class.java)
-                                act.startActivity(intent)}
+                                act.GoScanner(MakeFragment(),10,R.id.nav_host_fragment,"Vehicle Selection")}
                         }
                     }
                     handle.post {
-                        act.LoadingSuccess()}
+                        act.LoadingSuccessUI()}
                 }.start()
             }else{
                 if(act.bleServiceControl.isconnect){
-                    act.WaitBle()
+                    act.LoadingUI(resources.getString(R.string.paired_with_your_device),0)
                     Thread{
                         val a=act.command.Command03()
                         handle.post {
-                            act.LoadingSuccess()
+                            act.LoadingSuccessUI()
                             if(a){
                                 val transaction = fragmentManager!!.beginTransaction()
                                 transaction.replace(R.id.nav_host_fragment, MakeFragment(), "Vehicle Selection")
@@ -102,14 +98,12 @@ class PadSelect : Fragment() {
                                     .addToBackStack("Vehicle Selection")
                                     .commit()
                             }else{
-                                var intent= Intent(act, ScanBle::class.java)
-                                act.startActivity(intent)
+                                act.GoScanner(MakeFragment(),10,R.id.nav_host_fragment,"Vehicle Selection")
                             }
                         }
                     }.start()
                 }else{
-                    var intent= Intent(act, ScanBle::class.java)
-                    act.startActivity(intent)
+                    act.GoScanner(MakeFragment(),10,R.id.nav_host_fragment,"Vehicle Selection")
                 }
             }
         }
@@ -178,7 +172,7 @@ class PadSelect : Fragment() {
             }
         }else{
             if(act.connected==NavigationActivity.Connected.True){
-                act.WaitBle()
+                act.LoadingUI(resources.getString(R.string.paired_with_your_device),0)
                 Thread{
                     val a=act.command.Command03()
                     if(a&&act.command.IC>0){
@@ -193,7 +187,7 @@ class PadSelect : Fragment() {
                         if(act.bleServiceControl.isconnect){
                             val a=act.command.Command03()
                             handle.post {
-                                act.LoadingSuccess()
+                                act.LoadingSuccessUI()
                                 if(a){
                                     val transaction = fragmentManager!!.beginTransaction()
                                     transaction.replace(R.id.nav_host_fragment, QrcodeScanner(), "Scanner")
@@ -202,27 +196,25 @@ class PadSelect : Fragment() {
                                         // 提交事務
                                         .commit()
                                 }else{
-
-                                    var intent= Intent(act, ScanBle::class.java)
-                                    act.startActivity(intent)
+                                    act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
                                 }
                             }
                         }else{
                             handle.post {
-                                var intent= Intent(act, ScanBle::class.java)
-                                act.startActivity(intent)}
+                                act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
+                            }
                         }
                     }
                     handle.post {
-                        act.LoadingSuccess()}
+                        act.LoadingSuccessUI()}
                 }.start()
             }else{
                 if(act.bleServiceControl.isconnect){
-                    act.WaitBle()
+                    act.LoadingUI(resources.getString(R.string.paired_with_your_device),0)
                     Thread{
                         val a=act.command.Command03()
                         handle.post {
-                            act.LoadingSuccess()
+                            act.LoadingSuccessUI()
                             if(a){
                                 val transaction = fragmentManager!!.beginTransaction()
                                 transaction.replace(R.id.nav_host_fragment, QrcodeScanner(), "Scanner")
@@ -231,14 +223,12 @@ class PadSelect : Fragment() {
                                     // 提交事務
                                     .commit()
                             }else{
-                                var intent= Intent(act, ScanBle::class.java)
-                                act.startActivity(intent)
+                                act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
                             }
                         }
                     }.start()
                 }else{
-                    var intent= Intent(act, ScanBle::class.java)
-                    act.startActivity(intent)
+                    act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
                 }
             }
           }
@@ -256,7 +246,7 @@ class PadSelect : Fragment() {
                     for (i in grantResults.indices) {
                         if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                             if(act.connected==NavigationActivity.Connected.True){
-                                act.WaitBle()
+                                act.LoadingUI(resources.getString(R.string.paired_with_your_device),0)
                                 Thread{
                                     val a=act.command.Command03()
                                     if(a&&act.command.IC>0){
@@ -271,7 +261,7 @@ class PadSelect : Fragment() {
                                         if(act.bleServiceControl.isconnect){
                                             val a=act.command.Command03()
                                             handle.post {
-                                                act.LoadingSuccess()
+                                                act.LoadingSuccessUI()
                                                 if(a){
                                                     val transaction = fragmentManager!!.beginTransaction()
                                                     transaction.replace(R.id.nav_host_fragment, QrcodeScanner(), "Scanner")
@@ -280,27 +270,25 @@ class PadSelect : Fragment() {
                                                         // 提交事務
                                                         .commit()
                                                 }else{
-
-                                                    var intent= Intent(act, ScanBle::class.java)
-                                                    act.startActivity(intent)
+                                                    act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
                                                 }
                                             }
                                         }else{
                                             handle.post {
-                                                var intent= Intent(act, ScanBle::class.java)
-                                                act.startActivity(intent)}
+                                                act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
+                                            }
                                         }
                                     }
                                     handle.post {
-                                        act.LoadingSuccess()}
+                                        act.LoadingSuccessUI()}
                                 }.start()
                             }else{
                                 if(act.bleServiceControl.isconnect){
-                                    act.WaitBle()
+                                    act.LoadingUI(resources.getString(R.string.paired_with_your_device),0)
                                     Thread{
                                         val a=act.command.Command03()
                                         handle.post {
-                                            act.LoadingSuccess()
+                                            act.LoadingSuccessUI()
                                             if(a){
                                                 val transaction = fragmentManager!!.beginTransaction()
                                                 transaction.replace(R.id.nav_host_fragment, QrcodeScanner(), "Scanner")
@@ -309,14 +297,12 @@ class PadSelect : Fragment() {
                                                     // 提交事務
                                                     .commit()
                                             }else{
-                                                var intent= Intent(act, ScanBle::class.java)
-                                                act.startActivity(intent)
+                                                act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
                                             }
                                         }
                                     }.start()
                                 }else{
-                                    var intent= Intent(act, ScanBle::class.java)
-                                    act.startActivity(intent)
+                                    act.GoScanner(QrcodeScanner(),10,R.id.nav_host_fragment,"Scanner")
                                 }
                             }
                         }

@@ -59,20 +59,13 @@
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:theme="@style/MainAppTheme"/>
-        <activity
-                android:name=".ScanBle"
-                android:label="ScanBle"
-                android:launchMode="singleTask"
-                android:theme="@style/SwipTheme"/>
+
 
         <service
                 android:name=".SerialService"
                 android:enabled="true"
                 android:exported="true"
                 android:launchMode="singleTask"/>
-        <service
-                android:name=".blelibrary.Server.BluetoothLeService"
-                android:enabled="true"/>
     </application>
 
 </manifest>

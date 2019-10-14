@@ -16,6 +16,7 @@ import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.SettingPagr.Setting
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import android.net.Uri
+import com.orango.electronic.orangetxusb.UsbCable.CableSelect
 import java.lang.Exception
 
 
@@ -51,38 +52,16 @@ class HomeFragment : Fragment() {
         navActivity.back.visibility=View.GONE
         programSensorBtn = rootView.findViewById(R.id.program_sensor_btn)
         programSensorBtn.setOnClickListener {
-            val transaction = fragmentManager!!.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment, AreaFragment(), "Select Area")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                .addToBackStack("Select Area")
-                // 提交事務
-                .commit()
+            navActivity.ChangePage(CableSelect(),R.id.nav_host_fragment,"Select Area",true)
         }
         rootView.program_pad_btn.setOnClickListener {
-            val transaction = fragmentManager!!.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment, PadSelect(), "PadSelect")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                .addToBackStack("PadSelect")
-                // 提交事務
-                .commit()
+            navActivity.ChangePage(PadSelect(),R.id.nav_host_fragment,"PadSelect",true)
         }
         rootView.user_manual_btn.setOnClickListener {
-            val transaction = fragmentManager!!.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment,
-                Users_Manual(), "UsersManual")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                .addToBackStack("UsersManual")
-                // 提交事務
-                .commit()
+            navActivity.ChangePage(Users_Manual(),R.id.nav_host_fragment,"UsersManual",true)
         }
         rootView.Setim.setOnClickListener {
-            val transaction = fragmentManager!!.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment,
-                Setting(), "Setting")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                .addToBackStack("Setting")
-                // 提交事務
-                .commit()
+            navActivity.ChangePage(Setting(),R.id.nav_host_fragment,"Setting",true)
         }
         rootView.online_shopping_btn.setOnClickListener {
             val profilePreferences = navActivity.getSharedPreferences("Setting", Context.MODE_PRIVATE)
@@ -94,14 +73,7 @@ class HomeFragment : Fragment() {
                 "Deutsche"->{ uti="http://orange-rdks.de"}
                 "English"->{ uti="http://simple-sensor.com"}
                 "Italiano"->{
-//                    uti="http://orange-like.it"
-                    val transaction = fragmentManager!!.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment,
-                        Setting(), "Setting")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Setting")
-                        // 提交事務
-                        .commit()
+                    navActivity.ChangePage(Setting(),R.id.nav_host_fragment,"Setting",true)
                     return@setOnClickListener
                 }
             }

@@ -13,7 +13,6 @@ import android.widget.*
 import com.orango.electronic.orangetxusb.HttpCommand.Fuction.Upload_ProgramRecord
 import com.orango.electronic.orangetxusb.HttpCommand.SensorRecord
 import com.orango.electronic.orangetxusb.R
-import com.orango.electronic.orangetxusb.mainActivity.AreaFragment
 import com.orango.electronic.orangetxusb.mainActivity.HomeFragment
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.mainActivity.Relarm
@@ -56,12 +55,12 @@ class Cable_Program : Fragment() {
         downs19()
     }
 fun downs19(){
-    navActivity.loading(0)
+    navActivity.LoadingUI(resources.getString(R.string.Data_Loading),0)
     isProgramming=true
     Thread{
         var  a=DownS19(mmyNum,navActivity)
         handler.post {
-            if(a){navActivity.LoadingSuccess()
+            if(a){navActivity.LoadingSuccessUI()
                 isProgramming=false
             }else{
                 downs19()
@@ -85,7 +84,7 @@ fun downs19(){
         rootView.copy_id_btn.setOnClickListener {
             NavigationActivity.Action ="IDCOPY"
             navActivity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            val fragment = AreaFragment()
+            val fragment = CableSelect()
             val transaction = fragmentManager!!.beginTransaction()
             transaction.replace(R.id.nav_host_fragment, fragment, "Select Area")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫

@@ -103,7 +103,7 @@ class Enroll : AppCompatActivity() {
                          a=Fuction.Register(email,password,serialnumber,"Retailer",company,firstname,lastname,phone,state,city,streat,zpcode)
                     }
                     handler.post {
-                        LoadingSuccess()
+                        LoadingSuccessUI()
                         val profilePreferences = getSharedPreferences("Setting", Context.MODE_PRIVATE)
                         if(a==-1){
                             Toast.makeText(this,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
@@ -129,7 +129,7 @@ class Enroll : AppCompatActivity() {
         load.visibility=View.VISIBLE
         programAnimator.visibility=View.VISIBLE
     }
-    fun LoadingSuccess(){
+    fun LoadingSuccessUI(){
         load.visibility=View.GONE
         programAnimator.visibility=View.GONE
     }

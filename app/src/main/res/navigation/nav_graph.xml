@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/areaFragment"
-        android:name="com.orango.electronic.orangetxusb.mainActivity.AreaFragment"
+        android:name="com.orango.electronic.orangetxusb.UsbCable.CableSelect"
         android:label="fragment_area"
         tools:layout="@layout/fragment_area" >
         <action

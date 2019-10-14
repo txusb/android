@@ -55,7 +55,7 @@ class SignIn : AppCompatActivity() {
                     var a=Fuction.ValidateUser(admin,password)
                     run=false
                     handler.post {
-                        LoadingSuccess()
+                        LoadingSuccessUI()
                         if(a){
                             val profilePreferences = getSharedPreferences("Setting", Context.MODE_PRIVATE)
                             profilePreferences.edit().putString("admin",admin).putString("password",password).commit()
@@ -76,7 +76,7 @@ class SignIn : AppCompatActivity() {
         load.visibility=View.VISIBLE
         programAnimator.visibility=View.VISIBLE
     }
-    fun LoadingSuccess(){
+    fun LoadingSuccessUI(){
         load.visibility=View.GONE
         programAnimator.visibility=View.GONE
     }

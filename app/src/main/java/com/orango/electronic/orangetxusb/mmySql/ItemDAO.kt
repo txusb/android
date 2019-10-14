@@ -98,6 +98,7 @@ fun GoOk(code:String,fragmentManager: FragmentManager){
                             .addToBackStack("Program")
                             // 提交事務
                             .commit()
+
                     }else{
                         val args = Bundle()
                         args.putString(Cable_Program.stringMake, make)

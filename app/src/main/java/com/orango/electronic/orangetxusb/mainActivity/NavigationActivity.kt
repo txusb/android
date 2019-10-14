@@ -6,11 +6,8 @@ import android.content.*
 import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
 import android.os.Bundle
-import android.os.Handler
 import android.os.IBinder
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.KeyEvent
@@ -22,32 +19,27 @@ import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
 import com.hoho.android.usbserial.driver.UsbSerialDriver
 import com.hoho.android.usbserial.driver.UsbSerialProber
+import com.orange.blelibrary.blelibrary.BleActivity
 import com.orange.etalkinglibrary.E_talking.E_Command
 import com.orange.etalkinglibrary.E_talking.TalkingActivity
 import com.orango.electronic.orangetxusb.*
-import com.orango.electronic.orangetxusb.EventBus.ConnectBle
 import com.orango.electronic.orangetxusb.OrangeUsbProber.Companion.getCustomProber
 import com.orango.electronic.orangetxusb.SettingPagr.Update
 import com.orango.electronic.orangetxusb.TxCommand.Command
-import com.orango.electronic.orangetxusb.TxCommand.FormatConvert
+import com.orango.electronic.orangetxusb.TxCommand.FormatConvert.StringHexToByte
 import com.orango.electronic.orangetxusb.TxCommand.RxCommand
-import com.orango.electronic.orangetxusb.blelibrary.EventBus.*
-import com.orango.electronic.orangetxusb.blelibrary.Server.BleServiceControl
 import com.orango.electronic.orangetxusb.mmySql.ItemDAO
 import com.orango.electronic.orangetxusb.tool.FileDowload
 import kotlinx.android.synthetic.main.activity_navigation.*
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import kotlin.concurrent.schedule
 
 
-class NavigationActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener,ServiceConnection,
+class NavigationActivity : BleActivity(), FragmentManager.OnBackStackChangedListener,ServiceConnection,
     SerialListener {
     companion object {
         var Action="PROGRAM"
-        var ActionPad="PROGRAM"
         var PAD_OR_USB="USB"
         var blename:String=""
     }
@@ -55,15 +47,12 @@ class NavigationActivity : AppCompatActivity(), FragmentManager.OnBackStackChang
     var serialnum="99"
     lateinit var havemessage:TextView
     lateinit var command: Command
-    val TAG = "NavigationActivity"
     val itemDAO: ItemDAO by lazy { ItemDAO(applicationContext) }
     lateinit var toolbar: Toolbar
     lateinit var timer: Timer
     lateinit var back:ImageView
     var HaveMMy=false
-    var bleServiceControl = BleServiceControl()
     lateinit var RightTop:ImageView
-
     private var savedState: Bundle? = null
     enum class Connected {
         False, Pending, True
@@ -95,13 +84,8 @@ class NavigationActivity : AppCompatActivity(), FragmentManager.OnBackStackChang
                 if(command.HandShake("0")==0){
                     handler.post {
                         Toast.makeText(this,resources.getString(R.string.need_upadte),Toast.LENGTH_SHORT).show()
-                        val transaction = supportFragmentManager.beginTransaction()
-                        transaction.replace(R.id.nav_host_fragment,
-                            Update(), "Update")
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                            .addToBackStack("Update")
-                            // 提交事務
-                            .commit() }
+                        ChangePage(Update(),R.id.nav_host_fragment,"Update",true)
+                      }
                     return@Thread
                 }
                 while(command.AppverInspire.equals("nodata")){command.AppverInspire=FileDowload.CabelName()}
@@ -110,17 +94,10 @@ class NavigationActivity : AppCompatActivity(), FragmentManager.OnBackStackChang
                     check=  command.Command01()
                     if(check){Log.d("Appversion",command.Appver)
                         if(command.Appver.equals(command.AppverInspire)){
-
                         }else{
                             handler.post {
                                 Toast.makeText(this,resources.getString(R.string.need_upadte),Toast.LENGTH_SHORT).show()
-                                val transaction = supportFragmentManager.beginTransaction()
-                                transaction.replace(R.id.nav_host_fragment,
-                                    Update(), "Update")
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                                    .addToBackStack("Update")
-                                    // 提交事務
-                                    .commit() }
+                                ChangePage(Update(),R.id.nav_host_fragment,"Update",true) }
                         }
                     }
                 }
@@ -164,9 +141,9 @@ fun onclick(view: View){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
+        init()
         havemessage=findViewById(R.id.textView78)
         bindService(Intent(this, SerialService::class.java), this, Context.BIND_AUTO_CREATE)
-        EventBus.getDefault().register(this)
         RightTop=findViewById(R.id.imageView)
         loadtitle=findViewById(R.id.textView11)
         load=findViewById(R.id.load)
@@ -181,12 +158,7 @@ fun onclick(view: View){
         savedState = savedInstanceState
         if(savedState != null) onBackStackChanged()
         supportFragmentManager.addOnBackStackChangedListener(this)
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.nav_host_fragment, HomeFragment(), "Home")
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-            // 提交事務
-            .commit()
-
+        ChangePage(HomeFragment(),R.id.nav_host_fragment,"Home",false)
         timer=Timer()
         timer.schedule(0,5000){
             runOnUiThread(Runnable {
@@ -208,13 +180,6 @@ fun onclick(view: View){
                         }
                     }
                 }
-                if(!bleServiceControl.isconnect&&!blename.equals("")){
-                    bleServiceControl.connect(blename,this@NavigationActivity)
-                    Log.d("情況","有")
-                }
-if(bleServiceControl.isconnect){
-    Log.d("情況","connect$blename")
-}else{     Log.d("情況","tryconnect$blename")}
                 if(connected==Connected.False){
                 Log.d("cabel","tryconnect")
                 refresh()
@@ -222,9 +187,8 @@ if(bleServiceControl.isconnect){
                 Log.d("cabel","connect")
             } })
         }
-        action_bar_title.setOnClickListener { command.Inapp() }
     }
-    public fun GetMessage(){
+     fun GetMessage(){
         val profilePreferences = getSharedPreferences("Setting", Context.MODE_PRIVATE)
         E_Command.admin=profilePreferences.getString("admin","nodata")
         Thread{
@@ -318,15 +282,6 @@ var NowFr="no"
             val tname=supportFragmentManager.fragments.get(supportFragmentManager.fragments.size-1).tag!!
             if(tname.equals("PadSelect")||tname.equals("Select Area")||tname.equals("Home")||tname.equals("UsersManual")||tname.equals("Setting")){NowFr=tname
             }
-
-//           if(tname.equals("Select Area")||tname.equals("PadSelect")){
-//               val backStackCount = supportFragmentManager.backStackEntryCount
-//               for (i in 0 until backStackCount) {
-//                   val backStackId = supportFragmentManager.getBackStackEntryAt(i).name
-//                   Log.d("Backname",backStackId)
-////
-//               }/* end of for */
-//           }
         }
 
        Log.d("Fragement_Tag",NowFr)
@@ -443,137 +398,50 @@ var NowFr="no"
     }
 
 
-    //----------------------------------------Use bleServiceControl.WriteCmd(HexString,uuid).to write Data ----------------------------------------
-    @Subscribe
-    fun Event(a: RebackData) {
-        try {
-            Log.w("WriteReback", "Data:" + FormatConvert.bytesToHex(a.reback))
-            RxCommand.RX(a.reback, this)
-        } catch (e: Exception) {
-            Log.w("error", e.message)
-        }
-
-    }
-
-    //----------------------------------------Use bleServiceControl.ReadCmd(uuid).to read Data----------------------------------------
-    @Subscribe
-    fun Event(a: ReadData) {
-        try {
-            Log.w("ReadReback", "Data:" + FormatConvert.bytesToHex(a.reback))
-            RxCommand.RX(a.reback, this)
-        } catch (e: Exception) {
-            Log.w("error", e.message)
-        }
-
-    }
-
-    //----------------------------------------Use bleServiceControl.WriteCmd will callbcak this method to confirm is writed susscessfully----------------------------------------
-    @Subscribe
-    fun Event(a: WriteData) {
-        try {
-            Log.w("Write", "Data:" + FormatConvert.bytesToHex(a.data()))
-        } catch (e: Exception) {
-            Log.w("error", e.message)
-        }
-
-    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun Event(a: ConnectState) {
-        if (a.reback) {
+    override fun ConnectSituation(boolean: Boolean){
+        if (boolean) {
          Log.d("連線","連線ok")
-//            LoadingSuccess()
+//            LoadingSuccessUI()
         } else {
             Toast.makeText(this,"Bluetooth is disconnected",Toast.LENGTH_SHORT).show()
-            LoadingSuccess()
-            fal=10
+            LoadingSuccessUI()
             blename=""
-            supportFragmentManager.addOnBackStackChangedListener(this)
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.nav_host_fragment, HomeFragment(), "Home")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                // 提交事務
-                .commit()
+            ChangePage(HomeFragment(),R.id.nav_host_fragment,"Home",false)
         }
     }
-
-    var handler= Handler()
     fun loadingMMy(){
-        loading(0)
+        LoadingUI(resources.getString(R.string.Download_MYY_data),0)
         Thread{
             val a= FileDowload.DownMMy(this)
             handler.post {
                 if(a){
                     HaveMMy=true
-                    LoadingSuccess()
+                    LoadingSuccessUI()
                 }else{   HaveMMy=false
                     loadingMMy()}
             }
         }.start()
     }
-    fun update(pass:Int){
-        if(pass==0){
-            loadtitle.text=resources.getString(R.string.Updating)
-            load.visibility=View.VISIBLE
-            programAnimator.visibility=View.VISIBLE
-        }else{
-            loadtitle.text=resources.getString(R.string.Updating)+"..."+pass+"%"
-            load.visibility=View.VISIBLE
-            programAnimator.visibility=View.VISIBLE
-        }
-
-    }
-    fun loading(pass:Int){
-        if(pass==0){
-            loadtitle.text=resources.getString(R.string.Data_Loading)
-            load.visibility=View.VISIBLE
-            programAnimator.visibility=View.VISIBLE
-        }else{
-            loadtitle.text=resources.getString(R.string.Data_Loading)+"..."+pass+"%"
-            load.visibility=View.VISIBLE
-            programAnimator.visibility=View.VISIBLE
-        }
-    }
-    fun WaitBle(){
-        loadtitle.text=resources.getString(R.string.paired_with_your_device)
-        load.visibility=View.VISIBLE
-        programAnimator.visibility=View.VISIBLE
-    }
-    fun LoadingSuccess(){
+    override fun LoadingSuccessUI(){
         load.visibility=View.GONE
         programAnimator.visibility=View.GONE
     }
-    var fal=0
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun Event(a: ConnectBle) {
-        WaitBle()
-        Thread{
-             fal=0
-            while(true){
-                if(bleServiceControl.isconnect||fal==10){break}
-                Thread.sleep(1000)
-                fal++
-            }
-            handler.post {
-            if(bleServiceControl.isconnect){
-                if(scanorselect==0){
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, QrcodeScanner(), "Scanner")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Scanner")
-                        // 提交事務
-                        .commit()
-                }else{
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.add(R.id.nav_host_fragment, MakeFragment(), "Vehicle Selection")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Vehicle Selection")
-                        .commit()
-                }
+    override fun LoadingUI(a: String,pass:Int) {
+        if(pass==0){
+            loadtitle.text=a
+            load.visibility=View.VISIBLE
+            programAnimator.visibility=View.VISIBLE
+        }else{
+            loadtitle.text=a+"..."+pass+"%"
+            load.visibility=View.VISIBLE
+            programAnimator.visibility=View.VISIBLE
+        }
 
-            }else{ blename=""}
-                LoadingSuccess()
-            }
-        }.start()
+    }
+    override fun RX(a:String){
+        Log.w("BLEDATA", "RX:$a")
+        RxCommand.RX(StringHexToByte(a), this)
+
     }
 
 }

@@ -52,7 +52,7 @@ lateinit var rootview:View
             UpdateMuc()
 
         }
-        act.loading(0)
+        act.LoadingUI(resources.getString(R.string.update),0)
         donloadmcu()
         return rootview
     }
@@ -64,7 +64,7 @@ lateinit var rootview:View
             if(a&&b){
                 handler.post {
                     rootview.button13.isEnabled=true
-                    act.LoadingSuccess()
+                    act.LoadingSuccessUI()
                 }
             }else{
                 donloadmcu()
@@ -75,7 +75,7 @@ lateinit var rootview:View
 fun UpdateMuc(){
     act.command.HandShake(mcpass)
     progress=true
-    act.update(0)
+    act.LoadingUI(resources.getString(R.string.update),0)
     act.back.isEnabled=false
     Thread{
         when(act.command.HandShake(mcpass)){
@@ -83,7 +83,7 @@ fun UpdateMuc(){
                 if(act.command.GoProgram(mcpass)){
                     val a=act.command.WriteFlash(act,132,"CABLE",mcpass)
                     handler.post {
-                        act.LoadingSuccess()
+                        act.LoadingSuccessUI()
                         if(a){
                             Toast.makeText(act,resources.getString(R.string.update_success),Toast.LENGTH_SHORT).show()
                             val transaction = fragmentManager!!.beginTransaction()
@@ -98,7 +98,7 @@ fun UpdateMuc(){
 
                 }else{
                     handler.post {
-                        act.LoadingSuccess()
+                        act.LoadingSuccessUI()
                         Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -106,37 +106,37 @@ fun UpdateMuc(){
 
             }
             1->{
-                if(act.command.GoProgram(mcpass)){
-                    val a=act.command.WriteFlash(act,132,"PAD",mcpass)
-                    handler.post {
-                        act.LoadingSuccess()
-                        if(a){
-                            if(mcpass.equals("1")){    Toast.makeText(act,resources.getString(R.string.update_success),Toast.LENGTH_SHORT).show()
-                                val transaction = fragmentManager!!.beginTransaction()
-                                transaction.add(R.id.nav_host_fragment, HomeFragment(), "Home")
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                                    // 提交事務
-                                    .commit()  ;progress=false}else{
-                                Thread.sleep(2000)
-                                mcpass="1";UpdateMuc()}
-                        }else{
-                            Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                }else{
-                    handler.post {
-                        act.LoadingSuccess()
-                        Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
-                    }
-                }
+//                if(act.command.GoProgram(mcpass)){
+//                    val a=act.command.WriteFlash(act,132,"PAD",mcpass)
+//                    handler.post {
+//                        act.LoadingSuccessUI()
+//                        if(a){
+//                            if(mcpass.equals("1")){    Toast.makeText(act,resources.getString(R.string.update_success),Toast.LENGTH_SHORT).show()
+//                                val transaction = fragmentManager!!.beginTransaction()
+//                                transaction.add(R.id.nav_host_fragment, HomeFragment(), "Home")
+//                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
+//                                    // 提交事務
+//                                    .commit()  ;progress=false}else{
+//                                Thread.sleep(2000)
+//                                mcpass="1";UpdateMuc()}
+//                        }else{
+//                            Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//
+//                }else{
+//                    handler.post {
+//                        act.LoadingSuccessUI()
+//                        Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()
+//                    }
+//                }
             }
             2->{
                 if(act.command.A0xEB()){
                     handler.post { UpdateMuc() }
                 }else{
                     handler.post {
-                        act.LoadingSuccess()
+                        act.LoadingSuccessUI()
                         Toast.makeText(act,resources.getString(R.string.error),Toast.LENGTH_SHORT).show()}}
                 progress=false
             }

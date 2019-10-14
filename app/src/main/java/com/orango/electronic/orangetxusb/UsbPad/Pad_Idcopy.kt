@@ -76,11 +76,11 @@ var SCAN_OR_KEY=1
     }
     val handler=Handler()
         fun downs19(){
-            navActivity.loading(0)
+            navActivity.LoadingUI(resources.getString(R.string.Data_Loading),0)
             Thread{
                 var  a= FileDowload.DownS19(mmyNum, navActivity)
                 handler.post {
-                    if(a){navActivity.LoadingSuccess()}else{
+                    if(a){navActivity.LoadingSuccessUI()}else{
                         downs19()
                     }
                 }

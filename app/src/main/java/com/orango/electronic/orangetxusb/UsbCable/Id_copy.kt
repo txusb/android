@@ -15,7 +15,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 
 import com.orango.electronic.orangetxusb.R
-import com.orango.electronic.orangetxusb.mainActivity.AreaFragment
 import com.orango.electronic.orangetxusb.mainActivity.HomeFragment
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.tool.CustomTextWatcher
@@ -64,11 +63,11 @@ class Id_copy : Fragment() {
         }else{navActivity.finish()}
     }
     fun downs19(){
-        navActivity.loading(0)
+        navActivity.LoadingUI(resources.getString(R.string.Data_Loading),0)
         Thread{
             var  a=FileDowload.DownS19(mmyNum, navActivity)
             handler.post {
-                if(a){navActivity.LoadingSuccess()}else{
+                if(a){navActivity.LoadingSuccessUI()}else{
                     downs19()
                 }
             }
@@ -103,7 +102,7 @@ class Id_copy : Fragment() {
         rootView.Program_bt.setOnClickListener {
             NavigationActivity.Action ="PROGRAM"
             navActivity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            val fragment = AreaFragment()
+            val fragment = CableSelect()
             val transaction = fragmentManager!!.beginTransaction()
             transaction.replace(R.id.nav_host_fragment, fragment, "Select Area")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫

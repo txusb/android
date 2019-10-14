@@ -1,1 +1,1 @@
-include ':app', ':usbSerialForAndroid',':EtalkingLibrary'
+include ':app', ':usbSerialForAndroid',':EtalkingLibrary',':BleLibrary'

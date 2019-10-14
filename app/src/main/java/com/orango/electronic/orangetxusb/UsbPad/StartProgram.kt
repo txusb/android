@@ -116,12 +116,12 @@ var first=true
         if(WriteLf.length!=8){downs19()}
     }
     fun downs19(){
-        navActivity.loading(0)
+        navActivity.LoadingUI(resources.getString(R.string.Data_Loading),0)
         ISPROGRAMMING=true
         Thread{
             var  a= FileDowload.DownS19(mmyNum, navActivity)
             handler.post {
-                if(a){navActivity.LoadingSuccess()
+                if(a){navActivity.LoadingSuccessUI()
                     ISPROGRAMMING=false
                 }else{
                     downs19()

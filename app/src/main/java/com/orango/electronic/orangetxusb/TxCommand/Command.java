@@ -2,6 +2,7 @@ package com.orango.electronic.orangetxusb.TxCommand;
 
 import android.content.Context;
 import android.util.Log;
+import com.orango.electronic.orangetxusb.R;
 import com.orango.electronic.orangetxusb.SerialSocket;
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity;
 
@@ -22,7 +23,6 @@ public class Command {
     public  String SensorModel="nodata";
     public  String AppVersion="nodata";
     public  String Lib="nodata";
-    public  String Rx="";
     public String Appver="";
     public String AppverInspire="nodata";
     public String Boover="101";
@@ -34,7 +34,6 @@ public class Command {
     public boolean Command12(int ic,int channel,String id){
         try{
             int check=30;
-            Rx="";
             String commeand="0ASS120008CCIDXXXXF5".replace("SS",bytesToHex(new byte[]{(byte)ic})).replace("CC",bytesToHex(new byte[]{(byte)channel})).replace("ID",id);
             SendData(getCRC16(commeand),check);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
@@ -49,9 +48,9 @@ public class Command {
                     fal++;
                 }
                 if(fal>3){return false;}
-                if(Rx.length()==check){
-                    boolean g=checkcommand(Rx.substring(10,12));
-                    if(g){ID=Rx.substring(14,22);}
+                if(act.getRXDATA().length()==check){
+                    boolean g=checkcommand(act.getRXDATA().substring(10,12));
+                    if(g){ID=act.getRXDATA().substring(14,22);}
                     return g;
                 }
             }
@@ -61,7 +60,6 @@ public class Command {
     public boolean Command03(){
         try{
             int check=22;
-            Rx="";
             SendData((getCRC16("0AFE03000754504D539CC8F5")),check);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
@@ -75,8 +73,8 @@ public class Command {
                     fal++;
                 }
                 if(fal==1){return false;}
-                if(Rx.length()==check){
-                    IC=((int)StringHexToByte(Rx.substring(12,14))[0])/2;
+                if(act.getRXDATA().length()==check){
+                    IC=((int)StringHexToByte(act.getRXDATA().substring(12,14))[0])/2;
                     return true;
                 }
             }
@@ -86,7 +84,6 @@ public class Command {
     public boolean Command_11(int ic,int channel){
         try{
             int check=30;
-            Rx="";
             String commeand="0ASS110004CCXXXXF5".replace("SS",bytesToHex(new byte[]{(byte)ic})).replace("CC",bytesToHex(new byte[]{(byte)channel}));
             SendData((getCRC16(commeand)),check);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
@@ -101,9 +98,9 @@ public class Command {
                     fal++;
                 }
                 if(fal==1){return false;}
-                if(Rx.length()==check){
-                    boolean g=checkcommand(Rx.substring(10,12));
-                    if(g){ID=Rx.substring(14,22);}
+                if(act.getRXDATA().length()==check){
+                    boolean g=checkcommand(act.getRXDATA().substring(10,12));
+                    if(g){ID=act.getRXDATA().substring(14,22);}
                     return g;
                 }
             }
@@ -116,13 +113,12 @@ public class Command {
     public String writeid="";
     public  boolean writesensorID(String id){
         try{
-            Rx="nodata";
             SendData((getCRC16("0A0012000801IDXXXXF5".replace("ID",id))),30);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             while(true){
-                if(Rx.length()==30&&Rx.substring(14,22).equals(id)){
-                    writeid=Rx.substring(14,22);
+                if(act.getRXDATA().length()==30&&act.getRXDATA().substring(14,22).equals(id)){
+                    writeid=act.getRXDATA().substring(14,22);
                     break;}
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
@@ -136,14 +132,12 @@ public class Command {
     }
     public boolean Setserial(NavigationActivity act){
         try{
-            Rx="nodata";
-
             SendData("0A0004000754504D535610F5",32);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             while(true){
-                if(Rx.contains("F50004000B")){
-                    act.setSerialnum(Rx.substring(14,26));
+                if(act.getRXDATA().contains("F50004000B")){
+                    act.setSerialnum(act.getRXDATA().substring(14,26));
                     break;}
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
@@ -193,7 +187,7 @@ public class Command {
                     fal++;
                 }
                 if(fal>3){return false;}
-                if(Rx.length()==34){if(Rx.substring(4,6).equals("14")){return true;}}
+                if(act.getRXDATA().length()==34){if(act.getRXDATA().substring(4,6).equals("14")){return true;}}
             }
         }catch (Exception e){e.printStackTrace();
             return false;}
@@ -205,10 +199,10 @@ public class Command {
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             while(true){
-                if(Rx.length()>8&&Rx.substring(Rx.length()-8,Rx.length()-8+2).equals("3E")){
-                    writeid=Rx.substring(14,22);
+                if(act.getRXDATA().length()>8&&act.getRXDATA().substring(act.getRXDATA().length()-8,act.getRXDATA().length()-8+2).equals("3E")){
+                    writeid=act.getRXDATA().substring(14,22);
                     return true;}
-                if(Rx.length()>12&&Rx.substring(12,14).equals("01")||Rx.length()>12&&Rx.substring(12,14).equals("02")||Rx.length()>12&&Rx.substring(12,14).equals("03")){
+                if(act.getRXDATA().length()>12&&act.getRXDATA().substring(12,14).equals("01")||act.getRXDATA().length()>12&&act.getRXDATA().substring(12,14).equals("02")||act.getRXDATA().length()>12&&act.getRXDATA().substring(12,14).equals("03")){
                     ClearSensor();
                     return false;
                 }
@@ -256,7 +250,6 @@ public class Command {
     }
 
     public boolean  LogData(final String filename){
-        Rx="nodata";
         try{
             InputStream fr = new FileInputStream(filename);
             BufferedReader br = new BufferedReader(new InputStreamReader(fr));
@@ -271,7 +264,6 @@ public class Command {
             if(sb.length()%ln == 0){Long=sb.length()/ln;
             }else{Long=sb.length()/ln+1;}
             for(int i=0;i<Long;i++){
-                Rx="nodata";
                 if(i==Long-1){
                     String a=sb.toString().substring(i*ln, sb.length());
                     if(a.length()>=20){      SendData((AddCommand(a,i)),34);}
@@ -281,7 +273,7 @@ public class Command {
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
                 Date past=sdf.parse(sdf.format(new Date()));
                 while(true){
-                    if(Rx.length()>12&&checkcommand(Rx.substring(10,12))){
+                    if(act.getRXDATA().length()>12&&checkcommand(act.getRXDATA().substring(10,12))){
                         break;
                     }
                     Date now=sdf.parse(sdf.format(new Date()));
@@ -322,7 +314,6 @@ public class Command {
     }
     public boolean ProgramStep(final String filename,String Lf) {
         ClearChech();
-        Rx="nodata";
         try {
             ReadSensorId();
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
@@ -364,10 +355,10 @@ public class Command {
                     fal++;
                 }
                 if(fal>3){return false;}
-                if(Rx.length()==check){
+                if(act.getRXDATA().length()==check){
                     boolean g=true;
                     for(int i=0;i<IC;i++){
-                        String tmp=Rx.substring(10,Rx.length()-6);
+                        String tmp=act.getRXDATA().substring(10,act.getRXDATA().length()-6);
                         if(checkcommand(tmp.substring(i*12,i*12+2))){g=false;}
                     }
                     return g;
@@ -410,10 +401,10 @@ public class Command {
                     fal++;
                 }
                 if(fal>1){return false;}
-                if(Rx.length()==check){
+                if(act.getRXDATA().length()==check){
                     boolean g=true;
                     for(int i=0;i<IC-1;i++){
-                        String tmp=Rx.substring(10,Rx.length()-6);
+                        String tmp=act.getRXDATA().substring(10,act.getRXDATA().length()-6);
                         if(!checkcommand(tmp.substring(i*14,i*14+2))){
                             g=false;
                         }
@@ -426,7 +417,6 @@ public class Command {
 
     public boolean Command15(String Lf){
         try{
-            Rx="";
             FALSE_CHANNEL=new ArrayList<>();
             CHANNEL_BLE=new ArrayList<>();
             BLANK_CHANNEL=new ArrayList<>();
@@ -441,10 +431,10 @@ public class Command {
                 if(time>15){
                     return false;
                 }
-                if(Rx.length()==check){
+                if(act.getRXDATA().length()==check){
                     boolean g=true;
                     for(int i=0;i<IC*2;i++){
-                        String tmp=Rx.substring(10,Rx.length()-6);
+                        String tmp=act.getRXDATA().substring(10,act.getRXDATA().length()-6);
                         if(!checkcommand(tmp.substring(i*14,i*14+2))){g=false;
                             Log.w("WriteReback","失敗channel"+tmp.substring(i*14+2,i*14+4));
                             if(tmp.substring(i*14+4,i*14+12).equals("00018001")){
@@ -478,7 +468,7 @@ public class Command {
                     fal++;
                 }
                 if(fal>3){return false;}
-                if(Rx.length()==check&&!SensorModel.equals("nodata")&&!AppVersion.equals("nodata")&&!Lib.equals("nodata")){
+                if(act.getRXDATA().length()==check&&!SensorModel.equals("nodata")&&!AppVersion.equals("nodata")&&!Lib.equals("nodata")){
                     return true;
                 }
             }
@@ -518,16 +508,15 @@ public class Command {
                     fal++;
                 }
                 if(fal>3){return false;}
-                if(Rx.length()==32){
-                    Appver=Rx.substring(20,24);
-                    Boover=Rx.substring(16,20);
+                if(act.getRXDATA().length()==32){
+                    Appver=act.getRXDATA().substring(20,24);
+                    Boover=act.getRXDATA().substring(16,20);
                     return true;
                 }}
         }catch(Exception e){e.printStackTrace();return false;}
     }
     public boolean Command25(String ID1,String ID2,String ID3,String ID4,String Lf){
         try{
-            Rx="";
             FALSE_CHANNEL=new ArrayList<>();
             CHANNEL_BLE=new ArrayList<>();
             BLANK_CHANNEL=new ArrayList<>();
@@ -543,10 +532,10 @@ public class Command {
                 if(time>15){
                     return false;
                 }
-                if(Rx.length()==check){
+                if(act.getRXDATA().length()==check){
                     boolean g=true;
                     for(int i=0;i<4;i++){
-                        String tmp=Rx.substring(10,Rx.length()-6);
+                        String tmp=act.getRXDATA().substring(10,act.getRXDATA().length()-6);
                         if(!checkcommand(tmp.substring(i*14,i*14+2))){g=false;
                             Log.w("WriteReback","失敗channel"+tmp.substring(i*14+2,i*14+4));
                             if(tmp.substring(i*14+4,i*14+12).equals("00018001")){
@@ -571,7 +560,6 @@ public class Command {
         SensorModel="nodata";
         AppVersion="nodata";
         Lib="nodata";
-        Rx="nodata";
     }
     public boolean A0xEB(){
         try{
@@ -582,7 +570,7 @@ public class Command {
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
                 if(time>5){return  false;}
-                if((Rx.equals("F5FEEB0005C0003B480A")||Rx.equals("F5FEEB0007C000A001597F0A"))){
+                if((act.getRXDATA().equals("F5FEEB0005C0003B480A")||act.getRXDATA().equals("F5FEEB0007C000A001597F0A"))){
                     return true;
                 }
             }
@@ -602,13 +590,13 @@ try{
         Date now=sdf.parse(sdf.format(new Date()));
         double time=getDatePoor(now,past);
         if(time>2){return  -1;}
-        if(Rx.length()==14&&Rx.equals("F5"+mpass+"0000311E70A")){
+        if(act.getRXDATA().length()==14&&act.getRXDATA().equals("F5"+mpass+"0000311E70A")){
           return 0;
             }
-        if(Rx.length()==14&&Rx.equals(addcheckbyte("F5"+mpass+"0000321000A"))){
+        if(act.getRXDATA().length()==14&&act.getRXDATA().equals(addcheckbyte("F5"+mpass+"0000321000A"))){
             return 1;
         }
-        if(Rx.length()==22){
+        if(act.getRXDATA().length()==22){
             return 2;
         }
     }
@@ -626,7 +614,7 @@ try{
         }catch (Exception e){e.printStackTrace();return false;}
     }
     public void SendData(String data,int check){
-        Rx="";
+        act.setRXDATA("");
         if(act.getBleServiceControl().isconnect){
             act.getBleServiceControl().WriteCmd((getCRC16(data)),check);
         }else{
@@ -666,7 +654,7 @@ try{
                     act.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
-                            act.update(100);
+                            act.LoadingUI(act.getResources().getString(R.string.update), 100);
                         }
                     });
                     return true;
@@ -679,7 +667,7 @@ try{
                     act.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
-                            act.update((int)((finalI / finalLong)*100));
+                            act.LoadingUI(act.getResources().getString(R.string.update), (int)((finalI / finalLong)*100));
                         }
                     });
                     if(!check(Convvvert(data,Integer.toHexString(length),mcpass),mcpass)){
@@ -705,7 +693,7 @@ try{
                     SendData(addcheckbyte(data),14);
                     fal++;
                 }
-                if(Rx.length()==14&&Rx.equals(addcheckbyte("F5"+mcpass+"2000300F40A"))||Rx.equals(addcheckbyte("F5"+mcpass+"B000300000A"))){
+                if(act.getRXDATA().length()==14&&act.getRXDATA().equals(addcheckbyte("F5"+mcpass+"2000300F40A"))||act.getRXDATA().equals(addcheckbyte("F5"+mcpass+"B000300000A"))){
                     return true;
                 }
             }
@@ -731,7 +719,7 @@ try{
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
                 if(time>3){return false;}
-                if(Rx.equals("F501000300F70A")){return true;}
+                if(act.getRXDATA().equals("F501000300F70A")){return true;}
             }
         }catch (Exception e){e.printStackTrace();return false;}
     }
@@ -746,7 +734,7 @@ try{
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
                 if(time>3){return false;}
-                if(Rx.length()==14&&Rx.equals(addcheckbyte("F5"+mcpass+"1000300CC0A"))){return true;}
+                if(act.getRXDATA().length()==14&&act.getRXDATA().equals(addcheckbyte("F5"+mcpass+"1000300CC0A"))){return true;}
             }
         }catch (Exception e){e.printStackTrace();return false;}
     }
