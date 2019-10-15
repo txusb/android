@@ -44,7 +44,7 @@
         <activity android:name=".mainActivity.LogoActivity">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
-                <action android:name="android.intent.action.MAIN"/>
+             s   <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
@@ -66,6 +66,11 @@
                 android:enabled="true"
                 android:exported="true"
                 android:launchMode="singleTask"/>
+
+        <service android:name=".tool.AdService"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:launchMode="singleTask"/>
     </application>
 
 </manifest>

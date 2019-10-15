@@ -29,7 +29,9 @@ import com.orango.electronic.orangetxusb.TxCommand.Command
 import com.orango.electronic.orangetxusb.TxCommand.FormatConvert.StringHexToByte
 import com.orango.electronic.orangetxusb.TxCommand.RxCommand
 import com.orango.electronic.orangetxusb.mmySql.ItemDAO
+import com.orango.electronic.orangetxusb.tool.AdService
 import com.orango.electronic.orangetxusb.tool.FileDowload
+import com.orango.electronic.orangetxusb.tool.NotificationManager
 import kotlinx.android.synthetic.main.activity_navigation.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -159,7 +161,7 @@ fun onclick(view: View){
         if(savedState != null) onBackStackChanged()
         supportFragmentManager.addOnBackStackChangedListener(this)
         ChangePage(HomeFragment(),R.id.nav_host_fragment,"Home",false)
-        timer=Timer()
+            timer=Timer()
         timer.schedule(0,5000){
             runOnUiThread(Runnable {
                 GetMessage()
@@ -193,14 +195,16 @@ fun onclick(view: View){
         E_Command.admin=profilePreferences.getString("admin","nodata")
         Thread{
             var messagecount=E_Command.GetTopMessage()
-            handler.post {
-                Log.d("message","$messagecount")
-                if(messagecount==0||messagecount==-1){
-                    havemessage.visibility=View.GONE
-                }else{
-                    havemessage.visibility=View.VISIBLE
-                    havemessage.setText(""+messagecount)
-                }  }
+            val post = handler.post {
+                Log.d("message", "$messagecount")
+                if (messagecount == 0 || messagecount == -1) {
+                    havemessage.visibility = View.GONE
+                } else {
+                    if(havemessage.visibility==View.GONE){NotificationManager().AddAdvice(resources.getString(R.string.Online_customer_service),resources.getString(R.string.Customer_service_specialist),this)}
+                    havemessage.visibility = View.VISIBLE
+                    havemessage.setText("" + messagecount)
+                }
+            }
         }.start()
     }
     public override fun onDestroy() {
