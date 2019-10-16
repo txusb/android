@@ -123,7 +123,7 @@
     <string name="Program_sensor">Program sensor</string>
     <string name="Programming_do_not_move_sensors">Programmierung, bitte Sensor nicht bewegen</string>
     <string name="Next">Nächster</string>
-    <string name="Programming_failed_where">Fehler (Fehler bei Reifenposition)</string>
+    <string name="Programming_failed_where">Fehler</string>
     <string name="Get_location">Die Ortungsfunktion muss aktiviert sein,
         um den Bluetooth-Dienst zu starten.</string>
     <string name="Prog_Sensor">Prog.sensor</string>

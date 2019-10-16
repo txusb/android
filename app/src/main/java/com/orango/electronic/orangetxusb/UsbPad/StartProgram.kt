@@ -20,7 +20,9 @@ import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.mainActivity.Relarm
 import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
+import com.orango.electronic.orangetxusb.mainActivity.HomeFragment
 import com.orango.electronic.orangetxusb.tool.FileDowload
+import kotlinx.android.synthetic.main.activity_demo.*
 import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.*
 import kotlinx.android.synthetic.main.fragment_start_program.view.*
 import kotlinx.android.synthetic.main.fragment_start_program.view.Lf
@@ -146,7 +148,10 @@ var first=true
         rootView=inflater.inflate(R.layout.fragment_start_program, container, false)
         rootView.mmy_text.text = "$make/$model /$year"
         first=true
-        navActivity.setActionBarTitle(navActivity.resources.getString(R.string.Program_USB_PAD))
+        when(NavigationActivity.Action){
+            "IDCOPY"->{ navActivity.setActionBarTitle(activity!!.resources.getString(R.string.ID_COPY))}
+            "PROGRAM"->{navActivity.setActionBarTitle(navActivity.resources.getString(R.string.Program))}
+        }
         UpdateUi(LF,UNLINK)
         UpdateUi(RF,UNLINK)
         UpdateUi(LR,UNLINK)
@@ -195,6 +200,7 @@ var first=true
                 }
             }.start();}
         rootView.Relarm.setOnClickListener {
+            Relarm.position=0
             val fragment = Relarm()
             val args = Bundle()
             args.putString(Cable_Program.stringMake, make)
@@ -562,6 +568,10 @@ fun UpdateUiCondition(position: Int){
                     }
                     handler.post {
                         navActivity.back.isClickable=true
+                        navActivity.back.setOnClickListener {
+                            navActivity.supportFragmentManager.popBackStack(0,1)
+                        }
+                        navActivity.back.setImageResource(R.mipmap.menu)
                         ISPROGRAMMING=false
                         try{
                             LFID=navActivity.resources.getString(R.string.Unlinked)

@@ -126,17 +126,6 @@ fun onclick(view: View){
         R.id.imageView71->{
             startActivity(Intent(this, TalkingActivity::class.java))
         }
-        R.id.imageView3->{
-            Thread {
-                try{
-                    var inst = Instrumentation()
-                    inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK)
-                }
-                catch ( e:java.lang.Exception) {
-                    Log.e("Exception when onBack", e.toString())
-                }
-            }.start()
-        }
     }
 }
 
@@ -284,6 +273,10 @@ var NowFr="no"
         if(supportFragmentManager.fragments.get(supportFragmentManager.fragments.size-1).tag!=null){
             val tname=supportFragmentManager.fragments.get(supportFragmentManager.fragments.size-1).tag!!
             if(tname.equals("PadSelect")||tname.equals("Select Area")||tname.equals("Home")||tname.equals("UsersManual")||tname.equals("Setting")){NowFr=tname
+            }
+                back.setImageResource(R.mipmap.btn_back_normal)
+            back.setOnClickListener {
+                    supportFragmentManager.popBackStack()
             }
         }
 

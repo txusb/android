@@ -18,10 +18,10 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary">
             <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" app:srcCompat="@mipmap/btn_back_normal"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent" app:srcCompat="@mipmap/btn_back_normal"
                     android:layout_gravity="start"
-                    android:id="@+id/imageView3" android:translationX="-15dp" android:onClick="onclick"/>
+                    android:id="@+id/imageView3" android:translationX="-15dp"/>
             <TextView
                     android:id="@+id/action_bar_title"
                     android:layout_width="wrap_content"

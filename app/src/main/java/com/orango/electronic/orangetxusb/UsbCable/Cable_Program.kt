@@ -110,6 +110,7 @@ rootView.Menu.setOnClickListener {
                 // 提交事務
                 .commit()}
         rootView.Relarm.setOnClickListener {
+            Relarm.position=0
             val fragment = Relarm()
             val args = Bundle()
             args.putString(stringMake, make)

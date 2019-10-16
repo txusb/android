@@ -33,74 +33,20 @@ class ShowYear(private val years: ArrayList<String>, private val make: String, p
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.text_item.text=years[position]
     holder.mView.setOnClickListener{
-        when(NavigationActivity.Action){
-            "PROGRAM"->{
-                if(NavigationActivity.PAD_OR_USB.equals("USB")){
-                    val args = Bundle()
-                    args.putString(Cable_Program.stringMake, make)
-                    args.putString(Cable_Program.stringMakeImg, makeImg)
-                    args.putString(Cable_Program.stringModel, model)
-                    args.putString(Cable_Program.stringYear, years[position])
-                    val fragment = Cable_Program()
-                    fragment.arguments = args
-                    val transaction = fragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, fragment, "Program")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Program")
-                        // 提交事務
-                        .commit()
-                }else{
-                    val args = Bundle()
-                    args.putString(Cable_Program.stringMake, make)
-                    args.putString(Cable_Program.stringMakeImg, makeImg)
-                    args.putString(Cable_Program.stringModel, model)
-                    args.putString(Cable_Program.stringYear, years[position])
-                    args.putString(Cable_Program.LFID, "")
-                    args.putString(Cable_Program.LRID, "")
-                    args.putString(Cable_Program.RRID, "")
-                    args.putString(Cable_Program.RFID, "")
-                    val fragment = StartProgram()
-                    fragment.arguments = args
-                    val transaction = fragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, fragment, "Pad_Program")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Pad_Program")
-                        // 提交事務
-                        .commit()
-                }
-            }
-            "IDCOPY"->{
-                if(NavigationActivity.PAD_OR_USB.equals("USB")){
-                    val args = Bundle()
-                    args.putString(Cable_Program.stringMake, make)
-                    args.putString(Cable_Program.stringMakeImg, makeImg)
-                    args.putString(Cable_Program.stringModel, model)
-                    args.putString(Cable_Program.stringYear, years[position])
-                    val fragment = Id_copy()
-                    fragment.arguments = args
-                    val transaction = fragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, fragment, "Id_Copy")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Id_Copy")
-                        // 提交事務
-                        .commit()
-                }else{
-                    val args = Bundle()
-                    args.putString(Cable_Program.stringMake, make)
-                    args.putString(Cable_Program.stringMakeImg, makeImg)
-                    args.putString(Cable_Program.stringModel, model)
-                    args.putString(Cable_Program.stringYear, years[position])
-                    val fragment = Pad_Idcopy()
-                    fragment.arguments = args
-                    val transaction = fragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, fragment, "Id_Copy")
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                        .addToBackStack("Id_Copy")
-                        // 提交事務
-                        .commit()
-                }
-            }
-        }
+        Relarm.position=1
+        val fragment = Relarm()
+        val args = Bundle()
+        args.putString(Cable_Program.stringMake, make)
+        args.putString(Cable_Program.stringMakeImg, makeImg)
+        args.putString(Cable_Program.stringModel, model)
+        args.putString(Cable_Program.stringYear, years[position])
+        fragment.arguments=args
+        val transaction = fragmentManager!!.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment, "Relarm")
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
+            .addToBackStack("Relarm")
+            // 提交事務
+            .commit()
 }
     }
 

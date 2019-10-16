@@ -124,20 +124,21 @@ class PadSelect : Fragment() {
     var handle= Handler()
     fun idcopy(){
         NavigationActivity.Action="IDCOPY"
-
         Idcopy.background=resources.getDrawable(R.drawable.solid,null)
         Program.background=resources.getDrawable(R.drawable.stroke,null)
         Idcopy.setTextColor(resources.getColor(R.color.white))
         Program.setTextColor(resources.getColor(R.color.buttoncolor))
+        (activity as NavigationActivity).setActionBarTitle(activity!!.resources.getString(R.string.ID_COPY))
     }
     fun program(){ NavigationActivity.Action="PROGRAM"
         Program.background=resources.getDrawable(R.drawable.solid,null)
         Idcopy.background=resources.getDrawable(R.drawable.stroke,null)
         Idcopy.setTextColor(resources.getColor(R.color.buttoncolor))
-        Program.setTextColor(resources.getColor(R.color.white))}
+        Program.setTextColor(resources.getColor(R.color.white))
+        (activity as NavigationActivity).setActionBarTitle(activity!!.resources.getString(R.string.Program))
+    }
     override fun onResume() {
         super.onResume()
-        (activity as NavigationActivity).setActionBarTitle(activity!!.resources.getString(R.string.Program_USB_PAD))
         (activity as NavigationActivity).RightTop.setBackgroundResource(R.mipmap.icon_link_pad)
         (activity as NavigationActivity).RightTop.setOnClickListener { }
             if((activity as NavigationActivity).bleServiceControl.isconnect){

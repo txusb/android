@@ -139,7 +139,7 @@
     <string name="Programming_do_not_move_sensors">烧录中请勿移动传感器</string>
     <string name="Next">下一步</string>
     <string name="error">error</string>
-    <string name="Programming_failed_where">刻录失败(失败的轮位)</string>
+    <string name="Programming_failed_where">刻录失败</string>
     <string name="Get_location">必须开启定位功能才能启动蓝芽服务.</string>
     <string name="Prog_Sensor">Prog.Sensor</string>
     <string name="Sound">音效</string>

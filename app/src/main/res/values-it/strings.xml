@@ -152,7 +152,7 @@
     <string name="Programming_do_not_move_sensors">Programmazione, non muovere i sensori</string>
     <string name="Next">Il prossimo</string>
     <string name="error">error</string>
-    <string name="Programming_failed_where">Fallito (Posizione pneumatico fallita)</string>
+    <string name="Programming_failed_where">Fallito</string>
     <string name="Get_location">La funzione di localizzazione deve essere
         abilitata per avviare il servizio Bluetooth.</string>
     <string name="Prog_Sensor">Prog.Sensor</string>

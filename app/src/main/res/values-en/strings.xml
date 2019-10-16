@@ -212,7 +212,7 @@
     <string name="Programming_do_not_move_sensors">Programming, do not move sensors.</string>
     <string name="Next">Next</string>
     <string name="error">error</string>
-    <string name="Programming_failed_where">Program fail,( Failed tire position )</string>
+    <string name="Programming_failed_where">Program fail</string>
     <string name="Get_location">The location function must be turned on to start the Bluetooth service.</string>
     <string name="Prog_Sensor">Prog.Sensor</string>
     <string name="Sound">Sound</string>

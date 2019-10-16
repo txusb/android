@@ -132,7 +132,7 @@
     <string name="Programming_do_not_move_sensors">燒錄中請勿移動發射器</string>
     <string name="Next">下一步</string>
     <string name="error">錯誤</string>
-    <string name="Programming_failed_where">燒錄失敗(失敗的輪位)</string>
+    <string name="Programming_failed_where">燒錄失敗</string>
     <string name="Get_location">必須開啟定位功能才能啟動藍芽服務.</string>
     <string name="Prog_Sensor">重新燒錄</string>
     <string name="Please_Confirm_That_The_Sensor_Is_Connect">請確認傳感器已經連接</string>

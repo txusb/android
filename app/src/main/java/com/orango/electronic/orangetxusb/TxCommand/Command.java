@@ -428,7 +428,7 @@ public class Command {
             while(true){
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
-                if(time>15){
+                if(time>20){
                     return false;
                 }
                 if(act.getRXDATA().length()==check){
@@ -529,7 +529,7 @@ public class Command {
             while(true){
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
-                if(time>15){
+                if(time>20){
                     return false;
                 }
                 if(act.getRXDATA().length()==check){
