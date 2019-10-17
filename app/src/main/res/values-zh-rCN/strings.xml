@@ -114,7 +114,7 @@
     <string name="Methods_of_vehicle_data_selection">选择车辆数据方法</string>
     <string name="Scan_Code">扫描QR码</string>
     <string name="Vehicle_data_selection">车辆数据选择</string>
-    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">请扫描目录或海报上的二维码
+    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">请扫描发射器或包装盒上的ID QR码
     </string>
     <string name="Select_CAR_Make">选择车型</string>
     <string name="Select_CAR_Model">选择车款</string>
@@ -292,4 +292,5 @@
     <string name="hourago">1小时前</string>
     <string name="monthago">1个月前</string>
     <string name="yeargo">1年前</string>
+    <string name="checkscan">请确认要烧录的发射器以加入USB PAD， 再点选轮位进行扫描</string>
 </resources>

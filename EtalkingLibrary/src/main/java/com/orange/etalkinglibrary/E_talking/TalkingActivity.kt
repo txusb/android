@@ -36,7 +36,7 @@ class TalkingActivity : AppCompatActivity() {
     lateinit var timer: Timer
     var refresh=true
     var image="nodata"
-    var talkingwho="admin"
+    var talkingwho="orangetpms"
     lateinit var tit:TextView
     lateinit var sender: EditText
     lateinit var InternalError:RelativeLayout

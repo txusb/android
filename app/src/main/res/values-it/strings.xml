@@ -127,8 +127,7 @@
     <string name="Methods_of_vehicle_data_selection">Modi per selezionare i dati del veicolo</string>
     <string name="Scan_Code">Scansione codice 2D</string>
     <string name="Vehicle_data_selection">Seleziona veicolo</string>
-    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">Scannerizza il codice QR sul catalogo
-    </string>
+    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">Si prega di scansionare il codice QR ID sul trasmettitore o sulla scatola.</string>
     <string name="Select_CAR_Make">Seleziona marca</string>
     <string name="Select_CAR_Model">Seleziona modello</string>
     <string name="Select_Year">Seleziona anno</string>
@@ -310,4 +309,5 @@
     <string name="hourago">1 ora fa</string>
     <string name="monthago">1 mese fa</string>
     <string name="yeargo">1 anno fa</string>
+    <string name="checkscan">Assicurarsi che il sensore sia su USB PAD, quindi selezionare la posizione del pneumatico per iniziare la scansione</string>
 </resources>

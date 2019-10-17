@@ -8,5 +8,9 @@
     <activity android:name="com.orange.etalkinglibrary.E_talking.ShowImage"
               android:theme="@style/SwipTheme">
     </activity>
+        <service android:name=".E_talking.AdService"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:launchMode="singleTask"/>
 </application>
 </manifest>

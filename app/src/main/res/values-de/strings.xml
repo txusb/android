@@ -99,7 +99,7 @@
     <string name="Methods_of_vehicle_data_selection">Methods of vehicle data selection</string>
     <string name="Scan_Code">Scan Code</string>
     <string name="Vehicle_data_selection">Vehicle data selection</string>
-    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">Please scan the QR Code on the catalog or poster.</string>
+    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">Bitte scannen Sie den ID QR Code auf dem Sender oder der Box.</string>
     <string name="Select_CAR_Make">Select CAR Make</string>
     <string name="Select_CAR_Model">Select CAR Model</string>
     <string name="Select_Year">Select Year</string>
@@ -239,4 +239,5 @@
     <string name="hourago">Vor einer Stunde</string>
     <string name="monthago">Vor 1 Monat</string>
     <string name="yeargo">Vor 1 Jahr</string>
+    <string name="checkscan">Vergewissern Sie sich, dass der Sensor am USB-PAD angeschlossen ist, und wählen Sie dann die Reifenposition aus, um den Scanvorgang zu starten</string>
 </resources>

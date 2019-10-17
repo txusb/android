@@ -156,5 +156,69 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/buttoncolor" android:textColor="@color/white" android:visibility="visible"
             android:layout_alignParentBottom="true"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/Select_Key" android:elevation="10dp">
+
+        <ImageView
+                android:src="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/imageView73" android:alpha="0.7"/>
+        <RelativeLayout
+                android:layout_width="284dp"
+                android:layout_height="184dp" android:layout_centerInParent="true"
+                android:background="@drawable/cornerbt">
+
+            <TextView
+                    android:text="Original Sensor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" android:id="@+id/textView80"
+                    android:layout_centerHorizontal="true" android:textColor="@color/white" android:gravity="center"/>
+            <ImageView
+                    android:src="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:id="@+id/imageView74" android:layout_below="@id/textView80"/>
+            <RelativeLayout
+                    android:layout_width="141dp"
+                    android:layout_height="match_parent" android:layout_below="@id/imageView74"
+                    android:id="@+id/scaner">
+
+                <TextView
+                        android:text="@string/Scan_Code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView81"
+                        android:textColor="@color/white" android:gravity="center"
+                        android:layout_below="@id/imageView77"/>
+                <ImageView
+                        android:src="@mipmap/scan"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp" android:id="@+id/imageView77"
+                        android:layout_marginTop="2dp" android:layout_marginLeft="29dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="141dp"
+                    android:layout_height="match_parent" android:layout_below="@id/imageView74"
+                    android:layout_alignParentEnd="true" android:id="@+id/keyin">
+
+                <TextView
+                        android:text="@string/Key_in_the_original_sensor_ID_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView82"
+                        android:textColor="@color/white" android:gravity="center"
+                        android:layout_below="@id/imageView75"/>
+                <ImageView
+                        android:src="@mipmap/key_in"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp" android:id="@+id/imageView75"
+                        android:layout_marginEnd="29dp" android:layout_marginTop="2dp"
+                        android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+            <ImageView
+                    android:src="@color/white"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" android:id="@+id/imageView78"
+                    android:layout_below="@id/imageView74" android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

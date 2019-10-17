@@ -1,13 +1,18 @@
 package com.orango.electronic.orangetxusb.UsbCable
 
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AlertDialog
 import android.text.InputFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +22,7 @@ import android.widget.*
 import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.mainActivity.HomeFragment
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
+import com.orango.electronic.orangetxusb.mainActivity.QrcodeScanner
 import com.orango.electronic.orangetxusb.tool.CustomTextWatcher
 import com.orango.electronic.orangetxusb.tool.FileDowload
 import kotlinx.android.synthetic.main.fragment_id_copy.*
@@ -45,6 +51,7 @@ class Id_copy : Fragment() {
     lateinit var rootView: View
     lateinit var year: String
     var Lf="0"
+    var  Scanid=""
      var need=-1
     var isProgramming=false
     var mmyNum=""
@@ -101,7 +108,6 @@ class Id_copy : Fragment() {
         }
         rootView.Program_bt.setOnClickListener {
             NavigationActivity.Action ="PROGRAM"
-            navActivity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             val fragment = CableSelect()
             val transaction = fragmentManager!!.beginTransaction()
             transaction.replace(R.id.nav_host_fragment, fragment, "Select Area")
@@ -110,9 +116,33 @@ class Id_copy : Fragment() {
                 // 提交事務
                 .commit()
         }
-
         UpdateUi(0)
+        rootView.scaner.setOnClickListener {
+            rootView.Select_Key.visibility=View.GONE
+            val frag=QrcodeScanner()
+            frag.Scan_For=frag.CableId
+            frag.IdcopyCable=this
+            frag.need=need
+            val transaction = fragmentManager!!.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, frag, "Scanner")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
+                .addToBackStack("Scanner")
+                // 提交事務
+                .commit()
+        }
+        rootView.keyin.setOnClickListener {
+            rootView.Select_Key.visibility=View.GONE
+        }
+
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(Scanid.isNotEmpty()){
+            rootView.editText.setText(Scanid)
+            rootView.Select_Key.visibility=View.GONE
+        }
     }
     fun getMem(str: String, m: String): Int {
         var str = str
@@ -192,8 +222,6 @@ fun insert():String{
             }.start()
         }
        }
-
-
 
     fun UpdateUi(a:Int){
         val PROGRAM_WAIT: RelativeLayout =rootView.findViewById(R.id.PROGRAM_WAIT)

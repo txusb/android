@@ -4,19 +4,33 @@ public class UnicodeUtil {
 
     /**
      * 将utf-8的汉字转换成unicode格式汉字码
-     * @param string
+     * @param str
      * @return
      */
-    public static String stringToUnicode(String string) {
+    public static String stringToUnicode(String str) {
+        str = (str == null ? "" : str);
+        String tmp;
+        StringBuffer sb = new StringBuffer(1000);
+        char c;
+        int i, j;
+        sb.setLength(0);
+        for (i = 0; i < str.length(); i++)
+        {
+            c = str.charAt(i);
+            sb.append("\\u");
+            j = (c >>>8); //取出高8位
+            tmp = Integer.toHexString(j);
+            if (tmp.length() == 1)
+                sb.append("0");
+            sb.append(tmp);
+            j = (c & 0xFF); //取出低8位
+            tmp = Integer.toHexString(j);
+            if (tmp.length() == 1)
+                sb.append("0");
+            sb.append(tmp);
 
-        StringBuffer unicode = new StringBuffer();
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
-            unicode.append("\\u" + Integer.toHexString(c));
         }
-        String str = unicode.toString();
-
-        return str;
+        return (new String(sb));
     }
 
     /**
@@ -25,15 +39,20 @@ public class UnicodeUtil {
      * @return
      */
     public static String unicodeToString(String unicode) {
-
-        String str = unicode.replace("0x", "\\");
-
         StringBuffer string = new StringBuffer();
-        String[] hex = str.split("\\\\u");
+
+        String[] hex = unicode.split("\\\\u");
+
         for (int i = 1; i < hex.length; i++) {
-            int data = Integer.parseInt(hex[i], 16);
+
+//        System.out.println(hex[i].length());
+            if(hex[i].length()>4){string.append(hex[i].substring(4));
+            }
+            int data=Integer.parseInt(hex[i].substring(0,4), 16);
+            // 追加成string
             string.append((char) data);
         }
+
         return string.toString();
     }
 

@@ -186,7 +186,7 @@
     <string name="Methods_of_vehicle_data_selection">Methods of vehicle data selection</string>
     <string name="Scan_Code">Scan Code</string>
     <string name="Vehicle_data_selection">Vehicle data selection</string>
-    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">Please scan the QR Code on the catalog or poster.
+    <string name="Please_scan_the_QR_Code_on_the_catalog_or_poster">Please scan on sensor or ID QR code on package
     </string>
     <string name="Select_CAR_Make">Select CAR Make</string>
     <string name="Select_CAR_Model">Select CAR Model</string>
@@ -361,4 +361,5 @@
     <string name="hourago">1 hour ago</string>
     <string name="monthago">1 month ago</string>
     <string name="yeargo">1 year ago</string>
+    <string name="checkscan">Please make sure sensor is on USB PAD, and then choose tire position to start scanning</string>
 </resources>

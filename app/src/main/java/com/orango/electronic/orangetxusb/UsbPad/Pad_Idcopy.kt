@@ -102,6 +102,7 @@ var SCAN_OR_KEY=1
         rootView=inflater.inflate(R.layout.fragment_pad__idcopy, container, false)
         if(ShowSelect){rootView.Select_Key.visibility=View.VISIBLE}else{rootView.Select_Key.visibility=View.GONE}
         if(SCAN_OR_KEY==0){
+            rootView.condition2.text=resources.getString(R.string.checkscan)
             scanner.Scan_For=scanner.ID
             rootView.Lft.isFocusable=false
             rootView.Rrt.isFocusable=false

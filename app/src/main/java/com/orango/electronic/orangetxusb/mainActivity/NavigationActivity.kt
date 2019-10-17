@@ -20,6 +20,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.hoho.android.usbserial.driver.UsbSerialDriver
 import com.hoho.android.usbserial.driver.UsbSerialProber
 import com.orange.blelibrary.blelibrary.BleActivity
+import com.orange.etalkinglibrary.E_talking.AdService
 import com.orange.etalkinglibrary.E_talking.E_Command
 import com.orange.etalkinglibrary.E_talking.TalkingActivity
 import com.orango.electronic.orangetxusb.*
@@ -29,9 +30,7 @@ import com.orango.electronic.orangetxusb.TxCommand.Command
 import com.orango.electronic.orangetxusb.TxCommand.FormatConvert.StringHexToByte
 import com.orango.electronic.orangetxusb.TxCommand.RxCommand
 import com.orango.electronic.orangetxusb.mmySql.ItemDAO
-import com.orango.electronic.orangetxusb.tool.AdService
 import com.orango.electronic.orangetxusb.tool.FileDowload
-import com.orango.electronic.orangetxusb.tool.NotificationManager
 import kotlinx.android.synthetic.main.activity_navigation.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -134,6 +133,8 @@ fun onclick(view: View){
         setContentView(R.layout.activity_navigation)
         init()
         havemessage=findViewById(R.id.textView78)
+        val intent = Intent(this, AdService::class.java)
+        this.startService(intent)
         bindService(Intent(this, SerialService::class.java), this, Context.BIND_AUTO_CREATE)
         RightTop=findViewById(R.id.imageView)
         loadtitle=findViewById(R.id.textView11)
@@ -180,21 +181,15 @@ fun onclick(view: View){
         }
     }
      fun GetMessage(){
-        val profilePreferences = getSharedPreferences("Setting", Context.MODE_PRIVATE)
-        E_Command.admin=profilePreferences.getString("admin","nodata")
-        Thread{
-            var messagecount=E_Command.GetTopMessage()
-            val post = handler.post {
-                Log.d("message", "$messagecount")
-                if (messagecount == 0 || messagecount == -1) {
-                    havemessage.visibility = View.GONE
-                } else {
-                    if(havemessage.visibility==View.GONE){NotificationManager().AddAdvice(resources.getString(R.string.Online_customer_service),resources.getString(R.string.Customer_service_specialist),this)}
-                    havemessage.visibility = View.VISIBLE
-                    havemessage.setText("" + messagecount)
-                }
-            }
-        }.start()
+        handler.post {
+                 Log.d("message", "${AdService.count}")
+                 if (AdService.count == 0 || AdService.count == -1) {
+                     havemessage.visibility = View.GONE
+                 } else {
+                     havemessage.visibility = View.VISIBLE
+                     havemessage.setText("" + AdService.count)
+                 }
+             }
     }
     public override fun onDestroy() {
         if (connected != Connected.False){stopService(Intent(this, SerialService::class.java))}

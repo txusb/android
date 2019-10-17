@@ -44,15 +44,7 @@ open class BleActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
     }
 
     open  fun  goback(){
-        Thread(){
-            try{
-                var inst = Instrumentation();
-                inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
-            }
-            catch ( e:java.lang.Exception) {
-                Log.e("Exception when onBack", e.toString());
-            }
-        }.start();
+      supportFragmentManager!!.popBackStack()
     }
      var handler= Handler()
 

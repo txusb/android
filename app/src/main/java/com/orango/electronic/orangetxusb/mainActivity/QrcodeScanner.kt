@@ -21,6 +21,7 @@ import com.google.zxing.Result
 import com.orango.electronic.orangetxusb.UsbPad.Pad_Idcopy
 
 import com.orango.electronic.orangetxusb.R
+import com.orango.electronic.orangetxusb.UsbCable.Id_copy
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 
@@ -37,6 +38,7 @@ private const val ARG_PARAM2 = "param2"
 class QrcodeScanner : Fragment(), ZXingScannerView.ResultHandler{
     var S19=0
     var ID=1
+    var CableId=1
     var need=8
     var Scan_For=S19
     val LF=1
@@ -45,45 +47,51 @@ class QrcodeScanner : Fragment(), ZXingScannerView.ResultHandler{
     val Lr=4
     var place=0
     lateinit var Idcopy:Pad_Idcopy
+    lateinit var IdcopyCable:Id_copy
     lateinit var edit:EditText
     override fun handleResult(rawResult: Result?) {
 //        rootView.textView12.text="Contents = " + rawResult!!.getText()
-        if(Scan_For==ID){
-            val contents=rawResult!!.text.split("*",":")
-            if(contents.size==3&&contents[1].length== need){
-            edit.setText(contents[1])
+        when(Scan_For){
+            ID->{
+                val contents=rawResult!!.text.split("*",":")
+                if(contents.size>=3&&contents[1].length== need){
+                    edit.setText(contents[1])
 
-                Log.d("place",""+place)
-                when(place){
-                    LF->{Idcopy.ScanLf=contents[1]}
-                    Rf->{Idcopy.ScanRf=contents[1]}
-                    Rr->{Idcopy.ScanRr=contents[1]}
-                    Lr->{Idcopy.ScanLr=contents[1]}
+                    Log.d("place",""+place)
+                    when(place){
+                        LF->{Idcopy.ScanLf=contents[1]}
+                        Rf->{Idcopy.ScanRf=contents[1]}
+                        Rr->{Idcopy.ScanRr=contents[1]}
+                        Lr->{Idcopy.ScanLr=contents[1]}
+                    }
+                    Idcopy.ShowSelect=false
+                    act.goback()
+                }else{
+                    Log.d("QRCODE",rawResult.text)
+                    val handler = Handler()
+                    Toast.makeText(act,act.resources.getString(R.string.Please_scan_the_correct_QR_code),Toast.LENGTH_SHORT).show()
+                    handler.postDelayed({ mScannerView!!.resumeCameraPreview(this) }, 2000)
                 }
-                Idcopy.ShowSelect=false
-                Thread{
-                    try{
-                        var inst = Instrumentation()
-                        inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK)
-                    }
-                    catch ( e:java.lang.Exception) {
-                        Log.e("Exception when onBack", e.toString())
-                    }
-                }.start()
-            }else{
-                Log.d("QRCODE",rawResult.text)
-                val handler = Handler()
-                Toast.makeText(act,act.resources.getString(R.string.Please_scan_the_correct_QR_code),Toast.LENGTH_SHORT).show()
-                handler.postDelayed({ mScannerView!!.resumeCameraPreview(this) }, 2000)
             }
-        }else{
-            val contents=rawResult!!.text.split("*")
-            if(contents.size==3){
-                act.itemDAO.GoOk(contents[0],fragmentManager!!)
+            S19->{
+                val contents=rawResult!!.text.split("*")
+                if(contents.size==3){
+                    act.itemDAO.GoOk(contents[0],fragmentManager!!)
+                }
             }
-
+            CableId->{
+                val contents=rawResult!!.text.split("*",":")
+                if(contents.size>=3&&contents[1].length== need){
+                    IdcopyCable.Scanid=contents[1]
+                    act.goback()
+                }else{
+                    Log.d("QRCODE",rawResult.text)
+                    val handler = Handler()
+                    Toast.makeText(act,act.resources.getString(R.string.Please_scan_the_correct_QR_code),Toast.LENGTH_SHORT).show()
+                    handler.postDelayed({ mScannerView!!.resumeCameraPreview(this) }, 2000)
+                }
+            }
         }
-
     }
 
     private var mScannerView: ZXingScannerView? = null
@@ -107,6 +115,7 @@ class QrcodeScanner : Fragment(), ZXingScannerView.ResultHandler{
         mScannerView!!.setAspectTolerance(0.0f)
         frame=rootView.findViewById(R.id.frame)
         frame.addView(mScannerView)
+        Log.d("ideneed",""+need);
         return rootView
     }
     override fun onResume() {
