@@ -83,8 +83,8 @@
     <string name="Orange_USB_TPMS">Orange USB TPMS</string>
     <string name="Data_Loading">Data Loading</string>
     <string name="Orange_USB_TPMS_Application">Orange USB TPMS Application</string>
-    <string name="Program_USB_TPMS">Program(USB TPMS)</string>
-    <string name="Program_USB_PAD">Program(USB PAD)</string>
+    <string name="Program_USB_TPMS">USB CABLE</string>
+    <string name="Program_USB_PAD">USB PAD</string>
     <string name="Cloud_information">Cloud information</string>
     <string name="Online_shopping">Online shopping</string>
     <string name="Users_manual">User\'s manual</string>

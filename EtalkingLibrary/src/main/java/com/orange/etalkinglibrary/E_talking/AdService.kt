@@ -19,7 +19,7 @@ class AdService : Service() {
         super.onCreate()
         Log.v("wang", "OnCreate 服务启动时调用")
         timer=Timer()
-        timer.schedule(0,5000){
+        timer.schedule(0,10000){
             GetMessage()
         }
     }
@@ -45,10 +45,10 @@ class AdService : Service() {
             handler.post {
                 Log.d("message", "$messagecount")
                 if (messagecount != 0 && messagecount != -1 && messagecount != count) {
-                    count=messagecount
                     handler.post {  NotificationManager().AddAdvice(resources.getString(R.string.Online_customer_service),resources.getString(
                         R.string.Customer_service_specialist),this)  }
                 }
+                count=messagecount
             }
 
         }.start()

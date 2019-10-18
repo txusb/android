@@ -31,7 +31,7 @@ public class E_Command {
             ps.writeUTF(ad);
             ps.writeUTF(file);
             ps.writeUTF(Message);
-            if(br.readInt()==1){return true;}else{return false;}
+           return true;
         }catch (Exception e){sleep(1000);e.printStackTrace();
             return false;
         }

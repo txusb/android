@@ -55,17 +55,18 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp" android:layout_alignParentBottom="true" android:layout_marginBottom="27dp"
-            android:layout_marginLeft="36dp" android:layout_marginRight="36dp">
+            android:layout_height="60dp" android:layout_alignParentBottom="true"
+    >
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button5" android:layout_weight="1"
-                android:layout_marginRight="4dp" android:background="@mipmap/button" android:text="@string/Disagree"
-                android:textColor="@color/white" android:onClick="onclick"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/button5" android:layout_weight="1"
+                android:background="@color/buttoncolor" android:text="@string/Disagree"
+                android:textColor="@color/white" android:onClick="onclick" android:layout_marginEnd="0.5dp"/>
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button6" android:layout_weight="1"
-                android:layout_marginLeft="4dp" android:background="@mipmap/button" android:text="@string/Agree"
-                android:textColor="@color/white" android:onClick="onclick"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/button6" android:layout_weight="1"
+                android:background="@color/buttoncolor" android:text="@string/Agree"
+                android:textColor="@color/white" android:onClick="onclick"
+                android:layout_marginStart="0.5dp"/>
     </LinearLayout>
 </RelativeLayout>

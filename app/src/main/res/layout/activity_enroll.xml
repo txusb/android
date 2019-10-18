@@ -209,20 +209,20 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" android:layout_marginLeft="34dp"
-                    android:layout_marginTop="10dp" android:layout_marginRight="34dp"
-                    android:layout_marginBottom="30dp">
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+            >
                 <Button
                         android:text="@string/cancel"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/cancel" android:layout_weight="1"
-                        android:background="@mipmap/button" android:layout_marginRight="8dp"
+                        android:layout_height="match_parent" android:id="@+id/cancel" android:layout_weight="1"
+                        android:background="@color/buttoncolor" android:layout_marginRight="0.5dp"
                         android:textColor="@color/white" android:onClick="onclick"/>
                 <Button
                         android:text="@string/Sign_in"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/next" android:layout_weight="1"
-                        android:background="@mipmap/button" android:layout_marginLeft="8dp"
+                        android:layout_height="match_parent" android:id="@+id/next" android:layout_weight="1"
+                        android:background="@color/buttoncolor" android:layout_marginLeft="0.5dp"
                         android:textColor="@color/white" android:onClick="onclick"/>
             </LinearLayout>
         </LinearLayout>

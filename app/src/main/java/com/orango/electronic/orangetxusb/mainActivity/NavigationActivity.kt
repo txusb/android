@@ -183,9 +183,9 @@ fun onclick(view: View){
      fun GetMessage(){
         handler.post {
                  Log.d("message", "${AdService.count}")
-                 if (AdService.count == 0 || AdService.count == -1) {
+                 if (AdService.count == 0 ) {
                      havemessage.visibility = View.GONE
-                 } else {
+                 }else if(AdService.count == -1){} else {
                      havemessage.visibility = View.VISIBLE
                      havemessage.setText("" + AdService.count)
                  }

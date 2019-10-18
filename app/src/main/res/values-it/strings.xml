@@ -111,8 +111,8 @@
     <string name="Orange_USB_TPMS">Orange USB TPMS</string>
     <string name="Data_Loading">Scarica i dati</string>
     <string name="Orange_USB_TPMS_Application">Applicazione Orange USB TPMS</string>
-    <string name="Program_USB_TPMS">Programma (USB TPMS)</string>
-    <string name="Program_USB_PAD">Program(USB PAD)</string>
+    <string name="Program_USB_TPMS">USB CABLE</string>
+    <string name="Program_USB_PAD">USB PAD</string>
     <string name="Cloud_information">Informazioni cloud</string>
     <string name="Online_shopping">Shopping Online</string>
     <string name="Users_manual">Istruzioni per l\'uso</string>

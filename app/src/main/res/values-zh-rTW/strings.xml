@@ -92,8 +92,8 @@
     <string name="Orange_USB_TPMS">Orange USB TPMS</string>
     <string name="Data_Loading">載入資訊</string>
     <string name="Orange_USB_TPMS_Application">Orange USB TPMS Application</string>
-    <string name="Program_USB_TPMS">Program(USB TPMS)</string>
-    <string name="Program_USB_PAD">Program(USB PAD)</string>
+    <string name="Program_USB_TPMS">USB CABLE</string>
+    <string name="Program_USB_PAD">USB PAD</string>
     <string name="Cloud_information">雲端數據</string>
     <string name="Online_shopping">線上購物</string>
     <string name="Users_manual">使用說明</string>

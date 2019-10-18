@@ -63,15 +63,16 @@ fun idcopy(){
     Program.background=resources.getDrawable(R.drawable.stroke,null)
     Idcopy.setTextColor(resources.getColor(R.color.white))
     Program.setTextColor(resources.getColor(R.color.buttoncolor))
+    (activity as NavigationActivity).setActionBarTitle(activity!!.resources.getString(R.string.ID_COPY))
 }
     fun program(){ NavigationActivity.Action ="PROGRAM"
         Program.background=resources.getDrawable(R.drawable.solid,null)
         Idcopy.background=resources.getDrawable(R.drawable.stroke,null)
         Idcopy.setTextColor(resources.getColor(R.color.buttoncolor))
-        Program.setTextColor(resources.getColor(R.color.white))}
+        Program.setTextColor(resources.getColor(R.color.white))
+        (activity as NavigationActivity).setActionBarTitle(activity!!.resources.getString(R.string.Program))}
     override fun onResume() {
         super.onResume()
-        (activity as NavigationActivity).setActionBarTitle("Program (USB TPMS)")
         (activity as NavigationActivity).RightTop.visibility=View.GONE
         (activity as NavigationActivity).RightTop.setOnClickListener { }
     }

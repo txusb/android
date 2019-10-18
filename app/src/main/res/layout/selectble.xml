@@ -7,11 +7,11 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Devicname"
-        android:textColor="@android:color/background_light" />
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Devicname"
+            android:textColor="@android:color/background_light" android:background="@mipmap/btn_rectangle_normal"/>
 
     <TextView
         android:id="@+id/textView2"
