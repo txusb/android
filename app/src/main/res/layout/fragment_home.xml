@@ -114,7 +114,7 @@
                         android:textColor="#32414E"
                         android:textSize="15sp"
                         android:layout_centerHorizontal="true" android:layout_below="@id/online_shopping_btn"
-                        android:translationX="-10dp"/>
+                        android:translationX="-10dp" android:id="@+id/changer"/>
             </RelativeLayout>
         </LinearLayout>
 

@@ -106,6 +106,7 @@ class TalkingActivity : AppCompatActivity() {
     var handler= Handler()
     fun newMail(){
         if(refresh){
+            var originsize=this.it.admin.size
             refresh=false
             if(it.id.size==0){
                 refresh=true
@@ -116,8 +117,8 @@ class TalkingActivity : AppCompatActivity() {
                 handler.post {
                     refresh=true
                     if(it.success){
+                        if(originsize!=this.it.admin.size){cell.notifyDataSetChanged()}
                         InternalError.visibility=View.GONE
-                        cell.notifyDataSetChanged()
                     }
                 }
             }.start()

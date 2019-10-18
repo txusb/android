@@ -154,7 +154,7 @@ fun onclick(view: View){
             timer=Timer()
         timer.schedule(0,5000){
             runOnUiThread(Runnable {
-                GetMessage()
+//                GetMessage()
                 if(NowFr.equals("PadSelect")||NowFr.equals("Select Area")){
                     if(NowFr.equals("PadSelect")){
                         if(bleServiceControl.isconnect){

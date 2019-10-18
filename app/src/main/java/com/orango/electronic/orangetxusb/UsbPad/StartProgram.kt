@@ -44,7 +44,6 @@ import java.lang.Exception
 import java.util.*
 import com.orango.electronic.orangetxusb.R.id.animation_view2 as animation_view21
 import kotlinx.android.synthetic.main.fragment_mmy.view.Relarm as Relarm1
-import kotlinx.android.synthetic.main.fragment_mmy.view.menu as menu1
 import kotlinx.android.synthetic.main.fragment_mmy.view.mmy_text as mmy_text1
 import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.copy_id_btn as copy_id_btn1
 import kotlinx.android.synthetic.main.fragment_start_program.view.Program_bt as Program_bt1

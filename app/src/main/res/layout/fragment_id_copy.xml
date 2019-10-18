@@ -9,8 +9,8 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/PROGRAM_SUCCESS"
-            app:layout_constraintTop_toBottomOf="@id/relative" app:layout_constraintBottom_toTopOf="@id/Menu"
-            android:visibility="gone" android:layout_above="@id/Menu" android:layout_below="@id/relative">
+            app:layout_constraintTop_toBottomOf="@id/relative" app:layout_constraintBottom_toTopOf="@id/Twice"
+            android:visibility="visible" android:layout_above="@id/Twice" android:layout_below="@id/relative">
 
         <TextView
                 android:text="11ABCDEF"
@@ -36,19 +36,6 @@
                 android:layout_width="267dp"
                 android:layout_height="260dp" android:id="@+id/imageView2" android:layout_centerInParent="true"
                 android:translationY="-10dp"/>
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_below="@id/imageView2"
-                android:layout_alignEnd="@id/imageView2" android:translationY="-10dp">
-
-            <Button
-                    android:text="PROG.SENSOR"
-                    android:layout_width="140dp"
-                    android:layout_height="50dp" android:id="@+id/ProgramAgain"
-                    android:background="@mipmap/button" android:textColor="@color/white"
-                    android:layout_centerVertical="true" android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="5dp"/>
-        </RelativeLayout>
         <ImageView
                 android:src="@mipmap/v2_pt84ps"
                 android:layout_width="110dp"
@@ -60,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp" app:layout_constraintTop_toBottomOf="@id/relative"
             android:id="@+id/PROGRAM_START"
-            android:visibility="visible" android:layout_below="@id/relative" android:layout_above="@id/Menu">
+            android:visibility="visible" android:layout_below="@id/relative" android:layout_above="@id/Twice">
 
         <ImageView
                 android:id="@+id/program_img2"
@@ -128,10 +115,11 @@
                 android:layout_height="50dp"
                 android:id="@+id/editText" android:layout_below="@id/textView9" android:layout_marginLeft="45dp"
                 android:layout_marginRight="45dp" android:background="@color/white"
-                android:hint="ID code should be 8 characters" android:gravity="center" android:layout_marginTop="10dp"
-                android:maxLength="8"/>
+                android:hint="@string/ID_code_should_be_8_characters" android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:maxLength="8" android:textSize="16sp"/>
         <Button
-                android:text="PROGRAM"
+                android:text="@string/Program"
                 android:layout_width="168dp"
                 android:layout_height="50dp" android:id="@+id/button3" android:layout_below="@id/editText"
                 android:layout_centerHorizontal="true" android:layout_marginTop="30dp"
@@ -149,13 +137,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:singleLine="true"
             android:background="@color/buttoncolor" android:text="BMW / 1(F20,F21) / 2014~2015"/>
-    <Button
-            android:text="@string/MENU"
-            android:layout_height="56dp" android:id="@+id/Menu"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/buttoncolor" android:textColor="@color/white" android:visibility="visible"
-            android:layout_alignParentBottom="true"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" android:id="@+id/Twice" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_alignParentBottom="true">
+
+        <Button
+                android:text="@string/MENU"
+                android:layout_height="56dp" android:id="@+id/Menu"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/buttoncolor" android:textColor="@color/white" android:visibility="visible"
+                android:layout_weight="1"/>
+        <Button
+                android:text="@string/RE_PROGRAM"
+                android:layout_height="56dp" android:id="@+id/repg"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/buttoncolor" android:textColor="@color/white" android:visibility="gone"
+                android:layout_weight="1"/>
+    </LinearLayout>
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/Select_Key" android:elevation="10dp">

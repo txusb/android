@@ -47,6 +47,7 @@
                     android:lineSpacingMultiplier="1.2"
                     android:text="sasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasa"
                     android:textColor="@android:color/background_dark"
+                    android:textIsSelectable="true"
                     android:textSize="14sp"/>
         </RelativeLayout>
         <RelativeLayout
@@ -130,6 +131,7 @@
                     android:lineSpacingMultiplier="1.2"
                     android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
                     android:textColor="@android:color/background_dark"
+                    android:textIsSelectable="true"
                     android:textSize="14sp"/>
         </RelativeLayout>
 

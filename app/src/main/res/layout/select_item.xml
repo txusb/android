@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="76dp"
             android:gravity="center"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:layout_centerInParent="true" android:layout_marginStart="60dp" android:lines="2"/>
 </RelativeLayout>

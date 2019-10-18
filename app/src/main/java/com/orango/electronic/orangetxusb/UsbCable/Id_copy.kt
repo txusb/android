@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.fragment_id_copy.view.*
 import kotlinx.android.synthetic.main.fragment_mmy.view.*
 import java.lang.Exception
 import kotlinx.android.synthetic.main.fragment_id_copy.view.Menu as Menu1
-import kotlinx.android.synthetic.main.fragment_id_copy.view.ProgramAgain as ProgramAgain1
 import kotlinx.android.synthetic.main.fragment_mmy.view.Program_bt as Program_bt1
 
 
@@ -93,9 +92,8 @@ class Id_copy : Fragment() {
         rootView.button3.setOnClickListener {
             if(editText.text.toString().length==need){ProgramFirst()}else{        Toast.makeText(navActivity,resources.getString(R.string.ID_code_should_be_8_characters).replace("8",""+need),Toast.LENGTH_SHORT).show()}
         }
-        rootView.ProgramAgain.setOnClickListener {
-            if(editText.text.toString().length==need){ProgramFirst()}else{       Toast.makeText(navActivity,resources.getString(R.string.ID_code_should_be_8_characters).replace("8",""+need),Toast.LENGTH_SHORT).show()}
-
+        rootView.repg.setOnClickListener{
+                        if(editText.text.toString().length==need){ProgramFirst()}else{       Toast.makeText(navActivity,resources.getString(R.string.ID_code_should_be_8_characters).replace("8",""+need),Toast.LENGTH_SHORT).show()}
         }
         rootView.Menu.setOnClickListener {
             val fragment = HomeFragment()
@@ -211,6 +209,12 @@ fun insert():String{
                 handler.post {
                     isProgramming=false
                     try {
+                        rootView.repg.visibility=View.VISIBLE
+                        rootView.Menu.visibility=View.GONE
+                        navActivity.back.setOnClickListener {
+                            navActivity.supportFragmentManager.popBackStack(0,1)
+                        }
+                        navActivity.back.setImageResource(R.mipmap.menu)
                         if(a){
                             Program()
                         }else{

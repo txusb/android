@@ -48,8 +48,8 @@
     <TextView
             android:text="Programmimg, do not move sensors"
             android:layout_width="match_parent"
-            android:layout_height="30dp" android:id="@+id/condition"
-            android:gravity="center" android:textSize="16dp"
+            android:layout_height="50dp" android:id="@+id/condition"
+            android:gravity="center" android:textSize="14dp"
             android:layout_alignParentTop="false" android:layout_below="@id/relative"/>
     <RelativeLayout
             android:layout_width="match_parent"

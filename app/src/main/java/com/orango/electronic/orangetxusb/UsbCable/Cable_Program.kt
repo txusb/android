@@ -76,8 +76,6 @@ fun downs19(){
         navActivity.setActionBarTitle(navActivity.resources.getString(R.string.Program_USB_TPMS))
         navActivity.back.visibility=View.VISIBLE
         rootView.mmy_text.text = "$make/$model /$year"
-        rootView.ProgramAgain.setOnClickListener {      Program()
-        }
         rootView.program_sensor_btn.setOnClickListener {
             Program()
         }
@@ -92,16 +90,10 @@ fun downs19(){
                 // 提交事務
                 .commit()
         }
-rootView.Menu.setOnClickListener {
-    val fragment = HomeFragment()
-    val transaction = fragmentManager!!.beginTransaction()
-    transaction.replace(R.id.nav_host_fragment, fragment, "Home")
-        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-        .addToBackStack("Home")
-        // 提交事務
-        .commit()
+rootView.pragin.setOnClickListener {
+    Program()
 }
-        rootView.menu.setOnClickListener {     val fragment =
+        rootView.Menu.setOnClickListener {     val fragment =
             HomeFragment()
             val transaction = fragmentManager!!.beginTransaction()
             transaction.replace(R.id.nav_host_fragment, fragment, "Home")
@@ -151,6 +143,10 @@ val handler: Handler =Handler()
                     try {
                         isProgramming=false
                         navActivity.back.isClickable=true
+                        navActivity.back.setOnClickListener {
+                            navActivity.supportFragmentManager.popBackStack(0,1)
+                        }
+                        navActivity.back.setImageResource(R.mipmap.menu)
                         if(a){
                             UpdateUi(2)
                         }else{ UpdateUi(3)  }

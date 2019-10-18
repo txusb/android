@@ -55,7 +55,7 @@ class Set_Languages : Fragment() {
         LanguageList.add("Select")
         LanguageList.add("繁體中文")
         LanguageList.add("简体中文")
-        LanguageList.add("Deutsche")
+        LanguageList.add("Deutsch")
         LanguageList.add("English")
         LanguageList.add("Italiano")
         val lanAdapter = ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item, LanguageList)

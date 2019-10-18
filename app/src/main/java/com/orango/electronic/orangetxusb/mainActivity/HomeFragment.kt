@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
             rootView.online_shopping_btn.setBackgroundResource(R.mipmap.setting)
             rootView.Setim.visibility=View.GONE
             rootView.textView68.visibility=View.GONE
+            rootView.changer.text=resources.getString(R.string.Setting)
         }
         navActivity.back.visibility=View.GONE
         programSensorBtn = rootView.findViewById(R.id.program_sensor_btn)

@@ -43,7 +43,7 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
-                    android:visibility="visible">
+                    android:visibility="gone">
                 <ImageView
                         android:layout_width="40dp"
                         android:layout_height="wrap_content" app:srcCompat="@mipmap/customer"
