@@ -110,10 +110,10 @@ public class BluetoothLeService extends Service {
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
             tmp=tmp+bytesToHex(characteristic.getValue());
-            act.RX(tmp);
             if(tmp.length()==check||check==0){
                 act.setRXDATA(tmp);
-                Log.d("WriteReback",(tmp));
+                act.RX(tmp);
+                Log.d("BLEDATA","RX:"+(tmp));
             }
         }
 
@@ -125,9 +125,9 @@ public void onCharacteristicWrite(BluetoothGatt gatt,BluetoothGattCharacteristic
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
             tmp=tmp+bytesToHex(characteristic.getValue());
-            act.RX(tmp);
             if(tmp.length()==check||check==0){
                 act.setRXDATA(tmp);
+                act.RX(tmp);
                 Log.d("WriteReback",(tmp));
             }
 

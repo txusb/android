@@ -40,7 +40,7 @@
             android:layout_below="@id/mmy_text6">
 
         <Button
-                android:text="IdCopy"
+                android:text="@string/ID_COPY"
                 android:layout_width="100dp"
                 android:layout_height="30dp" android:id="@+id/copy_id_btn"
                 android:background="@drawable/solid"

@@ -184,6 +184,7 @@ var SCAN_OR_KEY=1
         CheckUnlinked()
         rootView.scaner.setOnClickListener{
             rootView.Select_Key.visibility=View.GONE
+            rootView.condition2.text=resources.getString(R.string.checkscan)
             scanner.Scan_For=scanner.ID
             rootView.Lft.isFocusable=false
             rootView.Rrt.isFocusable=false

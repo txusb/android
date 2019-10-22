@@ -90,7 +90,7 @@ open class BleActivity : AppCompatActivity(), FragmentManager.OnBackStackChanged
     }
     open fun RX(a:String){
         try {
-            Log.w("BLEDATA", "RX:$a")
+//            Log.w("BLEDATA", "RX:$a")
         } catch (e: Exception) {
             Log.w("error", e.message)
         }

@@ -432,7 +432,6 @@ var NowFr="no"
     override fun RX(a:String){
         Log.w("BLEDATA", "RX:$a")
         RxCommand.RX(StringHexToByte(a), this)
-
     }
 
 }

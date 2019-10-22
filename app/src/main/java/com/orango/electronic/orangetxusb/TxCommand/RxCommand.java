@@ -39,7 +39,7 @@ public class RxCommand {
         }
     }
     public static String RX(byte[] data, NavigationActivity activity){
-        activity.setRXDATA(bytesToHex(data));
+//        activity.setRXDATA(bytesToHex(data));
         if(data.length==21&&data[2]==0x10&&data[20]==0x0A){
             ArrayList<String> A0X10=A0X10(data);
             String spn ="SensorModel:"+A0X10.get(0)+"\nAppVersion:"+A0X10.get(1)+"\nLib:"+A0X10.get(2);

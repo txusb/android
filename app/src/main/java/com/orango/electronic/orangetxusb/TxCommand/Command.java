@@ -81,6 +81,7 @@ public class Command {
         }catch (Exception e){e.printStackTrace();
             return false;}
     }
+
     public boolean Command_11(int ic,int channel){
         try{
             int check=30;
