@@ -100,6 +100,7 @@ var SCAN_OR_KEY=1
         savedInstanceState: Bundle?
     ): View? {
         rootView=inflater.inflate(R.layout.fragment_pad__idcopy, container, false)
+        rootView.textView81.text=resources.getString(R.string.Scan_Code)+"\n(For Orange Sensor)"
         if(ShowSelect){rootView.Select_Key.visibility=View.VISIBLE}else{rootView.Select_Key.visibility=View.GONE}
         if(SCAN_OR_KEY==0){
             rootView.condition2.text=resources.getString(R.string.checkscan)

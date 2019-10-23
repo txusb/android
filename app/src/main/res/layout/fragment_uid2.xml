@@ -17,7 +17,7 @@
             android:layout_height="match_parent" android:layout_below="@id/textView38">
         <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button12" app:srcCompat="@mipmap/img_step2"
+                android:layout_height="wrap_content" android:id="@+id/button12" app:srcCompat="@mipmap/cid2"
                 android:layout_centerInParent="true" android:padding="1dp" android:background="@drawable/strokeb"/>
     </RelativeLayout>
 </RelativeLayout>

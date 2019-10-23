@@ -45,7 +45,6 @@ class PadSelect : Fragment() {
         NavigationActivity.PAD_OR_USB="PAD"
         act.back.visibility=View.VISIBLE
         rootView.scan.setOnClickListener {
-            act.scanorselect=0
             RequestPermission()
         }
         rootView.serch.setOnClickListener {

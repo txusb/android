@@ -5,7 +5,7 @@
                 android:layout_height="match_parent"
                 tools:context=".ManualActivity.Idcopy_USB.UID1" android:background="#FFF5ED">
     <ImageView
-            android:src="@mipmap/img_step1_program"
+            android:src="@mipmap/cid1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/imageView31" android:layout_below="@id/textView39"/>
     <TextView

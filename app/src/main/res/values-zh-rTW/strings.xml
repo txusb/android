@@ -235,4 +235,6 @@
     <string name="monthago">1個月前</string>
     <string name="yeargo">1年前</string>
     <string name="checkscan">請確認要燒錄的發射器以放入USB PAD， 再點選輪位進行掃描</string>
+    <string name="Scan_Two">請掃描目錄或海報上的二維碼</string>
+    <string name="keyin">手動輸入</string>
 </resources>

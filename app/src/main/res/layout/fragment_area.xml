@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content" android:layout_weight="1">
 
             <Button
-                    android:text="IdCopy"
+                    android:text="@string/ID_COPY"
                     android:layout_width="100dp"
                     android:layout_height="30dp" android:id="@+id/Idcopy"
                     android:background="@drawable/stroke"

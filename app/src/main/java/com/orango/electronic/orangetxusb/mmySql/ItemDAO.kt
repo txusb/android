@@ -14,6 +14,7 @@ import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.UsbCable.Id_copy
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
+import com.orango.electronic.orangetxusb.mainActivity.Relarm
 import com.orango.electronic.orangetxusb.tool.FileDowload
 import java.lang.Exception
 import java.util.ArrayList
@@ -71,7 +72,7 @@ class ItemDAO(context: Context) {
             return null
         }
     }
-fun GoOk(code:String,fragmentManager: FragmentManager){
+fun     GoOk(code:String,fragmentManager: FragmentManager){
     val sql="select  `Make`,`Model`,`Year`,`Make_Img`  from `Summary table` where `Direct Fit` not in($notin) and `$MAKE_IMG_COLUMN` not in($notin) and `MMY number`='$code' limit 0,1"
     val result = db.rawQuery(
         sql,null)
@@ -82,75 +83,20 @@ fun GoOk(code:String,fragmentManager: FragmentManager){
             val model=result.getString(1)
             val years=result.getString(2)
             val makeImg=result.getString(3)
-            when(NavigationActivity.Action){
-                "PROGRAM"->{
-                    if(NavigationActivity.PAD_OR_USB.equals("USB")){
-                        val args = Bundle()
-                        args.putString(Cable_Program.stringMake, make)
-                        args.putString(Cable_Program.stringMakeImg, makeImg)
-                        args.putString(Cable_Program.stringModel, model)
-                        args.putString(Cable_Program.stringYear, years)
-                        val fragment = Cable_Program()
-                        fragment.arguments = args
-                        val transaction = fragmentManager.beginTransaction()
-                        transaction.replace(R.id.nav_host_fragment, fragment, "Program")
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                            .addToBackStack("Program")
-                            // 提交事務
-                            .commit()
-
-                    }else{
-                        val args = Bundle()
-                        args.putString(Cable_Program.stringMake, make)
-                        args.putString(Cable_Program.stringMakeImg, makeImg)
-                        args.putString(Cable_Program.stringModel, model)
-                        args.putString(Cable_Program.stringYear, years)
-                        args.putString(Cable_Program.LFID, "")
-                        args.putString(Cable_Program.LRID, "")
-                        args.putString(Cable_Program.RRID, "")
-                        args.putString(Cable_Program.RFID, "")
-                        val fragment = StartProgram()
-                        fragment.arguments = args
-                        val transaction = fragmentManager.beginTransaction()
-                        transaction.replace(R.id.nav_host_fragment, fragment, "Pad_Program")
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                            .addToBackStack("Pad_Program")
-                            // 提交事務
-                            .commit()
-                    }
-                }
-                "IDCOPY"->{
-                    if(NavigationActivity.PAD_OR_USB.equals("USB")){
-                        val args = Bundle()
-                        args.putString(Cable_Program.stringMake, make)
-                        args.putString(Cable_Program.stringMakeImg, makeImg)
-                        args.putString(Cable_Program.stringModel, model)
-                        args.putString(Cable_Program.stringYear, years)
-                        val fragment = Id_copy()
-                        fragment.arguments = args
-                        val transaction = fragmentManager.beginTransaction()
-                        transaction.replace(R.id.nav_host_fragment, fragment, "Id_Copy")
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                            .addToBackStack("Id_Copy")
-                            // 提交事務
-                            .commit()
-                    }else{
-                        val args = Bundle()
-                        args.putString(Cable_Program.stringMake, make)
-                        args.putString(Cable_Program.stringMakeImg, makeImg)
-                        args.putString(Cable_Program.stringModel, model)
-                        args.putString(Cable_Program.stringYear, years)
-                        val fragment = Pad_Idcopy()
-                        fragment.arguments = args
-                        val transaction = fragmentManager.beginTransaction()
-                        transaction.replace(R.id.nav_host_fragment, fragment, "Id_Copy")
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
-                            .addToBackStack("Id_Copy")
-                            // 提交事務
-                            .commit()
-                    }
-                }
-            }
+            Relarm.position=1
+            val fragment = Relarm()
+            val args = Bundle()
+            args.putString(Cable_Program.stringMake, make)
+            args.putString(Cable_Program.stringMakeImg, makeImg)
+            args.putString(Cable_Program.stringModel, model)
+            args.putString(Cable_Program.stringYear, years)
+            fragment.arguments=args
+            val transaction = fragmentManager!!.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, fragment, "Relarm")
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
+                .addToBackStack("Relarm")
+                // 提交事務
+                .commit()
         }while (result.moveToNext())
         // 關閉Cursor物件
         result.close()

@@ -85,6 +85,7 @@ class Id_copy : Fragment() {
     ): View? {
         rootView=inflater.inflate(R.layout.fragment_id_copy, container, false)
         navActivity.setActionBarTitle(navActivity.resources.getString(R.string.Program_USB_TPMS))
+        rootView.textView81.text=resources.getString(R.string.Scan_Code)+"\n(For Orange Sensor)"
         rootView.mmy_text3.text = "$make/$model /$year"
         rootView.editText.addTextChangedListener(CustomTextWatcher(rootView.editText))
         navActivity.back.visibility=View.VISIBLE
@@ -214,6 +215,7 @@ fun insert():String{
                         navActivity.back.setOnClickListener {
                             navActivity.supportFragmentManager.popBackStack(0,1)
                         }
+                        navActivity.GoMenu=true
                         navActivity.back.setImageResource(R.mipmap.menu)
                         if(a){
                             Program()

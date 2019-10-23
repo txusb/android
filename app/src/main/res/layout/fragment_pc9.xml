@@ -9,7 +9,7 @@
             android:layout_height="match_parent" android:layout_below="@id/textView66">
 
         <ImageView
-                android:src="@mipmap/pc9"
+                android:src="@mipmap/uid9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/imageView56"
                 android:layout_centerInParent="true" android:padding="1dp" android:background="@drawable/strokeb"/>

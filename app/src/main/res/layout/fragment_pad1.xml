@@ -15,7 +15,7 @@
             android:layout_height="match_parent" android:layout_below="@id/textView47">
 
         <ImageView
-                android:src="@mipmap/pad1"
+                android:src="@mipmap/upr1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/imageView38"
                 android:layout_centerInParent="true"/>

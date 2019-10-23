@@ -146,6 +146,7 @@ val handler: Handler =Handler()
                         navActivity.back.setOnClickListener {
                             navActivity.supportFragmentManager.popBackStack(0,1)
                         }
+                        navActivity.GoMenu=true
                         navActivity.back.setImageResource(R.mipmap.menu)
                         if(a){
                             UpdateUi(2)

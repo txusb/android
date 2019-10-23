@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_centerVertical="true" android:id="@+id/li">
         <TextView
-                android:text="Program (USB TPMS)"
+                android:text="USB Cable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textView28" android:gravity="center"
                 android:textSize="20sp" android:textColor="@color/colorPrimaryDark"/>
@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal" android:textColor="@color/white"
                 android:text="@string/ID_COPY" android:layout_marginTop="14dp"/>
         <TextView
-                android:text="Program (USB PAD)"
+                android:text="USB PAD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textView29" android:gravity="center"
                 android:textSize="20sp" android:layout_marginTop="20dp" android:textColor="@color/colorPrimaryDark"/>

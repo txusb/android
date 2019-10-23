@@ -22,6 +22,7 @@ import com.orango.electronic.orangetxusb.UsbPad.Pad_Idcopy
 
 import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.UsbCable.Id_copy
+import kotlinx.android.synthetic.main.fragment_qrcode_scanner.view.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 
@@ -38,7 +39,7 @@ private const val ARG_PARAM2 = "param2"
 class QrcodeScanner : Fragment(), ZXingScannerView.ResultHandler{
     var S19=0
     var ID=1
-    var CableId=1
+    var CableId=2
     var need=8
     var Scan_For=S19
     val LF=1
@@ -116,6 +117,17 @@ class QrcodeScanner : Fragment(), ZXingScannerView.ResultHandler{
         frame=rootView.findViewById(R.id.frame)
         frame.addView(mScannerView)
         Log.d("ideneed",""+need);
+        when(Scan_For){
+            ID->{
+                rootView.textView12.text=resources.getString(R.string.Please_scan_the_QR_Code_on_the_catalog_or_poster)
+            }
+            S19->{
+                rootView.textView12.text=resources.getString(R.string.Scan_Two)
+            }
+            CableId->{
+                rootView.textView12.text=resources.getString(R.string.Please_scan_the_QR_Code_on_the_catalog_or_poster)
+            }
+        }
         return rootView
     }
     override fun onResume() {

@@ -256,7 +256,6 @@ fun onclick(view: View){
         onBackPressed()
         return true
     }
-
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
@@ -264,14 +263,17 @@ fun onclick(view: View){
         return super.onKeyUp(keyCode, event)
     }
 var NowFr="no"
+    var GoMenu=false
     override fun onBackStackChanged() {
         if(supportFragmentManager.fragments.get(supportFragmentManager.fragments.size-1).tag!=null){
             val tname=supportFragmentManager.fragments.get(supportFragmentManager.fragments.size-1).tag!!
             if(tname.equals("PadSelect")||tname.equals("Select Area")||tname.equals("Home")||tname.equals("UsersManual")||tname.equals("Setting")){NowFr=tname
             }
-                back.setImageResource(R.mipmap.btn_back_normal)
+            back.setImageResource(R.mipmap.btn_back_normal)
             back.setOnClickListener {
-                    supportFragmentManager.popBackStack()
+                if(GoMenu){GoMenu=false
+                    supportFragmentManager!!.popBackStack(0, 1)
+                }else{supportFragmentManager.popBackStack()}
             }
         }
 

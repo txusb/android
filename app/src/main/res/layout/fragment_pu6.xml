@@ -16,7 +16,7 @@
             android:layout_height="match_parent" android:layout_below="@id/textView35">
 
         <ImageView
-                android:src="@mipmap/img_step5_program"
+                android:src="@mipmap/cpr6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/imageView28"
                 android:layout_centerInParent="true" android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
