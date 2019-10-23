@@ -143,9 +143,6 @@ val handler: Handler =Handler()
                     try {
                         isProgramming=false
                         navActivity.back.isClickable=true
-                        navActivity.back.setOnClickListener {
-                            navActivity.supportFragmentManager.popBackStack(0,1)
-                        }
                         navActivity.GoMenu=true
                         navActivity.back.setImageResource(R.mipmap.menu)
                         if(a){
@@ -177,13 +174,15 @@ val handler: Handler =Handler()
         PROGRAM_WAIT.visibility=View.GONE
         PROGRAM_START.visibility=View.GONE
         PROGRAM_SUCCESS.visibility=View.GONE
+        rootView.Relarm.visibility=View.GONE
+        rootView.pragin.visibility=View.GONE
+        rootView.Menu.visibility=View.GONE
         when(a){
             0->{
                 Menu.visibility=View.VISIBLE
                 PROGRAM_WAIT.visibility=View.VISIBLE
             }
             1->{
-                Menu.visibility=View.VISIBLE
                 PROGRAM_START.visibility=View.VISIBLE}
             2->{
                 PROGRAM_SUCCESS.visibility=View.VISIBLE
@@ -193,6 +192,8 @@ val handler: Handler =Handler()
                 Statutext2.setTextColor(resources.getColor(R.color.colorRecieveText))
                 Statutext.text=resources.getString(R.string.Programming_completed)
                 Statutext2.text=resources.getString(R.string.Please_remove_the_sensor)
+                rootView.Relarm.visibility=View.VISIBLE
+                rootView.pragin.visibility=View.VISIBLE
             }
             3->{
                 PROGRAM_SUCCESS.visibility=View.VISIBLE
@@ -202,6 +203,7 @@ val handler: Handler =Handler()
                 Statutext2.setTextColor(resources.getColor(R.color.colorPrimaryDark))
                 Statutext.text=resources.getString(R.string.Programming_failed)
                 Statutext2.text=resources.getString(R.string.Please_press_RE_PROGRAM)
+                rootView.pragin.visibility=View.VISIBLE
             }
         }
     }

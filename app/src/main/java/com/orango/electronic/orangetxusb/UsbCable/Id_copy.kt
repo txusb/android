@@ -23,6 +23,7 @@ import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.mainActivity.HomeFragment
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.mainActivity.QrcodeScanner
+import com.orango.electronic.orangetxusb.mainActivity.Relarm
 import com.orango.electronic.orangetxusb.tool.CustomTextWatcher
 import com.orango.electronic.orangetxusb.tool.FileDowload
 import kotlinx.android.synthetic.main.fragment_id_copy.*
@@ -132,7 +133,22 @@ class Id_copy : Fragment() {
         rootView.keyin.setOnClickListener {
             rootView.Select_Key.visibility=View.GONE
         }
-
+rootView.relearm.setOnClickListener {
+    Relarm.position=0
+    val fragment = Relarm()
+    val args = Bundle()
+    args.putString(Cable_Program.stringMake, make)
+    args.putString(Cable_Program.stringMakeImg, makeImg)
+    args.putString(Cable_Program.stringModel, model)
+    args.putString(Cable_Program.stringYear, year)
+    fragment.arguments=args
+    val transaction = fragmentManager!!.beginTransaction()
+    transaction.replace(R.id.nav_host_fragment, fragment, "Relarm")
+        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)//設定動畫
+        .addToBackStack("Relarm")
+        // 提交事務
+        .commit()
+}
         return rootView
     }
 
@@ -212,9 +228,6 @@ fun insert():String{
                     try {
                         rootView.repg.visibility=View.VISIBLE
                         rootView.Menu.visibility=View.GONE
-                        navActivity.back.setOnClickListener {
-                            navActivity.supportFragmentManager.popBackStack(0,1)
-                        }
                         navActivity.GoMenu=true
                         navActivity.back.setImageResource(R.mipmap.menu)
                         if(a){
@@ -239,12 +252,17 @@ fun insert():String{
         PROGRAM_WAIT.visibility=View.GONE
         PROGRAM_START.visibility=View.GONE
         PROGRAM_SUCCESS.visibility=View.GONE
+        rootView.relearm.visibility=View.GONE
+        rootView.repg.visibility=View.GONE
+        rootView.Menu.visibility=View.GONE
         when(a){
             0->{
                 PROGRAM_WAIT.visibility=View.VISIBLE
+                rootView.Menu.visibility=View.VISIBLE
             }
             1->{
-                PROGRAM_START.visibility=View.VISIBLE}
+                PROGRAM_START.visibility=View.VISIBLE
+            }
             2->{
                 PROGRAM_SUCCESS.visibility=View.VISIBLE
                 Statuim.setImageDrawable(resources.getDrawable(R.mipmap.v2_pt84ps,null))
@@ -252,6 +270,8 @@ fun insert():String{
                 Statutext2.setTextColor(resources.getColor(R.color.colorRecieveText))
                 Statutext.text=resources.getString(R.string.Programming_completed)
                 Statutext2.text=resources.getString(R.string.Please_remove_the_sensor)
+                rootView.relearm.visibility=View.VISIBLE
+                rootView.repg.visibility=View.VISIBLE
             }
             3->{
                 PROGRAM_SUCCESS.visibility=View.VISIBLE
@@ -260,6 +280,8 @@ fun insert():String{
                 Statutext2.setTextColor(resources.getColor(R.color.colorPrimaryDark))
                 Statutext.text=resources.getString(R.string.Programming_failed)
                 Statutext2.text=resources.getString(R.string.Please_press_RE_PROGRAM)
+                rootView.relearm.visibility=View.GONE
+                rootView.repg.visibility=View.VISIBLE
             }
         }
     }

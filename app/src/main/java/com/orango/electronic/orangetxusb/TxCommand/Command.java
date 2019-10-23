@@ -564,7 +564,7 @@ public class Command {
     }
     public boolean A0xEB(){
         try{
-            SendData("0AFEEB000D4F52414E474554504D533A72F5",0);
+            socket.write((getCRC16("0AFEEB000D4F52414E474554504D533A72F5")),0);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             while(true){
@@ -584,7 +584,7 @@ public class Command {
         //3在app中
 try{
     String command=addcheckbyte("0A"+mpass+"000030000F5");
-    SendData(command,0);
+    socket.write((command),0);
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
     Date past=sdf.parse(sdf.format(new Date()));
     while(true){
@@ -616,10 +616,18 @@ try{
     }
     public void SendData(String data,int check){
         act.setRXDATA("");
-        if(act.getBleServiceControl().isconnect){
-            act.getBleServiceControl().WriteCmd((getCRC16(data)),check);
+        if(NavigationActivity.Companion.getPAD_OR_USB().equals("PAD")){
+            if(act.getBleServiceControl().isconnect){
+                act.getBleServiceControl().WriteCmd((getCRC16(data)),check);
+            }else{
+                try{    socket.write((getCRC16(data)),check);}catch (Exception e){e.printStackTrace();}
+            }
         }else{
-            try{    socket.write((getCRC16(data)),check);}catch (Exception e){e.printStackTrace();}
+            if(act.getConnected()==NavigationActivity.Connected.True){
+                try{    socket.write((getCRC16(data)),check);}catch (Exception e){e.printStackTrace();}
+            }else{
+                act.getBleServiceControl().WriteCmd((getCRC16(data)),check);
+            }
         }
     }
     public static String addcheckbyte(String com){
@@ -681,11 +689,11 @@ try{
         }catch(Exception e){e.printStackTrace();return false;}
     }
     public  boolean check(String data,String mcpass){
-        SendData(addcheckbyte(data),14);
         try{
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             int fal=0;
+            socket.write(addcheckbyte(data),14);
             while(fal<5){
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
@@ -728,7 +736,7 @@ try{
     public boolean GoProgram(String mcpass){
         try{
             String a="0A"+mcpass+"300030000F5";
-            SendData(addcheckbyte(a),14);
+            socket.write(addcheckbyte(a),14);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             while(true){

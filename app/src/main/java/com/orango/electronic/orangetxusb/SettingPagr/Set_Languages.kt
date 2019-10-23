@@ -71,7 +71,7 @@ class Set_Languages : Fragment() {
             when(LanguagesSpinner.selectedItem.toString()){
                 "繁體中文"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_TAIWAIN);}
                 "简体中文"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_CHINESE);}
-                "Deutsche"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_DE);}
+                "Deutsch"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_DE);}
                 "English"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_ENGLISH);}
                 "Italiano"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_ITALIANO);}
             }

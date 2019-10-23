@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
             when(a){
                 "繁體中文"->{ uti="http://simple-sensor.com"}
                 "简体中文"->{ uti="http://simple-sensor.com"}
-                "Deutsche"->{ uti="http://orange-rdks.de"}
+                "Deutsch"->{ uti="http://orange-rdks.de"}
                 "English"->{ uti="http://simple-sensor.com"}
                 "Italiano"->{
                     navActivity.ChangePage(Setting(),R.id.nav_host_fragment,"Setting",true)

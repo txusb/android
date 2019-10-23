@@ -298,7 +298,7 @@ fun     GoOk(code:String,fragmentManager: FragmentManager){
         when(a){
             "繁體中文"->{ colname="`Relearn Procedure (Traditional Chinese)`"}
             "简体中文"->{ colname="`Relearn Procedure (Jane)`"}
-            "Deutsche"->{ colname="`Relearn Procedure (German)`"}
+            "Deutsch"->{ colname="`Relearn Procedure (German)`"}
             "English"->{ colname="`Relearn Procedure (English)`"}
             "Italiano"->{ colname="`Relearn Procedure (Italian)`"}
         }

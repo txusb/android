@@ -88,7 +88,6 @@ String tmp="";
         if(serialPort == null)
             throw new IOException("not connected");
         Log.d("write",(data));
-
         this.Long=Long;
         tmp="";
         serialPort.write(StringHexToByte(data), WRITE_WAIT_MILLIS);
@@ -98,7 +97,7 @@ String tmp="";
     public void onNewData(byte[] data) {
         if(listener != null)
         tmp=tmp+bytesToHex(data);
-        Log.d("writereback",tmp);
+//        Log.d("writereback",tmp);
         if(tmp.length()==Long||Long==0){
             Log.d("writereback",tmp);
             listener.onSerialRead(StringHexToByte(tmp));

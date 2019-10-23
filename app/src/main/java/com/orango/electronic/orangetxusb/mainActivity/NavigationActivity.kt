@@ -20,6 +20,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.hoho.android.usbserial.driver.UsbSerialDriver
 import com.hoho.android.usbserial.driver.UsbSerialProber
 import com.orange.blelibrary.blelibrary.BleActivity
+import com.orange.blelibrary.blelibrary.tool.FormatConvert.bytesToHex
 import com.orange.etalkinglibrary.E_talking.AdService
 import com.orange.etalkinglibrary.E_talking.E_Command
 import com.orange.etalkinglibrary.E_talking.TalkingActivity
@@ -113,6 +114,7 @@ class NavigationActivity : BleActivity(), FragmentManager.OnBackStackChangedList
     }
 
     override fun onSerialRead(data: ByteArray) {
+        RXDATA=bytesToHex(data)
         RxCommand.RX(data, this)
     }
 
@@ -133,8 +135,8 @@ fun onclick(view: View){
         setContentView(R.layout.activity_navigation)
         init()
         havemessage=findViewById(R.id.textView78)
-        val intent = Intent(this, AdService::class.java)
-        this.startService(intent)
+//        val intent = Intent(this, AdService::class.java)
+//        this.startService(intent)
         bindService(Intent(this, SerialService::class.java), this, Context.BIND_AUTO_CREATE)
         RightTop=findViewById(R.id.imageView)
         loadtitle=findViewById(R.id.textView11)
@@ -272,7 +274,7 @@ var NowFr="no"
             back.setImageResource(R.mipmap.btn_back_normal)
             back.setOnClickListener {
                 if(GoMenu){GoMenu=false
-                    supportFragmentManager!!.popBackStack(0, 1)
+                    supportFragmentManager.popBackStack(null,1)
                 }else{supportFragmentManager.popBackStack()}
             }
         }

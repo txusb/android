@@ -567,9 +567,6 @@ fun UpdateUiCondition(position: Int){
                     }
                     handler.post {
                         navActivity.back.isClickable=true
-                        navActivity.back.setOnClickListener {
-                            navActivity.supportFragmentManager.popBackStack(0,1)
-                        }
                         navActivity.GoMenu=true
                         navActivity.back.setImageResource(R.mipmap.menu)
                         ISPROGRAMMING=false

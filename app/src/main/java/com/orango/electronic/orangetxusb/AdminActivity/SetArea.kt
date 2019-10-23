@@ -41,7 +41,7 @@ class SetArea : AppCompatActivity() {
         LanguageList.add("Select")
         LanguageList.add("繁體中文")
         LanguageList.add("简体中文")
-        LanguageList.add("Deutsche")
+        LanguageList.add("Deutsch")
         LanguageList.add("English")
         LanguageList.add("Italiano")
         val lanAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, LanguageList)
@@ -59,7 +59,7 @@ fun onclick(view: View){
             when(LanguagesSpinner.selectedItem.toString()){
                 "繁體中文"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_TAIWAIN);}
                 "简体中文"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_CHINESE);}
-                "Deutsche"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DE);}
+                "Deutsch"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DE);}
                 "English"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ENGLISH);}
                 "Italiano"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ITALIANO);}
             }

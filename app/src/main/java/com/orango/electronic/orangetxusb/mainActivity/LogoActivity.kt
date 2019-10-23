@@ -93,7 +93,7 @@ class LogoActivity : AppCompatActivity() {
                 when(a){
                     "繁體中文"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_TAIWAIN);}
                     "简体中文"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_CHINESE);}
-                    "Deutsche"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DE);}
+                    "Deutsch"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DE);}
                     "English"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ENGLISH);}
                     "Italiano"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ITALIANO);}
                 }
