@@ -24,9 +24,6 @@ class HomeFragment : Fragment() {
     companion object {
         val TAG = "HomeFragment"
     }
-
-
-
     lateinit var navActivity: NavigationActivity
     lateinit var rootView: View
     lateinit var programSensorBtn: Button

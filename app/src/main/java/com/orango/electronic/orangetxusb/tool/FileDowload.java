@@ -1,6 +1,7 @@
 package com.orango.electronic.orangetxusb.tool;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -23,60 +24,6 @@ public static String ip=(Build.VERSION.SDK_INT > Build.VERSION_CODES.M) ? "35.24
     private static String encoding = System.getProperty("file.encoding");
     public static String username="orangerd";
     public static String password=(Build.VERSION.SDK_INT > Build.VERSION_CODES.M) ? "orangetpms(~2":"orangetpms";
-    public static boolean downFile(String url, int port, String username,
-                                   String password, String remotePath, String fileName,
-                                   String localPath) {
-        FTPClient ftpClient = new FTPClient();
-        boolean result = false;
-        try {
-            int reply;
-            ftpClient.setControlEncoding(encoding);
-            /*
-             * 為了上傳和下載中文檔案，有些地方建議使用以下兩句代替
-             * new String(remotePath.getBytes(encoding),"iso-8859-1")轉碼。
-             * 經過測試，通不過。
-             */
-//   FTPClientConfig conf = new FTPClientConfig(FTPClientConfig.SYST_NT);
-//   conf.setServerLanguageCode("zh");
-            ftpClient.connect(url, port);
-// 如果採用預設埠，可以使用ftp.connect(url)的方式直接連線FTP伺服器
-            ftpClient.login(username, password);// 登入
-// 設定檔案傳輸型別為二進位制
-            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-// 獲取ftp登入應答程式碼
-            reply = ftpClient.getReplyCode();
-// 驗證是否登陸成功
-            if (!FTPReply.isPositiveCompletion(reply)) {
-                ftpClient.disconnect();
-                System.err.println("FTP server refused connection.");
-                return result;
-            }
-// 轉移到FTP伺服器目錄至指定的目錄下
-            ftpClient.changeWorkingDirectory(new String(remotePath.getBytes(encoding), StandardCharsets.ISO_8859_1));
-// 獲取檔案列表
-            FTPFile[] fs = ftpClient.listFiles();
-            for (FTPFile ff : fs) {
-                if (ff.getName().equals(fileName)) {
-                    File localFile = new File(localPath);
-                    OutputStream is = new FileOutputStream(localFile);
-                    ftpClient.retrieveFile(ff.getName(), is);
-                    is.close();
-                }
-            }
-            ftpClient.logout();
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (ftpClient.isConnected()) {
-                try {
-                    ftpClient.disconnect();
-                } catch (IOException ioe) {
-                }
-            }
-        }
-        return result;
-    }
     public static boolean DownMMy( Activity activity) {
         try {
            File DB_PATH = activity.getDatabasePath("usb_tx_mmy.db");
@@ -84,7 +31,6 @@ public static String ip=(Build.VERSION.SDK_INT > Build.VERSION_CODES.M) ? "35.24
             if(!file.exists()){ if(!file.mkdirs()){return false;}
             }
 return    doloadmmy(DB_PATH.getPath(),activity);
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -95,27 +41,32 @@ return    doloadmmy(DB_PATH.getPath(),activity);
     }
 
     public static String GetS19Name(String name){
-try{
-    FTPClient ftpClient = new FTPClient();
-    ftpClient.connect("35.240.51.141",21);
-    ftpClient.login(username, "orangetpms(~2");
-    FTPFile[] files=ftpClient.listFiles("Database/SensorCode/SIII/"+name);
-    if(files.length>0){Log.d("filename",files[0].getName());
-        SensorRecord.SensorCode_Version= files[0].getName();
-    return files[0].getName(); }
-    return "nodata";
-    }catch (Exception e){e.printStackTrace(); return "nodata";}
+        try{
+            URL url=new URL("http://35.240.51.141:8077/Database/SensorCode/SIII/"+name+"/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            String line = null;
+            StringBuffer strBuf = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                strBuf.append(line);
+            }
+            String[] arg=strBuf.toString().split(" HREF=\"");
+            for(String a : arg){
+                if(a.contains(".s19")){  return (a.substring(a.indexOf(">")+1,a.indexOf("<")));}
+            }
+        }catch(Exception e){e.printStackTrace();}
+        return "nodata";
     }
 
 public static boolean donloads19(String name,Activity activity){
         if(Internet){
             try{
-                URL url=new URL("ftp://"+username+":"+password+"@"+ip+"/Database/SensorCode/SIII/"+name+"/"+GetS19Name(name));
-//                URL url=new URL("ftp://orangerd:orangetpms@61.221.15.194/OrangeTool/Database/SensorCode/SIII/"+name+"/"+GetS19Name(name));
+                URL url=new URL("http://35.240.51.141:8077/Database/SensorCode/SIII/"+name+"/"+GetS19Name(name));
                 InputStream is=url.openStream();
                 FileOutputStream fos=new FileOutputStream(activity.getApplicationContext().getFilesDir().getPath()+"/"+name+".s19");
                 int bufferSize = 8192;
                 byte[] buf = new byte[bufferSize];
+
                 while(true){
                     int read=is.read(buf);
                     if(read==-1){  break;}
@@ -152,15 +103,8 @@ public static boolean donloads19(String name,Activity activity){
             SharedPreferences profilePreferences = activity.getSharedPreferences("Setting", Context.MODE_PRIVATE);
             String mmyname=mmyname();
             if(profilePreferences.getString("mmyname","").equals(mmyname)){return true;}
-//            URL url=new URL("ftp://orangerd:orangetpms@61.221.15.194/OrangeTool/Database/MMY/EU/MMY_EU_list_V0.4_190910.db");
-            URL url=new URL("ftp://"+username+":"+password+"@"+ip+"/Database/MMY/EU/"+mmyname);
-            Log.d("path","ftp://"+username+":"+password+"@"+ip+"/Database/MMY/EU/"+mmyname);
-//            url.getContent()
-//            URLConnection a=url.openConnection();
-//            a.setDoOutput(true);
-//            a.setReadTimeout(50000);
-//            a.setDoInput(true);
-//            InputStream is=a.getInputStream();
+            URL url=new URL("http://35.240.51.141:8077/Database/MMY/EU/"+mmyname);
+            Log.d("path","http://35.240.51.141:8077/Database/MMY/EU/"+mmyname);
             InputStream is=url.openStream();
             FileOutputStream fos=new FileOutputStream(fileanme);
             int bufferSize = 8192;
@@ -181,13 +125,6 @@ public static boolean donloads19(String name,Activity activity){
             }
             profilePreferences.edit().putString("mmyname",mmyname).commit();
             return f.length() != 0;
-//            if(downFile(ip, 21, username,
-//                    password, "Database/MMY/EU", mmyname, fileanme)){
-//                profilePreferences.edit().putString("mmyname",mmyname).commit();
-//                return true;
-//            }else{
-//                Log.d("false","下載失敗");
-//                return false;}
         }catch (Exception e){e.printStackTrace(); return false;}}else{
             try{
                 InputStream is=activity.getAssets().open("MMY_EU_list_V0.4_190910.db");
@@ -210,25 +147,37 @@ public static boolean donloads19(String name,Activity activity){
 
     public static String mmyname(){
         try{
-            FTPClient ftpClient = new FTPClient();
-            ftpClient.connect("35.240.51.141",21);
-            ftpClient.login(username, "orangetpms(~2");
-           FTPFile[] files=ftpClient.listFiles("Database/MMY/EU");
-          if(files.length>0){Log.d("filename",files[0].getName());
-              SensorRecord.DB_Version=files[0].getName();
-          return files[0].getName(); }
-            return "nodata";
-        }catch (Exception e){e.printStackTrace(); return "nodata";}
+            URL url=new URL("http://35.240.51.141:8077/Database/MMY/EU/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            String line = null;
+            StringBuffer strBuf = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                strBuf.append(line);
+            }
+            String[] arg=strBuf.toString().split(" HREF=\"");
+            for(String a : arg){
+                if(a.contains(".db")){  return (a.substring(a.indexOf(">")+1,a.indexOf("<")));}
+            }
+        }catch(Exception e){e.printStackTrace();}
+        return "nodata";
     }
     public static String McuName(){
         try{
-            FTPClient ftpClient = new FTPClient();
-            ftpClient.connect("35.240.51.141",21);
-            ftpClient.login(username, "orangetpms(~2");
-            FTPFile[] files=ftpClient.listFiles("Drive/USB PAD/Firmware/MCU");
-            if(files.length>0){Log.d("filename",files[0].getName()); return files[0].getName(); }
-            return "nodata";
-        }catch (Exception e){e.printStackTrace(); return "nodata";}
+            URL url=new URL("http://35.240.51.141:8077/Drive/USB%20PAD/Firmware/MCU/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            String line = null;
+            StringBuffer strBuf = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                strBuf.append(line);
+            }
+            String[] arg=strBuf.toString().split(" HREF=\"");
+            for(String a : arg){
+                if(a.contains(".x2")){  return (a.substring(a.indexOf(">")+1,a.indexOf("<")));}
+            }
+        }catch(Exception e){e.printStackTrace();}
+        return "nodata";
     }
 
     public static boolean DonloadMuc(Context activity){
