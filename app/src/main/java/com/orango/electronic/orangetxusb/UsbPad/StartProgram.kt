@@ -189,15 +189,7 @@ var first=true
             program()
         }
         rootView.menu.setOnClickListener {
-            Thread{
-                try{
-                    var inst = Instrumentation()
-                    inst.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK)
-                }
-                catch ( e:java.lang.Exception) {
-                    Log.e("Exception when onBack", e.toString())
-                }
-            }.start();}
+            program()}
         rootView.Relarm.setOnClickListener {
             Relarm.position=0
             val fragment = Relarm()
@@ -563,7 +555,7 @@ fun UpdateUiCondition(position: Int){
      b.SensorID = "error"
      idrecord.add(b)
  }
-                        Upload_ProgramRecord(make,model,year,startime,endtime,navActivity.serialnum, "USBPad", "IDCOPY", idrecord.size, "ALL", idrecord)
+                        Upload_ProgramRecord(make,model,year,startime,endtime,navActivity.serialnum, "USBPad", "Program", idrecord.size, "ALL", idrecord)
                     }
                     handler.post {
                         navActivity.back.isClickable=true

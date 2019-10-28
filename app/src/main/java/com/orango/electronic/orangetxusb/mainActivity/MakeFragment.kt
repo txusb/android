@@ -56,7 +56,9 @@ makes=navActivity.itemDAO.getMake(activity!!)!!
         val mgr =GridLayoutManager(this@MakeFragment.context,3)
         grid.layoutManager=mgr
         navActivity.back.visibility=View.VISIBLE
-        Thread{     navActivity.command.Setserial(navActivity)}.start()
+        Thread{     navActivity.command.Setserial(navActivity)
+        Log.d("serial",navActivity.serialnum)
+        }.start()
         return rootView
     }
 

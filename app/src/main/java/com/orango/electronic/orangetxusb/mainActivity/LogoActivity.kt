@@ -24,6 +24,8 @@ class LogoActivity : AppCompatActivity() {
         private val Permissions = arrayOf(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE)
+        var admin=""
+        var password=""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +106,9 @@ class LogoActivity : AppCompatActivity() {
 //                    startActivity(intent)
 //                    finish()
 //                },2000)
-                if(profilePreferences.getString("admin","nodata").equals("nodata")){
+                admin=profilePreferences.getString("admin","nodata")
+                password=profilePreferences.getString("password","nodata")
+                if(admin.equals("nodata")){
                     handler.postDelayed(Runnable {
                         val intent = Intent(this,SetArea::class.java)
                         startActivity(intent)

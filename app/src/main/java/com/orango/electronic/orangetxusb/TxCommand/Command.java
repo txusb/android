@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.orango.electronic.orangetxusb.HttpCommand.Fuction.AddIfNotValid;
 import static com.orango.electronic.orangetxusb.TxCommand.FormatConvert.*;
 import static com.orango.electronic.orangetxusb.TxCommand.FormatConvert.StringHexToByte;
 
@@ -138,7 +139,9 @@ public class Command {
             Date past=sdf.parse(sdf.format(new Date()));
             while(true){
                 if(act.getRXDATA().contains("F50004000B")){
-                    act.setSerialnum(act.getRXDATA().substring(14,26));
+                    String ser=act.getRXDATA().substring(16,26);
+                    act.setSerialnum(ser);
+                    AddIfNotValid(ser);
                     break;}
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);

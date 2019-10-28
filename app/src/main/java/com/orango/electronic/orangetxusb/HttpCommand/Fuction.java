@@ -1,6 +1,7 @@
 package com.orango.electronic.orangetxusb.HttpCommand;
 
 import android.util.Log;
+import com.orango.electronic.orangetxusb.mainActivity.LogoActivity;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,13 +14,15 @@ import java.util.ArrayList;
 import static android.support.constraint.Constraints.TAG;
 
 public class Fuction {
-    public static final int timeout=1000;
+    public static final int timeout=10000;
     public static final String wsdl = "http://bento2.orange-electronic.com/App_Asmx/ToolApp.asmx";
     private static RetNode _req(String url_String, String data, int timeout) {
         try{  Log.d(TAG + "_post", "url: " + url_String);
+            Log.d(TAG + "_post", "data: " + data);
             URL url = new URL(url_String);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
+            conn.setRequestProperty("Content-Length", ""+data.getBytes().length);
             conn.setRequestMethod("POST");
             conn.setUseCaches(false);
             conn.setDoInput(true);
@@ -44,7 +47,7 @@ public class Fuction {
             }
             dos.close();
             Log.d(TAG+"_post", "-------------respond data--------------");
-            Log.d(TAG+"_post", retNode.data);
+            Log.d(TAG+"_post", "Data:"+retNode.data);
             Log.d(TAG+"_post", "---------------------------------------");
             Log.d(TAG+"_post", "status: "+retNode.status);
             Log.d(TAG+"_post", "-------------data end--------------");
@@ -53,6 +56,7 @@ public class Fuction {
             RetNode retNode = new RetNode();
             retNode.status = -1;
             retNode.data = "";
+            Log.d("_post",e.getMessage());
             return  retNode;
         }
     }
@@ -260,4 +264,18 @@ public class Fuction {
         RetNode respnse=_req(wsdl,sb.toString(),timeout);
         Log.d("upload",respnse.data.toString());
     }catch(Exception e){  Log.d("upload",e.getMessage());}}
+    public static boolean AddIfNotValid(String serialnum){
+        try{
+            StringBuffer sb = new StringBuffer();
+            sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
+                    "  <soap12:Body>\n" +
+                    "    <GetDeviceInfo xmlns=\"http://tempuri.org/\">\n" +
+                    "      <SerialNum>119403980040</SerialNum>\n" +
+                    "    </GetDeviceInfo>\n" +
+                    "  </soap12:Body>\n" +
+                    "</soap12:Envelope>");
+                    return Fuction.Register(LogoActivity.Companion.getAdmin(),LogoActivity.Companion.getPassword(),serialnum,"Distributor","spare","spare","spare","spare","spare","spare","spare","")==0;
+        }catch (Exception e){e.printStackTrace();return false;}
+    }
 }

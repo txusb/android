@@ -194,24 +194,30 @@ var SCAN_OR_KEY=1
             rootView.Lft.setOnClickListener {
                 scanner.place=scanner.LF
                 scanner.edit=rootView.Lft
+                ShowSelect=false
                 RequestPermission() }
             rootView.Rrt.setOnClickListener {
                 scanner.place=scanner.Rr
                 scanner.edit=rootView.Rrt
+                ShowSelect=false
                 RequestPermission()
             }
             rootView.Rft.setOnClickListener {
                 scanner.place=scanner.Rf
                 scanner.edit=rootView.Rft
                 RequestPermission()
+                ShowSelect=false
             }
             rootView.Lrt.setOnClickListener {
                 scanner.place=scanner.Lr
                 scanner.edit=rootView.Lrt
+                ShowSelect=false
                 RequestPermission() }
             SCAN_OR_KEY=0
         }
-        rootView.keyin.setOnClickListener {rootView.Select_Key.visibility=View.GONE}
+        rootView.keyin.setOnClickListener {
+            rootView.Select_Key.visibility=View.GONE
+        }
         rootView.Lft.setText(ScanLf)
         rootView.Rrt.setText(ScanRr)
         rootView.Rft.setText(ScanRf)

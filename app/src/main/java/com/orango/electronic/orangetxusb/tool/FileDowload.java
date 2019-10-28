@@ -42,7 +42,7 @@ return    doloadmmy(DB_PATH.getPath(),activity);
 
     public static String GetS19Name(String name){
         try{
-            URL url=new URL("http://35.240.51.141:8077/Database/SensorCode/SIII/"+name+"/");
+            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/SensorCode/SIII/"+name+"/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
             String line = null;
@@ -61,12 +61,13 @@ return    doloadmmy(DB_PATH.getPath(),activity);
 public static boolean donloads19(String name,Activity activity){
         if(Internet){
             try{
-                URL url=new URL("http://35.240.51.141:8077/Database/SensorCode/SIII/"+name+"/"+GetS19Name(name));
+                String s19name=GetS19Name(name);
+                URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/SensorCode/SIII/"+name+"/"+s19name);
                 InputStream is=url.openStream();
                 FileOutputStream fos=new FileOutputStream(activity.getApplicationContext().getFilesDir().getPath()+"/"+name+".s19");
                 int bufferSize = 8192;
                 byte[] buf = new byte[bufferSize];
-
+                SensorRecord.SensorCode_Version=s19name;
                 while(true){
                     int read=is.read(buf);
                     if(read==-1){  break;}
@@ -102,9 +103,10 @@ public static boolean donloads19(String name,Activity activity){
 
             SharedPreferences profilePreferences = activity.getSharedPreferences("Setting", Context.MODE_PRIVATE);
             String mmyname=mmyname();
+            SensorRecord.DB_Version=mmyname.length()>19 ? mmyname.substring(16):mmyname;
             if(profilePreferences.getString("mmyname","").equals(mmyname)){return true;}
-            URL url=new URL("http://35.240.51.141:8077/Database/MMY/EU/"+mmyname);
-            Log.d("path","http://35.240.51.141:8077/Database/MMY/EU/"+mmyname);
+            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/EU/"+mmyname);
+            Log.d("path","http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/EU/"+mmyname);
             InputStream is=url.openStream();
             FileOutputStream fos=new FileOutputStream(fileanme);
             int bufferSize = 8192;
@@ -147,7 +149,7 @@ public static boolean donloads19(String name,Activity activity){
 
     public static String mmyname(){
         try{
-            URL url=new URL("http://35.240.51.141:8077/Database/MMY/EU/");
+            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/EU/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
             String line = null;
@@ -155,7 +157,7 @@ public static boolean donloads19(String name,Activity activity){
             while ((line = reader.readLine()) != null) {
                 strBuf.append(line);
             }
-            String[] arg=strBuf.toString().split(" HREF=\"");
+            String[] arg=strBuf.toString().split("HREF=\"");
             for(String a : arg){
                 if(a.contains(".db")){  return (a.substring(a.indexOf(">")+1,a.indexOf("<")));}
             }
@@ -164,7 +166,7 @@ public static boolean donloads19(String name,Activity activity){
     }
     public static String McuName(){
         try{
-            URL url=new URL("http://35.240.51.141:8077/Drive/USB%20PAD/Firmware/MCU/");
+            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Drive/USB%20PAD/Firmware/MCU/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
             String line = null;

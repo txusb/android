@@ -150,7 +150,7 @@ val handler: Handler =Handler()
                         }else{ UpdateUi(3)  }
                     }catch (e:Exception){}
                 }
-                Upload_ProgramRecord(make,model,year,startime,endtime,"119500863501", "USBCable", "Program", 1, "ALL", idrecord)
+            Upload_ProgramRecord(make,model,year,startime,endtime,navActivity.serialnum, "USBCable", "Program", 1, "ALL", idrecord)
             }.start()
         }
 
