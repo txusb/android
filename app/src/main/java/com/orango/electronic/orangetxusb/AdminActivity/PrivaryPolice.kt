@@ -21,6 +21,7 @@ class PrivaryPolice : AppCompatActivity() {
             R.id.button6->{
                 val intent = Intent(this, SignIn::class.java)
                 startActivity(intent)
+                this.finish()
             }
         }
     }

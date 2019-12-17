@@ -44,6 +44,7 @@ class SetArea : AppCompatActivity() {
         LanguageList.add("Deutsch")
         LanguageList.add("English")
         LanguageList.add("Italiano")
+        LanguageList.add("dansk")
         val lanAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, LanguageList)
         LanguagesSpinner.adapter=lanAdapter
     }
@@ -62,6 +63,7 @@ fun onclick(view: View){
                 "Deutsch"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DE);}
                 "English"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ENGLISH);}
                 "Italiano"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ITALIANO);}
+                "dansk"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DANSK);}
             }
             val intent = Intent(this,PrivaryPolice::class.java)
             startActivity(intent)

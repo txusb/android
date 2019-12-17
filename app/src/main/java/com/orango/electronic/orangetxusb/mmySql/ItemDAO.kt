@@ -294,7 +294,7 @@ fun     GoOk(code:String,fragmentManager: FragmentManager){
     fun GetreLarm(make:String,model:String,year:String,act:Context):String{
         val profilePreferences = act.getSharedPreferences("Setting", Context.MODE_PRIVATE)
         val a= profilePreferences.getString("Language","English")
-        var colname="English"
+        var colname="`Relearn Procedure (English)`"
         when(a){
             "繁體中文"->{ colname="`Relearn Procedure (Traditional Chinese)`"}
             "简体中文"->{ colname="`Relearn Procedure (Jane)`"}

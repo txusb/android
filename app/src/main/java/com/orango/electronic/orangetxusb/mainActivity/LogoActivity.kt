@@ -99,6 +99,7 @@ class LogoActivity : AppCompatActivity() {
                     "Deutsch"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DE);}
                     "English"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ENGLISH);}
                     "Italiano"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_ITALIANO);}
+                    "dansk"->{ LanguageUtil.updateLocale(this, LanguageUtil.LOCALE_DANSK);}
                 }
                 val handler = Handler()
 //                handler.postDelayed(Runnable {

@@ -401,6 +401,7 @@ var NowFr="no"
             Toast.makeText(this,"Bluetooth is disconnected",Toast.LENGTH_SHORT).show()
             LoadingSuccessUI()
             blename=""
+
             ChangePage(HomeFragment(),R.id.nav_host_fragment,"Home",false)
         }
     }

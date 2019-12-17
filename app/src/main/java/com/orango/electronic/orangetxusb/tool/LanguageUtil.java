@@ -38,6 +38,10 @@ public class LanguageUtil {
      * 德國
      */
     public static final Locale LOCALE_DE= new Locale("de");
+    /**
+     * 丹麥
+     */
+    public static final Locale LOCALE_DANSK= new Locale("da");
     private static final String LOCALE_SP = "LOCALE_SP";
     private static final String LOCALE_SP_KEY = "LOCALE_SP_KEY";
 

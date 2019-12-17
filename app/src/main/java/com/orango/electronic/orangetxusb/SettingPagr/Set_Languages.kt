@@ -58,6 +58,7 @@ class Set_Languages : Fragment() {
         LanguageList.add("Deutsch")
         LanguageList.add("English")
         LanguageList.add("Italiano")
+        LanguageList.add("dansk")
         val lanAdapter = ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item, LanguageList)
         LanguagesSpinner.adapter=lanAdapter
 
@@ -74,6 +75,7 @@ class Set_Languages : Fragment() {
                 "Deutsch"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_DE);}
                 "English"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_ENGLISH);}
                 "Italiano"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_ITALIANO);}
+                "dansk"->{ LanguageUtil.updateLocale(activity, LanguageUtil.LOCALE_DANSK);}
             }
             val fragment = HomeFragment()
             val transaction = fragmentManager!!.beginTransaction()

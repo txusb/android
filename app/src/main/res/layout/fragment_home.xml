@@ -76,24 +76,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:layout_weight="1">
 
-                <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Cloud_information"
-                        android:textColor="#32414E"
-                        android:textSize="15sp"
-                        android:gravity="center_horizontal" android:layout_below="@id/information_btn"
-                        android:layout_centerHorizontal="true"
-                        android:translationX="10dp"/>
                 <Button
-                        android:id="@+id/information_btn"
+                        android:id="@+id/user_manual_btn"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:alpha="0.6"
-                        android:background="@drawable/information_btn"
-                        android:layout_centerInParent="true"
-                        android:translationX="10dp" android:enabled="true"/>
+                        android:alpha="1.0"
+                        android:background="@drawable/users_manual_btn"
+                        android:enabled="false"
+                        android:layout_centerInParent="true" android:translationX="10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Users_manual"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:layout_below="@id/user_manual_btn" android:layout_centerHorizontal="true"
+                        android:translationX="10dp"/>
             </RelativeLayout>
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -125,27 +123,6 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:layout_weight="1">
-
-                <Button
-                        android:id="@+id/user_manual_btn"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:alpha="1.0"
-                        android:background="@drawable/users_manual_btn"
-                        android:enabled="false"
-                        android:layout_centerInParent="true" android:translationX="10dp"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Users_manual"
-                        android:textColor="#32414E"
-                        android:textSize="15sp"
-                        android:layout_below="@id/user_manual_btn" android:layout_centerHorizontal="true"
-                        android:translationX="10dp"/>
-            </RelativeLayout>
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="1">
                 <TextView
                         android:text="@string/Setting"
                         android:layout_width="wrap_content"
@@ -155,15 +132,42 @@
                         android:layout_centerVertical="false"
                         android:layout_alignParentBottom="false"
                         android:layout_below="@id/Setim" android:layout_centerHorizontal="true"
-                        android:translationX="-10dp"/>
+                        android:translationX="10dp"/>
                 <Button
                         android:layout_width="100dp"
                         android:layout_height="100dp" android:id="@+id/Setim" android:background="@mipmap/setting"
                         android:layout_alignParentBottom="false" android:layout_alignParentEnd="false"
                         android:enabled="false"
                         android:layout_centerInParent="true"
-                        android:translationX="-10dp"/>
+                        android:translationX="10dp"/>
             </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1" android:visibility="gone">
+
+                <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Cloud_information"
+                        android:textColor="#32414E"
+                        android:textSize="15sp"
+                        android:gravity="center_horizontal" android:layout_below="@id/information_btn"
+                        android:layout_centerHorizontal="true"
+                        android:translationX="10dp"/>
+                <Button
+                        android:id="@+id/information_btn"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:alpha="0.6"
+                        android:background="@drawable/information_btn"
+                        android:layout_centerInParent="true"
+                        android:translationX="10dp" android:enabled="true"/>
+            </RelativeLayout>
+            <ImageView
+                    android:src="@mipmap/universal_sensor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/imageView79" android:layout_weight="1"/>
         </LinearLayout>
 
     </LinearLayout>
