@@ -295,4 +295,5 @@
     <string name="checkscan">请确认要烧录的发射器以加入USB PAD， 再点选轮位进行扫描</string>
     <string name="Scan_Two">请扫描目录或海报上的二维码</string>
     <string name="keyin">手动输入</string>
+    <string name="onlyfor">仅用于SP201传感器</string>
 </resources>

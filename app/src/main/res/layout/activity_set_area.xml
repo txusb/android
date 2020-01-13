@@ -14,7 +14,7 @@
         <TextView
                 android:text="@string/Setting"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/textView18" android:textColor="@color/white"
+                android:layout_height="match_parent" android:id="@+id/textView17" android:textColor="@color/white"
                 android:gravity="center" android:textSize="20dp"/>
     </RelativeLayout>
     <Button
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp" android:id="@+id/spinner" android:layout_below="@id/textView20"
             android:layout_marginTop="12dp" android:layout_marginLeft="27dp" android:layout_marginRight="28dp"
-            android:background="@color/white"/>
+            android:background="@color/white" android:layout_centerInParent="true"/>
     <TextView
             android:text="@string/Languages"
             android:layout_width="match_parent"

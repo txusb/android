@@ -241,4 +241,5 @@
     <string name="checkscan">Vergewissern Sie sich, dass der Sensor am USB-PAD angeschlossen ist, und wählen Sie dann die Reifenposition aus, um den Scanvorgang zu starten</string>
     <string name="Scan_Two">Bitte scannen Sie den QR Code vom Katalog oder Poster</string>
     <string name="keyin">Geben Sie ein</string>
+    <string name="onlyfor">Nur für SP201 Sensor</string>
 </resources>

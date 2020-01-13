@@ -245,4 +245,5 @@ Our Privacy Policy may change from time to time. We will not reduce your rights 
     <string name="checkscan">Sørg for, at sensoren er i USB Holderen, og vælg derefter dækposition for at begynde at scanne</string>
     <string name="Scan_Two">Scan QR-koden på kataloget eller plakaten.</string>
     <string name="keyin">Indtast manuelt</string>
+   <string name="onlyfor">Kun til SP201-sensor</string>
 </resources>

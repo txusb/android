@@ -34,7 +34,7 @@
         <TextView
                 android:text="@string/Privacy_Policy"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/textView18" android:textColor="@color/white"
+                android:layout_height="match_parent" android:id="@+id/textView17" android:textColor="@color/white"
                 android:gravity="center" android:textSize="20dp"/>
     </RelativeLayout>
     <ScrollView

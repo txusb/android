@@ -364,4 +364,5 @@
     <string name="checkscan">Please make sure sensor is on USB PAD, and then choose tire position to start scanning</string>
     <string name="Scan_Two">Please scan the QR Code on the catalog or poster.</string>
     <string name="keyin">key in</string>
+    <string name="onlyfor">Only for SP201 sensor</string>
 </resources>

@@ -312,4 +312,5 @@
     <string name="checkscan">Assicurarsi che il sensore sia su USB PAD, quindi selezionare la posizione del pneumatico per iniziare la scansione</string>
     <string name="Scan_Two">Scannerizza il codice QR sul catalogo </string>
     <string name="keyin">Inserisci l\'ID</string>
+    <string name="onlyfor">Solo per sensore SP201</string>
 </resources>

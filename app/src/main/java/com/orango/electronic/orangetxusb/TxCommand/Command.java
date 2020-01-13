@@ -5,6 +5,7 @@ import android.util.Log;
 import com.orango.electronic.orangetxusb.R;
 import com.orango.electronic.orangetxusb.SerialSocket;
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity;
+import com.orango.electronic.orangetxusb.models.SensorBean;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -28,7 +29,6 @@ public class Command {
     public String AppverInspire="nodata";
     public String Boover="101";
     public int IC=0;
-    public String ID="";
     public ArrayList<String> FALSE_CHANNEL=new ArrayList<>();
     public ArrayList<String> BLANK_CHANNEL=new ArrayList<>();
     public ArrayList<String>  CHANNEL_BLE=new ArrayList<>();
@@ -51,7 +51,7 @@ public class Command {
                 if(fal>3){return false;}
                 if(act.getRXDATA().length()==check){
                     boolean g=checkcommand(act.getRXDATA().substring(10,12));
-                    if(g){ID=act.getRXDATA().substring(14,22);}
+//                    if(g){ID=act.getRXDATA().substring(14,22);}
                     return g;
                 }
             }
@@ -83,11 +83,18 @@ public class Command {
             return false;}
     }
 
-    public boolean Command_11(int ic,int channel){
+    public SensorBean Command_11(int ic,int channel,String version){
+        SensorBean sensorBean=new SensorBean();
         try{
             int check=30;
-            String commeand="0ASS110004CCXXXXF5".replace("SS",bytesToHex(new byte[]{(byte)ic})).replace("CC",bytesToHex(new byte[]{(byte)channel}));
-            SendData((getCRC16(commeand)),check);
+            String CC="";
+            if(version.equals(SensorBean._315)){
+                CC="1"+channel;
+            }else if(version.equals(SensorBean._433)){
+                CC="0"+channel;
+            }
+            String commeand="0ASS110004CCXXXXF5".replace("SS",bytesToHex(new byte[]{(byte)ic})).replace("CC",CC);
+            SendData((getCRC16(commeand)),0);
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
             Date past=sdf.parse(sdf.format(new Date()));
             int fal=0;
@@ -99,15 +106,24 @@ public class Command {
                     past=sdf.parse(sdf.format(new Date()));
                     fal++;
                 }
-                if(fal==1){return false;}
-                if(act.getRXDATA().length()==check){
+                if(fal==1){return sensorBean;}
+                if(act.getRXDATA().length()>=check){
                     boolean g=checkcommand(act.getRXDATA().substring(10,12));
-                    if(g){ID=act.getRXDATA().substring(14,22);}
-                    return g;
+                        sensorBean.id=act.getRXDATA().substring(14,22);
+                        if(act.getRXDATA().substring(24,25).equals("0")){
+                            sensorBean.boot_var=SensorBean._433;
+                        }else if(act.getRXDATA().substring(24,25).equals("1")){
+                            sensorBean.boot_var=SensorBean._315;
+                        }else if(act.getRXDATA().substring(24,25).equals("A")){
+                            sensorBean.boot_var=SensorBean._雙頻;
+                        }
+                        sensorBean.canPr=version.equals(sensorBean.boot_var)||sensorBean.boot_var.equals(SensorBean._雙頻);
+                        sensorBean.result=!sensorBean.id.equals("00018001");
+                    return sensorBean;
                 }
             }
         }catch (Exception e){e.printStackTrace();
-            return false;}
+            return sensorBean;}
     }
     public boolean checkcommand(String a){
         return getBit(StringHexToByte(a)[0]).substring(7, 8).equals("0");

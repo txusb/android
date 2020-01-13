@@ -275,6 +275,16 @@ fun     GoOk(code:String,fragmentManager: FragmentManager){
         // 回傳結果
         return result
     }
+    fun SencsorModel(s19:String):String{
+        val result = db.rawQuery("select `Sensor` from `Summary table` where  `Direct Fit`='$s19'", null)
+        if(result.count > 0 ){
+            result.moveToFirst()
+                return result.getString(0)
+        }else{
+            result.close()
+            return "SP201"
+        }
+    }
     fun GetCopyId(s19:String):Int{
         val result = db.rawQuery("select `ID_Count` from `Summary table` where `Direct Fit`='$s19' and `$MAKE_IMG_COLUMN` not in('NA') limit 0,1", null)
         if(result.count > 0 ){
@@ -290,7 +300,16 @@ fun     GoOk(code:String,fragmentManager: FragmentManager){
             return 8
         }
     }
-
+fun getOePart(a:String):String{
+    val result = db.rawQuery(
+        "select `OE Part Num` from `Summary table`   where `Direct Fit`='$a' limit 0,1",
+        null)
+    if(result.count > 0 ){
+        result.moveToFirst()
+        return result.getString(0)
+    }
+    return ""
+}
     fun GetreLarm(make:String,model:String,year:String,act:Context):String{
         val profilePreferences = act.getSharedPreferences("Setting", Context.MODE_PRIVATE)
         val a= profilePreferences.getString("Language","English")

@@ -100,13 +100,27 @@ public static boolean donloads19(String name,Activity activity){
 
     public static boolean doloadmmy(String fileanme,Activity activity){
         if(Internet){  try{
-
+            String ArUrl="EU";
             SharedPreferences profilePreferences = activity.getSharedPreferences("Setting", Context.MODE_PRIVATE);
-            String mmyname=mmyname();
+            String Area=profilePreferences.getString("Area","EU");
+            switch (Area){
+                case "EU":
+                    ArUrl="EU";
+                    break;
+                case "North America":
+                    ArUrl="US";
+                    break;
+                case "台灣":
+                    break;
+                case "中國大陸":
+                    break;
+
+            }
+            String mmyname=mmyname(ArUrl);
             SensorRecord.DB_Version=mmyname.length()>19 ? mmyname.substring(16):mmyname;
             if(profilePreferences.getString("mmyname","").equals(mmyname)){return true;}
-            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/EU/"+mmyname);
-            Log.d("path","http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/EU/"+mmyname);
+            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/"+ArUrl+"/"+mmyname);
+            Log.d("path","http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/"+ArUrl+"/"+mmyname);
             InputStream is=url.openStream();
             FileOutputStream fos=new FileOutputStream(fileanme);
             int bufferSize = 8192;
@@ -147,9 +161,9 @@ public static boolean donloads19(String name,Activity activity){
 
     }
 
-    public static String mmyname(){
+    public static String mmyname(String area){
         try{
-            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/EU/");
+            URL url=new URL("http://bento2.orange-electronic.com/Orange%20Cloud/Database/MMY/"+area+"/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
             String line = null;

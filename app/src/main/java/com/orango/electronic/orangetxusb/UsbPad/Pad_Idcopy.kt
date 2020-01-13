@@ -20,6 +20,7 @@ import com.orango.electronic.orangetxusb.R
 import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.mainActivity.QrcodeScanner
 import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
+import com.orango.electronic.orangetxusb.models.SensorBean
 import com.orango.electronic.orangetxusb.tool.CustomTextWatcherForpad
 import com.orango.electronic.orangetxusb.tool.FileDowload
 import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.*
@@ -55,6 +56,7 @@ class Pad_Idcopy : Fragment() {
     var ScanRf=""
     var ScanRr=""
     var ScanLr=""
+    var  SensorMode=""
     var scanner=QrcodeScanner()
      var run=false
      var ShowSelect=true
@@ -64,6 +66,7 @@ var SCAN_OR_KEY=1
         super.onCreate(savedInstanceState)
         retainInstance = true
         navActivity = activity as NavigationActivity
+        navActivity.setActionBarTitle("ID COPY")
         make = arguments!!.getString(Cable_Program.stringMake)!!
         makeImg = arguments!!.getString(Cable_Program.stringMakeImg)!!
         model = arguments!!.getString(Cable_Program.stringModel)!!
@@ -73,6 +76,9 @@ var SCAN_OR_KEY=1
             downs19()
             need=navActivity.itemDAO.GetCopyId( mmyNum)
         }else{navActivity.finish()}
+        val temp=navActivity.itemDAO.SencsorModel(mmyNum)
+        if(temp=="SP201"){SensorMode= SensorBean._433}
+        if(temp=="SP202"){SensorMode= SensorBean._315}
     }
     val handler=Handler()
         fun downs19(){
@@ -249,9 +255,9 @@ var SCAN_OR_KEY=1
         Thread{
             try{
                     for (i in 0..1) {
-                        val Ch1 = navActivity.command.Command_11(i, 1)
-                        val Ch2 = navActivity.command.Command_11(i, 2)
-                        handler.post {  if (Ch1) {
+                        val Ch1 = navActivity.command.Command_11(i, 1,SensorMode)
+                        val Ch2 = navActivity.command.Command_11(i, 2,SensorMode)
+                        handler.post {  if (Ch1.result) {
                             if(i==0){
                                 rootView.Lft.isEnabled=true
                                 rootView.Lft.hint = "Original sensor ID"
@@ -272,7 +278,7 @@ var SCAN_OR_KEY=1
                                 rootView.Rft.hint = navActivity.resources.getString(R.string.Unlinked)
                             }
                         }
-                            if (Ch2) {
+                            if (Ch2.result) {
                                 if(i==0){
                                     rootView.Lrt.isEnabled=true
                                     rootView.Lrt.hint = "Original sensor ID"

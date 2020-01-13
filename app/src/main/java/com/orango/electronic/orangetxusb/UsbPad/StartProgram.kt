@@ -12,6 +12,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.orango.electronic.orangetxusb.HttpCommand.Fuction.Upload_IDCopyRecord
 import com.orango.electronic.orangetxusb.HttpCommand.Fuction.Upload_ProgramRecord
 import com.orango.electronic.orangetxusb.HttpCommand.SensorRecord
@@ -21,6 +22,7 @@ import com.orango.electronic.orangetxusb.mainActivity.NavigationActivity
 import com.orango.electronic.orangetxusb.mainActivity.Relarm
 import com.orango.electronic.orangetxusb.UsbCable.Cable_Program
 import com.orango.electronic.orangetxusb.mainActivity.HomeFragment
+import com.orango.electronic.orangetxusb.models.SensorBean
 import com.orango.electronic.orangetxusb.tool.FileDowload
 import kotlinx.android.synthetic.main.activity_demo.*
 import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.*
@@ -48,6 +50,7 @@ import kotlinx.android.synthetic.main.fragment_mmy.view.mmy_text as mmy_text1
 import kotlinx.android.synthetic.main.fragment_pad__idcopy.view.copy_id_btn as copy_id_btn1
 import kotlinx.android.synthetic.main.fragment_start_program.view.Program_bt as Program_bt1
 import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -89,6 +92,8 @@ var first=true
     lateinit var mmyNum:String
     lateinit var model: String
     lateinit var year: String
+    var spversion=""
+    var  SensorMode=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -115,6 +120,9 @@ var first=true
             WriteRR=WriteRRtmp.replace("XX",WriteRR.substring(6,8)).replace("YY",WriteRR.substring(2,4))
         }
         if(WriteLf.length!=8){downs19()}
+         spversion=navActivity.itemDAO.SencsorModel(mmyNum)
+        if(spversion=="SP201"){SensorMode=SensorBean._433}
+        if(spversion=="SP202"){SensorMode=SensorBean._315}
     }
     fun downs19(){
         navActivity.LoadingUI(resources.getString(R.string.Data_Loading),0)
@@ -151,10 +159,10 @@ var first=true
             "IDCOPY"->{ navActivity.setActionBarTitle(activity!!.resources.getString(R.string.ID_COPY))}
             "PROGRAM"->{navActivity.setActionBarTitle(navActivity.resources.getString(R.string.Program))}
         }
-        UpdateUi(LF,UNLINK)
-        UpdateUi(RF,UNLINK)
-        UpdateUi(LR,UNLINK)
-        UpdateUi(RR,UNLINK)
+        UpdateUi(LF,UNLINK,true)
+        UpdateUi(RF,UNLINK,true)
+        UpdateUi(LR,UNLINK,true)
+        UpdateUi(RR,UNLINK,true)
         if(WriteLf.length==8){
             rootView.copy_id_btn.setBackgroundResource(R.drawable.solid)
             rootView.copy_id_btn.setTextColor(navActivity.resources.getColor(R.color.white))
@@ -186,6 +194,12 @@ var first=true
         rootView.animation_view2.speed = 1.0f
         UpdateUiCondition(PROGRAN_WAIT)
         rootView.program.setOnClickListener {
+            for(i in beans){
+                if(!i.canPr){
+                    Toast.makeText(activity!!,resources.getString(R.string.onlyfor).replace("SP201",spversion),Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+            }
             program()
         }
         rootView.menu.setOnClickListener {
@@ -210,7 +224,8 @@ var first=true
 
         return rootView
     }
-var  run=false
+var run=false
+var beans= arrayOf(SensorBean(),SensorBean(),SensorBean(),SensorBean())
     fun UdCondition(){
         handler.post {     navActivity.back.isClickable=false}
 
@@ -218,12 +233,19 @@ var  run=false
             Thread(Runnable {
                 try{
                         for (i in 0..1) {
-                            val Ch1 = navActivity.command.Command_11(i, 1)
-                            var Id1 = navActivity.command.ID
-                            val Ch2 = navActivity.command.Command_11(i, 2)
-                            var Id2 = navActivity.command.ID
+                            val Ch1 = navActivity.command.Command_11(i, 1,SensorMode)
+                            var Id1 = Ch1.id
+                            val Ch2 = navActivity.command.Command_11(i, 2,SensorMode)
+                            var Id2 = Ch2.id
+                            if(i==0){
+                                beans[0]=Ch1
+                                beans[1]=Ch2
+                            }else{
+                                beans[2]=Ch1
+                                beans[3]=Ch2
+                            }
                             handler.post(Runnable {
-                                if (Ch1) {
+                                if (Ch1.result) {
                                     if(mmyNum.equals("RN1628")||mmyNum.equals("SI2048")){
                                         val Writetmp=Id1.substring(0,2)+"XX"+Id1.substring(4,6)+"YY"
                                         Id1=Writetmp.replace("XX",Id1.substring(6,8)).replace("YY",Id1.substring(2,4))
@@ -231,25 +253,25 @@ var  run=false
                                     Id1=Id1.substring(Idcount)
                                     if(i==0){
                                         LFID=Id1
-                                        if(first){UpdateUi(LF,PROGRAN_WAIT)}
+                                        if(first){UpdateUi(LF,PROGRAN_WAIT,Ch1.canPr)}
                                         rootView.Lft.text=LFID
                                     }else{
                                         RFID=Id1
-                                        if(first){UpdateUi(RF,PROGRAN_WAIT)}
+                                        if(first){UpdateUi(RF,PROGRAN_WAIT,Ch1.canPr)}
                                         rootView.Rft.text=RFID
                                     }
                                 } else {
                                     if(i==0){
                                         LFID=navActivity.resources.getString(R.string.Unlinked)
-                                        if(first){UpdateUi(LF,UNLINK)}
+                                        if(first){UpdateUi(LF,UNLINK,Ch1.canPr)}
                                         rootView.Lft.text=LFID
                                     }else{
                                         RFID=navActivity.resources.getString(R.string.Unlinked)
-                                        if(first){UpdateUi(RF,UNLINK)}
+                                        if(first){UpdateUi(RF,UNLINK,Ch1.canPr)}
                                         rootView.Rft.text=RFID
                                     }
                                 }
-                                if (Ch2) {
+                                if (Ch2.result) {
                                     if(mmyNum.equals("RN1628")||mmyNum.equals("SI2048")){
                                         val Writetmp=Id2.substring(0,2)+"XX"+Id2.substring(4,6)+"YY"
                                         Id2=Writetmp.replace("XX",Id2.substring(6,8)).replace("YY",Id2.substring(2,4))
@@ -257,21 +279,21 @@ var  run=false
                                     Id2=Id2.substring(Idcount)
                                     if(i==0){
                                         LRID=Id2
-                                        if(first){UpdateUi(LR,PROGRAN_WAIT)}
+                                        if(first){UpdateUi(LR,PROGRAN_WAIT,Ch2.canPr)}
                                         rootView.Lrt.text=LRID
                                     }else{
                                         RRID=Id2
-                                        if(first){UpdateUi(RR,PROGRAN_WAIT)}
+                                        if(first){UpdateUi(RR,PROGRAN_WAIT,Ch2.canPr)}
                                         rootView.Rrt.text=RRID
                                     }
                                 } else {
                                     if(i==0){
                                         LRID=navActivity.resources.getString(R.string.Unlinked)
                                         rootView.Lrt.text=navActivity.resources.getString(R.string.Unlinked)
-                                        if(first){UpdateUi(LR,UNLINK)}
+                                        if(first){UpdateUi(LR,UNLINK,Ch2.canPr)}
                                     }else{
                                         RRID=navActivity.resources.getString(R.string.Unlinked)
-                                        if(first){UpdateUi(RR,UNLINK)}
+                                        if(first){UpdateUi(RR,UNLINK,Ch2.canPr)}
                                         rootView.Rrt.text=navActivity.resources.getString(R.string.Unlinked)
                                     }
                                 }
@@ -291,7 +313,7 @@ var  run=false
 
     }
     private var handler =Handler()
-fun UpdateUi(position:Int,situation:Int){
+fun UpdateUi(position:Int,situation:Int,canPr:Boolean){
     when(position){
         LF->{
          when(situation){
@@ -318,7 +340,7 @@ fun UpdateUi(position:Int,situation:Int){
              PROGRAN_WAIT->{
                  rootView.Lft.text=LFID
                  rootView.Lfi.visibility=View.GONE
-                 rootView.Lft.setBackgroundResource(R.mipmap.icon_input_box_write)
+                 if(canPr)rootView.Lft.setBackgroundResource(R.mipmap.icon_input_box_write) else rootView.Lft.setBackgroundResource(R.mipmap.icon_input_box_fail)
                  rootView.Lf.setBackgroundResource(R.mipmap.icon_tire_normal)
              }
          }
@@ -348,7 +370,7 @@ fun UpdateUi(position:Int,situation:Int){
                 PROGRAN_WAIT->{
                     rootView.Rft.text=RFID
                     rootView.Rfi.visibility=View.GONE
-                    rootView.Rft.setBackgroundResource(R.mipmap.icon_input_box_write)
+                    if(canPr)rootView.Rft.setBackgroundResource(R.mipmap.icon_input_box_write) else rootView.Rft.setBackgroundResource(R.mipmap.icon_input_box_fail)
                     rootView.Rf.setBackgroundResource(R.mipmap.icon_tire_normal)
                 }
             }
@@ -378,7 +400,7 @@ fun UpdateUi(position:Int,situation:Int){
                 PROGRAN_WAIT->{
                     rootView.Lrt.text=LRID
                     rootView.Lri.visibility=View.GONE
-                    rootView.Lrt.setBackgroundResource(R.mipmap.icon_input_box_write)
+                    if(canPr)rootView.Lrt.setBackgroundResource(R.mipmap.icon_input_box_write) else rootView.Lrt.setBackgroundResource(R.mipmap.icon_input_box_fail)
                     rootView.Lr.setBackgroundResource(R.mipmap.icon_tire_normal)
                 }
             }
@@ -408,7 +430,7 @@ fun UpdateUi(position:Int,situation:Int){
                 PROGRAN_WAIT->{
                     rootView.Rrt.text=RRID
                     rootView.Rri.visibility=View.GONE
-                    rootView.Rrt.setBackgroundResource(R.mipmap.icon_input_box_write)
+                    if(canPr)rootView.Rrt.setBackgroundResource(R.mipmap.icon_input_box_write) else rootView.Rrt.setBackgroundResource(R.mipmap.icon_input_box_fail)
                     rootView.Rr.setBackgroundResource(R.mipmap.icon_tire_normal)
                 }
             }
@@ -575,7 +597,7 @@ fun UpdateUiCondition(position: Int){
                                         RRID=Writetmp.replace("XX",RRID.substring(6,8)).replace("YY",RRID.substring(2,4))
                                     }
                                     RRID=RRID.substring(Idcount)
-                                    UpdateUi(RR,PROGRAN_SUCCESS)
+                                    UpdateUi(RR,PROGRAN_SUCCESS,true)
                                 }
                                 if(a.substring(0,a.indexOf(".")).equals("03")){
                                     RFID=a.substring(a.indexOf(".")+1,a.length)
@@ -584,7 +606,7 @@ fun UpdateUiCondition(position: Int){
                                         RFID=Writetmp.replace("XX",RFID.substring(6,8)).replace("YY",RFID.substring(2,4))
                                     }
                                     RFID=RFID.substring(Idcount)
-                                    UpdateUi(RF,PROGRAN_SUCCESS)
+                                    UpdateUi(RF,PROGRAN_SUCCESS,true)
                                 }
                                 if(a.substring(0,a.indexOf(".")).equals("02")){
                                     LRID=a.substring(a.indexOf(".")+1,a.length)
@@ -593,7 +615,7 @@ fun UpdateUiCondition(position: Int){
                                         LRID=Writetmp.replace("XX",LRID.substring(6,8)).replace("YY",LRID.substring(2,4))
                                     }
                                     LRID=LRID.substring(Idcount)
-                                    UpdateUi(LR,PROGRAN_SUCCESS)
+                                    UpdateUi(LR,PROGRAN_SUCCESS,true)
                                 }
                                 if(a.substring(0,a.indexOf(".")).equals("01")){
                                     LFID=a.substring(a.indexOf(".")+1,a.length)
@@ -602,7 +624,7 @@ fun UpdateUiCondition(position: Int){
                                         LFID=Writetmp.replace("XX",LFID.substring(6,8)).replace("YY",LFID.substring(2,4))
                                     }
                                     LFID=LFID.substring(Idcount)
-                                    UpdateUi(LF,PROGRAN_SUCCESS)
+                                    UpdateUi(LF,PROGRAN_SUCCESS,true)
                                 }
                             }
                             UpdateUiCondition(PROGRAN_SUCCESS)
@@ -612,44 +634,44 @@ fun UpdateUiCondition(position: Int){
                                     when(a){
                                         "04"->{
                                             RRID=navActivity.resources.getString(R.string.error)
-                                            UpdateUi(RR,PROGRAN_FAULSE)
+                                            UpdateUi(RR,PROGRAN_FAULSE,true)
                                         }
                                         "03"->{
                                             RFID=navActivity.resources.getString(R.string.error)
-                                            UpdateUi(RF,PROGRAN_FAULSE)
+                                            UpdateUi(RF,PROGRAN_FAULSE,true)
                                         }
                                         "02"->{
                                             LRID=navActivity.resources.getString(R.string.error)
-                                            UpdateUi(LR,PROGRAN_FAULSE)
+                                            UpdateUi(LR,PROGRAN_FAULSE,true)
                                         }
                                         "01"->{
                                             LFID=navActivity.resources.getString(R.string.error)
-                                            UpdateUi(LF,PROGRAN_FAULSE)
+                                            UpdateUi(LF,PROGRAN_FAULSE,true)
                                         }
                                     }
                                 }
                                 for (a in navActivity.command.BLANK_CHANNEL) {
                                     when(a){
                                         "04"->{
-                                            UpdateUi(RR,UNLINK)
+                                            UpdateUi(RR,UNLINK,true)
                                         }
                                         "03"->{
-                                            UpdateUi(RF,UNLINK)
+                                            UpdateUi(RF,UNLINK,true)
                                         }
                                         "02"->{
-                                            UpdateUi(LR,UNLINK)
+                                            UpdateUi(LR,UNLINK,true)
                                         }
                                         "01"->{
-                                            UpdateUi(LF,UNLINK)
+                                            UpdateUi(LF,UNLINK,true)
                                         }
                                     }
                                 }
                                 if(navActivity.command.FALSE_CHANNEL.size==0&&navActivity.command.BLANK_CHANNEL.size==0){
                                     UpdateUiCondition(PROGRAN_FAULSE)
-                                    UpdateUi(LF,PROGRAN_FAULSE)
-                                    UpdateUi(LR,PROGRAN_FAULSE)
-                                    UpdateUi(RF,PROGRAN_FAULSE)
-                                    UpdateUi(RR,PROGRAN_FAULSE)
+                                    UpdateUi(LF,PROGRAN_FAULSE,true)
+                                    UpdateUi(LR,PROGRAN_FAULSE,true)
+                                    UpdateUi(RF,PROGRAN_FAULSE,true)
+                                    UpdateUi(RR,PROGRAN_FAULSE,true)
                                 }
                             }
                         }catch (e:Exception){e.printStackTrace()}

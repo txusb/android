@@ -115,7 +115,8 @@ class NavigationActivity : BleActivity(), FragmentManager.OnBackStackChangedList
 
     override fun onSerialRead(data: ByteArray) {
         RXDATA=bytesToHex(data)
-        RxCommand.RX(data, this)
+        val rx = RxCommand.RX(data, this)
+
     }
 
     override fun onSerialIoError(e: Exception) {

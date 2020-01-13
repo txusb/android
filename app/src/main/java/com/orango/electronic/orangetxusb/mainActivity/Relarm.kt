@@ -17,21 +17,13 @@ import com.orango.electronic.orangetxusb.UsbPad.StartProgram
 import kotlinx.android.synthetic.main.fragment_relarm.view.*
 import kotlinx.android.synthetic.main.fragment_mmy.view.mmy_text as mmy_text1
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class Relarm : Fragment() {
-    companion object{
-        var position=0
+    companion object {
+        var position = 0
     }
+
     lateinit var rootView: View
-    lateinit var text:TextView
+    lateinit var text: TextView
     lateinit var make: String
     lateinit var makeImg: String
     lateinit var model: String
@@ -41,13 +33,17 @@ class Relarm : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView=inflater.inflate(R.layout.fragment_relarm, container, false)
+        rootView = inflater.inflate(R.layout.fragment_relarm, container, false)
         navActivity = activity as NavigationActivity
         retainInstance = true
-        navActivity.back.visibility=View.VISIBLE
-        if(position==0){rootView.menu3.text=resources.getString(R.string.MENU)}else{ rootView.menu3.text=resources.getString(R.string.Next)}
+        navActivity.back.visibility = View.VISIBLE
+        if (position == 0) {
+            rootView.menu3.text = resources.getString(R.string.MENU)
+        } else {
+            rootView.menu3.text = resources.getString(R.string.Next)
+        }
         rootView.menu3.setOnClickListener {
-            if(position==0){
+            if (position == 0) {
                 val fragment = HomeFragment()
                 val transaction = fragmentManager!!.beginTransaction()
                 transaction.replace(R.id.nav_host_fragment, fragment, "HomeFragment")
@@ -55,10 +51,10 @@ class Relarm : Fragment() {
                     .addToBackStack("Program Sensor")
                     // 提交事務
                     .commit()
-            }else{
-                when(NavigationActivity.Action){
-                    "PROGRAM"->{
-                        if(NavigationActivity.PAD_OR_USB.equals("USB")){
+            } else {
+                when (NavigationActivity.Action) {
+                    "PROGRAM" -> {
+                        if (NavigationActivity.PAD_OR_USB.equals("USB")) {
                             val args = Bundle()
                             args.putString(Cable_Program.stringMake, make)
                             args.putString(Cable_Program.stringMakeImg, makeImg)
@@ -72,7 +68,7 @@ class Relarm : Fragment() {
                                 .addToBackStack("Program")
                                 // 提交事務
                                 .commit()
-                        }else{
+                        } else {
                             val args = Bundle()
                             args.putString(Cable_Program.stringMake, make)
                             args.putString(Cable_Program.stringMakeImg, makeImg)
@@ -92,8 +88,8 @@ class Relarm : Fragment() {
                                 .commit()
                         }
                     }
-                    "IDCOPY"->{
-                        if(NavigationActivity.PAD_OR_USB.equals("USB")){
+                    "IDCOPY" -> {
+                        if (NavigationActivity.PAD_OR_USB.equals("USB")) {
                             val args = Bundle()
                             args.putString(Cable_Program.stringMake, make)
                             args.putString(Cable_Program.stringMakeImg, makeImg)
@@ -107,7 +103,7 @@ class Relarm : Fragment() {
                                 .addToBackStack("Id_Copy")
                                 // 提交事務
                                 .commit()
-                        }else{
+                        } else {
                             val args = Bundle()
                             args.putString(Cable_Program.stringMake, make)
                             args.putString(Cable_Program.stringMakeImg, makeImg)
@@ -128,9 +124,14 @@ class Relarm : Fragment() {
 
         }
         rootView.mmy_text.text = "$make/$model /$year"
-        rootView.textView10.text=navActivity.itemDAO.GetreLarm(make,model,year,navActivity)
+        val s19 = navActivity.itemDAO.getMMY(make, model, year)
+        rootView.textView10.text =
+            "OE Part # :\n${navActivity.itemDAO.getOePart(s19)}\n\nFor OrangeSensor:\n${navActivity.itemDAO.SencsorModel(
+                s19
+            )}\n\nRelearn:\n${navActivity.itemDAO.GetreLarm(make, model, year, navActivity)}"
         return rootView
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -141,6 +142,7 @@ class Relarm : Fragment() {
         year = arguments!!.getString(Cable_Program.stringYear)!!
 
     }
+
     override fun onResume() {
         super.onResume()
         navActivity.setActionBarTitle(navActivity.resources.getString(R.string.Relearn_Procedure))
