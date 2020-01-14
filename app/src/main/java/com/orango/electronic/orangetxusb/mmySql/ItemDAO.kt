@@ -300,6 +300,7 @@ fun     GoOk(code:String,fragmentManager: FragmentManager){
             return 8
         }
     }
+    
 fun getOePart(a:String):String{
     val result = db.rawQuery(
         "select `OE Part Num` from `Summary table`   where `Direct Fit`='$a' limit 0,1",

@@ -266,16 +266,7 @@ public class Fuction {
     }catch(Exception e){  Log.d("upload",e.getMessage());}}
     public static boolean AddIfNotValid(String serialnum){
         try{
-            StringBuffer sb = new StringBuffer();
-            sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
-                    "  <soap12:Body>\n" +
-                    "    <GetDeviceInfo xmlns=\"http://tempuri.org/\">\n" +
-                    "      <SerialNum>119403980040</SerialNum>\n" +
-                    "    </GetDeviceInfo>\n" +
-                    "  </soap12:Body>\n" +
-                    "</soap12:Envelope>");
-                    return Fuction.Register(LogoActivity.Companion.getAdmin(),LogoActivity.Companion.getPassword(),serialnum,"Distributor","spare","spare","spare","spare","spare","spare","spare","")==0;
+                    return Fuction.Register(LogoActivity.Companion.getAdmin(),LogoActivity.Companion.getPassword(),"SP:"+serialnum,"Distributor","spare","spare","spare","spare","spare","spare","spare","")==0;
         }catch (Exception e){e.printStackTrace();return false;}
     }
 }

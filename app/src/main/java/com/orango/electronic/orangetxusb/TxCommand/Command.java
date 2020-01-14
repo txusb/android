@@ -102,13 +102,12 @@ public class Command {
                 Date now=sdf.parse(sdf.format(new Date()));
                 double time=getDatePoor(now,past);
                 if(time>2){
-                    SendData((getCRC16(commeand)),check);
+                    SendData((getCRC16(commeand)),0);
                     past=sdf.parse(sdf.format(new Date()));
                     fal++;
                 }
                 if(fal==1){return sensorBean;}
                 if(act.getRXDATA().length()>=check){
-                    boolean g=checkcommand(act.getRXDATA().substring(10,12));
                         sensorBean.id=act.getRXDATA().substring(14,22);
                         if(act.getRXDATA().substring(24,25).equals("0")){
                             sensorBean.boot_var=SensorBean._433;
